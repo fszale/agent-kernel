@@ -1,29 +1,29 @@
 graph TB
-    subgraph INPUTS["📥 Inputs"]
-        DS["Data Sources\n(transactions, logs\nKPIs, config)"]
-        CFG["Agent Config\n(guardrails, HITL\nkill switches)"]
-        EVT_IN["Cross-Agent Events\n(consumed from bus)"]
+    subgraph INPUTS["Inputs"]
+        DS["Data Sources\ntransactions, logs\nKPIs, config"]
+        CFG["Agent Config\nguardrails, HITL\nkill switches"]
+        EVT_IN["Cross-Agent Events\nconsumed from bus"]
     end
 
-    subgraph AGENT["🤖 Agent Runtime"]
+    subgraph AGENT["Agent Runtime"]
         DISCO["Discovery Layer\ncapabilities\nrequirements\nprovides"]
-        SKILLS["Skills\n(injected context\ninto system prompt)"]
-        PROMPTS["Prompts\n(task templates\nwith versioning\n+ A/B support)"]
-        MODEL["Model Router\nprimary → fallback\ntimeout handling"]
+        SKILLS["Skills\ninjected context\ninto system prompt"]
+        PROMPTS["Prompts\ntask templates\nwith versioning\nand A/B support"]
+        MODEL["Model Router\nprimary to fallback\ntimeout handling"]
         RATIONALE["Decision Rationale\njustification: REQUIRED\nreasoning_summary: REQUIRED"]
     end
 
-    subgraph SAFETY["🛡️ Safety Layer"]
-        CONF["Confidence\nScoring\n0.0 - 1.0"]
+    subgraph SAFETY["Safety Layer"]
+        CONF["Confidence\nScoring\n0.0 to 1.0"]
         GUARD["Guardrail\nEvaluation\nHard limits"]
         HITL_GATE["HITL Gate\nLow: auto\nMed/High: approval"]
     end
 
-    subgraph OUTPUTS["📤 Outputs"]
-        ANALYSIS["Analysis\n(read-only reports)"]
-        RECS["Recommendations\n(proposed actions)"]
-        EXEC["Execution\n(atomic actions\n+ rollback payload)"]
-        EVT_OUT["Cross-Agent Events\n(emitted to bus)"]
+    subgraph OUTPUTS["Outputs"]
+        ANALYSIS["Analysis\nread-only reports"]
+        RECS["Recommendations\nproposed actions"]
+        EXEC["Execution\natomic actions\nwith rollback payload"]
+        EVT_OUT["Cross-Agent Events\nemitted to bus"]
     end
 
     DS --> DISCO

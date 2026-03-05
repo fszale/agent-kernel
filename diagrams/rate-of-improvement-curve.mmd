@@ -1,16 +1,16 @@
 graph LR
-    W0["📍 Week 0\nBaseline\nI₀ = 0%"]
-    W1["Week 1-4\n🚀 Rapid\nAcceleration\nRoI = HIGH"]
-    W2["Week 5-10\n📈 Tapering\nRoI = DECLINING\n(normal)"]
-    W3["Week 11+\n✅ Stabilization\nRoI ≈ 0\nValue sustained"]
+    W0["Week 0\nBaseline\nI = 0%"]
+    W1["Week 1-4\nRapid Acceleration\nRoI = HIGH"]
+    W2["Week 5-10\nTapering\nRoI = DECLINING\nnormal"]
+    W3["Week 11+\nStabilization\nRoI near zero\nValue sustained"]
 
     W0 --> W1 --> W2 --> W3
 
     subgraph SHAPES["Curve Shape Diagnostics"]
-        S1["✅ S-Curve\nrise → taper → flat\nSUCCESS"]
-        S2["⚠️ Rise-Decline\nimprovement then\nregression → WARN"]
-        S3["❌ Flat Line\nno improvement\nFAILURE - redesign"]
-        S4["🔍 Unbounded\ncontinuous rise\nINVESTIGATE"]
+        S1["S-Curve\nrise to taper to flat\nSUCCESS"]
+        S2["Rise-Decline\nimprovement then\nregression - WARN"]
+        S3["Flat Line\nno improvement\nFAILURE - redesign"]
+        S4["Unbounded\ncontinuous rise\nINVESTIGATE"]
     end
 
     W3 -.->|"healthy"| S1
@@ -18,7 +18,7 @@ graph LR
     W1 -.->|"if stuck"| S3
     W3 -.->|"if still rising"| S4
 
-    FORMULA["📐 RoI Formula\nRoI(t) = ΔI / Δt\nwhere I = improvement %\nvs baseline\nSuccess: R² > 0.85\non logistic fit"]
+    FORMULA["RoI Formula\nRoI(t) = delta-I / delta-t\nwhere I = improvement %\nvs baseline\nSuccess: R-squared above 0.85\non logistic fit"]
 
     style W0 fill:#2a2a2a,color:#fff,stroke:#6b7280
     style W1 fill:#1a4a2e,color:#fff,stroke:#4ade80

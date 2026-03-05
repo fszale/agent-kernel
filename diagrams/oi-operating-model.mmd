@@ -1,31 +1,31 @@
 graph LR
     subgraph STAGE1["Stage 1\nProcess Mapping"]
-        S1["📋 Document\ncurrent state\nInputs → Outputs\nDecision points\nHandoffs"]
+        S1["Document current state\nInputs to Outputs\nDecision points\nHandoffs"]
     end
 
     subgraph STAGE2["Stage 2\nBottleneck ID"]
-        S2["🔍 Score bottlenecks\nTime 30%\nRepeat 20%\nErrors 20%\nImpact 20%\nData 10%"]
+        S2["Score bottlenecks\nTime 30%\nRepeat 20%\nErrors 20%\nImpact 20%\nData 10%"]
     end
 
     subgraph STAGE3["Stage 3\nAutomation Scoring"]
-        S3["📊 AI Readiness\nQuadrant\nPriority Targets\nQuick Wins\nInvest to Enable\nBacklog"]
+        S3["AI Readiness Quadrant\nPriority Targets\nQuick Wins\nInvest to Enable\nBacklog"]
     end
 
     subgraph STAGE4["Stage 4\nDeploy"]
-        S4["🚀 Minimal viable\nautomation\nHuman-in-loop v1\nMeasure from Day 1"]
+        S4["Minimal viable automation\nHuman-in-loop v1\nMeasure from Day 1"]
     end
 
-    subgraph STAGE5["Stage 5\nMeasure + Loop"]
-        S5["📈 Rate of\nImprovement\nS-curve tracking\nThesis validation\nNever stop"]
+    subgraph STAGE5["Stage 5\nMeasure and Loop"]
+        S5["Rate of Improvement\nS-curve tracking\nThesis validation\nNever stop"]
     end
 
     S1 -->|"map complete"| S2
     S2 -->|"top bottlenecks ranked"| S3
     S3 -->|"Priority Targets selected"| S4
     S4 -->|"deployed"| S5
-    S5 -->|"new bottlenecks\nemerge"| S2
+    S5 -->|"new bottlenecks emerge"| S2
 
-    METRIC["🎯 Always measure\nthe metric the\nbusiness cares about\n—not the AI metric"]
+    METRIC["Always measure\nthe metric the\nbusiness cares about\nnot the AI metric"]
 
     S5 -.->|"guided by"| METRIC
 

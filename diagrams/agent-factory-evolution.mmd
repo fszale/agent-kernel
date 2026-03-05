@@ -1,42 +1,45 @@
 graph TB
-    subgraph ERA1["⚙️ Era 1 — Single Agent\nToday: pilot deployments"]
-        A1["🤖 Domain Agent\n(e.g., Accounting Agent)\nL0→L3 autonomy\nHITL per action\nGuardrailed"]
-        H1["👤 Human\noperator + approver"]
+    subgraph ERA1["Era 1 - Single Agent\nToday: pilot deployments"]
+        A1["Domain Agent\ne.g. Accounting Agent\nL0 to L3 autonomy\nHITL per action\nGuardrailed"]
+        H1["Human\noperator and approver"]
         A1 <-->|"approvals\nrecommendations"| H1
     end
 
-    subgraph ERA2["🏭 Era 2 — Agent Factory\nNear future: coordinated fleets"]
-        ORCH["🧠 Orchestrator\n(event bus + scheduler\n+ routing)"]
-        A2a["🤖 Finance\nAgent"]
-        A2b["🤖 Operations\nAgent"]
-        A2c["🤖 Support\nAgent"]
-        A2d["🤖 Intelligence\nAgent"]
-        H2["👥 Human Team\n(HITL where needed)"]
-        ORCH --> A2a & A2b & A2c & A2d
+    subgraph ERA2["Era 2 - Agent Factory\nNear future: coordinated fleets"]
+        ORCH["Orchestrator\nevent bus + scheduler\nand routing"]
+        A2a["Finance Agent"]
+        A2b["Operations Agent"]
+        A2c["Support Agent"]
+        A2d["Intelligence Agent"]
+        H2["Human Team\nHITL where needed"]
+        ORCH --> A2a
+        ORCH --> A2b
+        ORCH --> A2c
+        ORCH --> A2d
         A2a <-->|"cross-agent events"| A2b
         A2b <-->|"cross-agent events"| A2c
         A2c <-->|"cross-agent events"| A2d
         ORCH <-->|"escalations\nstrategic approvals"| H2
     end
 
-    subgraph ERA3["🏭+👤 Era 3 — Hybrid Factory\nMid future: AI amplifies humans"]
-        HF1["👤 Human Expert\nwith personal AI\nassistant factory"]
-        HF2["👤 Human Expert\nwith personal AI\nassistant factory"]
-        SHARED["🤖 Shared Agent\nFactory\n(coordinated fleet)"]
+    subgraph ERA3["Era 3 - Hybrid Factory\nMid future: AI amplifies humans"]
+        HF1["Human Expert\nwith personal AI\nassistant factory"]
+        HF2["Human Expert\nwith personal AI\nassistant factory"]
+        SHARED["Shared Agent Factory\ncoordinated fleet"]
         HF1 <-->|"instructions\nhigh-level goals"| SHARED
         HF2 <-->|"instructions\nhigh-level goals"| SHARED
         HF1 <-->|"collaboration"| HF2
     end
 
-    subgraph ERA4["🌐 Era 4 — Factory of Factories\nFar future: autonomous coordination"]
-        FAC_A["🏭 Factory A\n(Company / Domain A)\nAI fleet + humans"]
-        FAC_B["🏭 Factory B\n(Company / Domain B)\nAI fleet + humans"]
-        FAC_C["🏭 Factory C\n(Company / Domain C)\nAI fleet + humans"]
-        PROTO["📋 Standard Protocol\n(agent-to-agent API\ntrustability contracts\nverifiable rationale)"]
-        FAC_A <-->|"agent-to-agent\ncalls"| PROTO
-        FAC_B <-->|"agent-to-agent\ncalls"| PROTO
-        FAC_C <-->|"agent-to-agent\ncalls"| PROTO
-        HITL_GOV["👤 HITL Governance\n(cross-factory standards\naudit + intervention)"]
+    subgraph ERA4["Era 4 - Factory of Factories\nFar future: autonomous coordination"]
+        FAC_A["Factory A\nCompany / Domain A\nAI fleet + humans"]
+        FAC_B["Factory B\nCompany / Domain B\nAI fleet + humans"]
+        FAC_C["Factory C\nCompany / Domain C\nAI fleet + humans"]
+        PROTO["Standard Protocol\nagent-to-agent API\ntrustability contracts\nverifiable rationale"]
+        FAC_A <-->|"agent-to-agent calls"| PROTO
+        FAC_B <-->|"agent-to-agent calls"| PROTO
+        FAC_C <-->|"agent-to-agent calls"| PROTO
+        HITL_GOV["HITL Governance\ncross-factory standards\naudit and intervention"]
         PROTO <-->|"exceptions\nescalations"| HITL_GOV
     end
 

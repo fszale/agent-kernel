@@ -1,28 +1,28 @@
 graph TB
-    subgraph PPT["People · Process · Technology Evaluation Matrix"]
-        subgraph P["👥 People"]
+    subgraph PPT["People, Process, Technology Evaluation Matrix"]
+        subgraph P["People"]
             P_REV["Revenue\nWho benefits?\nHow much?"]
             P_RISK["Risk\nWho is at risk?\nDownside?"]
-            P_COST["Cost\nTraining, change\nmanagement"]
+            P_COST["Cost\nTraining, change management"]
         end
 
-        subgraph PR["⚙️ Process"]
-            PR_REV["Revenue\nRevenue-process\nimprovements?"]
-            PR_RISK["Risk\nOperational risk\nreduction?"]
-            PR_COST["Cost\nEfficiency gains\nautomation?"]
+        subgraph PR["Process"]
+            PR_REV["Revenue\nRevenue-process improvements?"]
+            PR_RISK["Risk\nOperational risk reduction?"]
+            PR_COST["Cost\nEfficiency gains, automation?"]
         end
 
-        subgraph T["💻 Technology"]
-            T_REV["Revenue\nTech-enabled\nexpansion?"]
-            T_RISK["Risk\nSecurity/reliability\nrisks?"]
-            T_COST["Cost\nBuild vs buy\nmaintenance?"]
+        subgraph T["Technology"]
+            T_REV["Revenue\nTech-enabled expansion?"]
+            T_RISK["Risk\nSecurity and reliability risks?"]
+            T_COST["Cost\nBuild vs buy, maintenance?"]
         end
     end
 
     subgraph VS["Value Stream Output"]
-        REV["💰 Revenue\nGeneration"]
-        RISK["🛡️ Risk\nMitigation"]
-        COST["💸 Cost\nSavings"]
+        REV["Revenue Generation"]
+        RISK["Risk Mitigation"]
+        COST["Cost Savings"]
     end
 
     P_REV --> REV
@@ -35,7 +35,7 @@ graph TB
     PR_COST --> COST
     T_COST --> COST
 
-    SCORE["📊 Score 1-10 per cell\n= 9 scores total\nMax = 90\n75+ Strong\n55-74 Promising\n35-54 Marginal\n0-34 Weak"]
+    SCORE["Score 1-10 per cell\n9 scores total\nMax = 90\n75+ Strong\n55-74 Promising\n35-54 Marginal\n0-34 Weak"]
 
     REV --> SCORE
     RISK --> SCORE
