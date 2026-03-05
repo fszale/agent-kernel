@@ -1,0 +1,48 @@
+graph TB
+    subgraph PPT["People · Process · Technology Evaluation Matrix"]
+        subgraph P["👥 People"]
+            P_REV["Revenue\nWho benefits?\nHow much?"]
+            P_RISK["Risk\nWho is at risk?\nDownside?"]
+            P_COST["Cost\nTraining, change\nmanagement"]
+        end
+
+        subgraph PR["⚙️ Process"]
+            PR_REV["Revenue\nRevenue-process\nimprovements?"]
+            PR_RISK["Risk\nOperational risk\nreduction?"]
+            PR_COST["Cost\nEfficiency gains\nautomation?"]
+        end
+
+        subgraph T["💻 Technology"]
+            T_REV["Revenue\nTech-enabled\nexpansion?"]
+            T_RISK["Risk\nSecurity/reliability\nrisks?"]
+            T_COST["Cost\nBuild vs buy\nmaintenance?"]
+        end
+    end
+
+    subgraph VS["Value Stream Output"]
+        REV["💰 Revenue\nGeneration"]
+        RISK["🛡️ Risk\nMitigation"]
+        COST["💸 Cost\nSavings"]
+    end
+
+    P_REV --> REV
+    PR_REV --> REV
+    T_REV --> REV
+    P_RISK --> RISK
+    PR_RISK --> RISK
+    T_RISK --> RISK
+    P_COST --> COST
+    PR_COST --> COST
+    T_COST --> COST
+
+    SCORE["📊 Score 1-10 per cell\n= 9 scores total\nMax = 90\n75+ Strong\n55-74 Promising\n35-54 Marginal\n0-34 Weak"]
+
+    REV --> SCORE
+    RISK --> SCORE
+    COST --> SCORE
+
+    style P fill:#1a3a5c,color:#fff,stroke:#4a9ede
+    style PR fill:#1a4a2e,color:#fff,stroke:#4ade80
+    style T fill:#3a2a5c,color:#fff,stroke:#a78bfa
+    style VS fill:#2a2a2a,color:#fff,stroke:#6b7280
+    style SCORE fill:#1a1a3a,color:#fff,stroke:#a78bfa

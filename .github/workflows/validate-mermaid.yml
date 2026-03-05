@@ -1,0 +1,60 @@
+name: Validate Mermaid Diagrams
+
+on:
+  push:
+    paths:
+      - 'diagrams/**'
+  pull_request:
+    paths:
+      - 'diagrams/**'
+
+jobs:
+  validate:
+    name: Mermaid Syntax Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Validate all .mmd files
+        run: |
+          echo "Validating Mermaid diagram syntax..."
+          FAILED=0
+          for f in diagrams/*.mmd; do
+            echo "  Checking: $f"
+            if ! mmdc -i "$f" -o /dev/null 2>/dev/null; then
+              echo "  ❌ Syntax error in: $f"
+              FAILED=1
+            else
+              echo "  ✅ Valid: $f"
+            fi
+          done
+          if [ $FAILED -ne 0 ]; then
+            echo "❌ Mermaid validation FAILED — fix syntax errors before merging"
+            exit 1
+          fi
+          echo "✅ All Mermaid diagrams valid"
+
+      - name: Check registry.json references all .mmd files
+        run: |
+          echo "Checking registry.json completeness..."
+          FAILED=0
+          for f in diagrams/*.mmd; do
+            id=$(basename "$f" .mmd)
+            if ! grep -q "\"$id\"" diagrams/registry.json; then
+              echo "  ❌ $f not registered in diagrams/registry.json"
+              FAILED=1
+            fi
+          done
+          if [ $FAILED -ne 0 ]; then
+            echo "❌ registry.json is missing entries. Add the diagram and its used_in targets."
+            exit 1
+          fi
+          echo "✅ All .mmd files are registered"

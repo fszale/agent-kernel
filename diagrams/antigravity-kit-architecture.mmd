@@ -1,0 +1,49 @@
+graph TB
+    subgraph L1["Layer 1: Agent Context\n(read automatically)"]
+        CTX["CONTEXT.md\nProject map, conventions\nnaming rules"]
+        AGENTS["AGENTS.md\nSkill selection guide\nactivation hierarchy"]
+        PHIL["PHILOSOPHY.md\nDesign principles\nembedded diagrams"]
+    end
+
+    subgraph L2["Layer 2: Reusable Knowledge\n(skills + prompts + templates)"]
+        SK["skills/\n22 SKILL.md files\nAgent behaviors"]
+        PR["prompts/\n16 prompt templates\nStructured workflows"]
+        TM["templates/\n10 document templates\nFillable output formats"]
+    end
+
+    subgraph L3["Layer 3: Diagram System\n(visual architecture)"]
+        MMD["diagrams/\n8 .mmd sources"]
+        REG["registry.json\nSource of truth"]
+        EMB["scripts/embed_diagrams.py\nAuto-embed into docs"]
+    end
+
+    subgraph L4["Layer 4: Agent Procedures\n(repeatable workflows)"]
+        WF[".agents/workflows/\n7 step-by-step\nprocedures"]
+        ASK[".agents/skills/\n2 project knowledge\ndocs"]
+    end
+
+    subgraph L5["Layer 5: Automated Quality\n(GitHub Actions CI/CD)"]
+        CI1["skill-consistency-check.yml\nFrontmatter + sections"]
+        CI2["documentation-sync.yml\nIndex completeness"]
+        CI3["validate-mermaid.yml\nDiagram syntax + registry"]
+        AI1["prompt-quality-review.yml\nWeekly AI review"]
+        AI2["content-improvement.yml\nWeekly gap analysis"]
+        AI3["pr-agent-review.yml\nAI PR governance check"]
+    end
+
+    CTX --> AGENTS --> PHIL
+    L1 -->|"agents read context\nthen select skills"| L2
+    SK --> PR --> TM
+    L2 -->|"skills reference\ndiagrams"| L3
+    MMD --> REG --> EMB
+    L3 -->|"diagrams embedded\ninto docs"| L1
+    L4 -->|"procedures use\nskills + prompts"| L2
+    L5 -->|"validates all\nlayers"| L1
+    L5 -->|"validates"| L2
+    L5 -->|"validates"| L3
+
+    style L1 fill:#1a3a5c,color:#fff,stroke:#4a9ede
+    style L2 fill:#1a4a2e,color:#fff,stroke:#4ade80
+    style L3 fill:#3a2a5c,color:#fff,stroke:#a78bfa
+    style L4 fill:#3a3a1a,color:#fff,stroke:#facc15
+    style L5 fill:#4a2a1a,color:#fff,stroke:#fb923c

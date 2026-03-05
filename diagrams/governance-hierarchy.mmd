@@ -1,0 +1,32 @@
+graph TB
+    subgraph HUMAN["👤 Human-Authored"]
+        OBJ["🎯 Business Objective\n─────────────────\nrationale: WHY this matters\npriority: Critical|High|Med|Low\ntarget_kpis: metric + timeframe"]
+    end
+
+    subgraph AGENT_APPROVED["🤖 Agent-Proposed · Human-Approved"]
+        STR["📐 Strategy\n─────────────────\nobjective_alignment: HOW not WHICH\nthesis: falsifiable claim\nevidence: supporting data\nexpected_outcomes: KPI + timeframe"]
+    end
+
+    subgraph AGENT_BUNDLE["🔗 Agent-Bundled · All-or-Nothing Approval"]
+        TAC["📦 Tactic\n─────────────────\nstrategy_alignment: HOW not WHICH\nintent: WHY actions must go together\nexecution_mode: Sequential|Parallel|Phased\nrisk_level: Low|Med|High"]
+    end
+
+    subgraph AGENT_EXEC["⚡ Agent-Executed · Risk-Gated"]
+        ACT["🔧 Action\n─────────────────\ntactic_alignment: role in bundle\nrisk_class: Low|Med|High\nconfidence_score: 0.0-1.0\nexpected_value: $ or metric delta\njustification: REQUIRED\nreasoning_summary: REQUIRED\nrollback: how to undo"]
+    end
+
+    OBJ -->|"Quarterly HITL review"| STR
+    STR -->|"Biweekly HITL review"| TAC
+    TAC -->|"All-or-nothing HITL"| ACT
+
+    ACT -->|"✅ 30-sec traceability test"| OBJ
+
+    GUARD["🛡️ Guardrails\nmax_change_pct\nmin_confidence\nmax_actions/day\nfinancial_cap"] -.->|"blocks violations"| ACT
+    KILL["🔴 Kill Switches\nGlobal → Domain\n→ Agent Type\n→ Tactic\n→ Action Class"] -.->|"immediate halt"| ACT
+
+    style HUMAN fill:#1a3a5c,color:#fff,stroke:#4a9ede
+    style AGENT_APPROVED fill:#1a4a2e,color:#fff,stroke:#4ade80
+    style AGENT_BUNDLE fill:#3a2a5c,color:#fff,stroke:#a78bfa
+    style AGENT_EXEC fill:#4a2a1a,color:#fff,stroke:#fb923c
+    style GUARD fill:#2a1a1a,color:#fff,stroke:#f87171
+    style KILL fill:#2a1a1a,color:#fff,stroke:#f87171

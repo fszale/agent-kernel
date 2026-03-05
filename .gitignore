@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Mermaid CLI output (rendered SVGs are build artifacts)
+diagrams/*.svg
+diagrams/*.png
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local

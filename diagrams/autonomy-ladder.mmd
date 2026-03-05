@@ -1,0 +1,21 @@
+graph LR
+    L0["🔭 L0\nOBSERVE\n──────────\nDetects + reports\nNo proposals\nNo execution"]
+    L1["💡 L1\nRECOMMEND\n──────────\nProposes actions\nExpected value\nHuman decides"]
+    L2["✅ L2\nAPPROVE-TO-EXEC\n──────────\nFull payload ready\nHuman approves\nThen executes"]
+    L3["🚀 L3\nGUARDRAILED AUTO\n──────────\nExecutes in envelope\nAlerts on anomaly\nWeekly audit"]
+
+    L0 -->|"PROMOTE: 4+ weeks\naccurate detection\nno incidents"| L1
+    L1 -->|"PROMOTE: 4+ weeks\nROI > threshold\nerrors < 1%"| L2
+    L2 -->|"PROMOTE: 4+ weeks\nprovable value\nguardrail adherence"| L3
+
+    L3 -->|"DEMOTE:\nanomaly detected"| L2
+    L2 -->|"DEMOTE:\nincident occurs"| L1
+    L1 -->|"DEMOTE:\nkill switch"| L0
+
+    NEW["🆕 New agent\nor capability"] -->|"Always start here"| L0
+
+    style L0 fill:#1a3a5c,color:#fff,stroke:#4a9ede
+    style L1 fill:#1a4a2e,color:#fff,stroke:#4ade80
+    style L2 fill:#3a3a1a,color:#fff,stroke:#facc15
+    style L3 fill:#1a4a2e,color:#fff,stroke:#4ade80
+    style NEW fill:#2a2a2a,color:#fff,stroke:#6b7280

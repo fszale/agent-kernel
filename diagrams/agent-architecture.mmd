@@ -1,0 +1,47 @@
+graph TB
+    subgraph INPUTS["📥 Inputs"]
+        DS["Data Sources\n(transactions, logs\nKPIs, config)"]
+        CFG["Agent Config\n(guardrails, HITL\nkill switches)"]
+        EVT_IN["Cross-Agent Events\n(consumed from bus)"]
+    end
+
+    subgraph AGENT["🤖 Agent Runtime"]
+        DISCO["Discovery Layer\ncapabilities\nrequirements\nprovides"]
+        SKILLS["Skills\n(injected context\ninto system prompt)"]
+        PROMPTS["Prompts\n(task templates\nwith versioning\n+ A/B support)"]
+        MODEL["Model Router\nprimary → fallback\ntimeout handling"]
+        RATIONALE["Decision Rationale\njustification: REQUIRED\nreasoning_summary: REQUIRED"]
+    end
+
+    subgraph SAFETY["🛡️ Safety Layer"]
+        CONF["Confidence\nScoring\n0.0 - 1.0"]
+        GUARD["Guardrail\nEvaluation\nHard limits"]
+        HITL_GATE["HITL Gate\nLow: auto\nMed/High: approval"]
+    end
+
+    subgraph OUTPUTS["📤 Outputs"]
+        ANALYSIS["Analysis\n(read-only reports)"]
+        RECS["Recommendations\n(proposed actions)"]
+        EXEC["Execution\n(atomic actions\n+ rollback payload)"]
+        EVT_OUT["Cross-Agent Events\n(emitted to bus)"]
+    end
+
+    DS --> DISCO
+    CFG --> GUARD
+    EVT_IN --> DISCO
+    DISCO --> SKILLS
+    SKILLS --> PROMPTS
+    PROMPTS --> MODEL
+    MODEL --> RATIONALE
+    RATIONALE --> CONF
+    CONF --> GUARD
+    GUARD --> HITL_GATE
+    HITL_GATE -->|"approved"| ANALYSIS
+    HITL_GATE -->|"approved"| RECS
+    HITL_GATE -->|"approved"| EXEC
+    EXEC --> EVT_OUT
+
+    style INPUTS fill:#1a3a5c,color:#fff,stroke:#4a9ede
+    style AGENT fill:#1a4a2e,color:#fff,stroke:#4ade80
+    style SAFETY fill:#3a2a1a,color:#fff,stroke:#fb923c
+    style OUTPUTS fill:#3a2a5c,color:#fff,stroke:#a78bfa

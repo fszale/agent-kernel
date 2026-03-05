@@ -1,0 +1,101 @@
+name: Content Improvement
+
+on:
+  schedule:
+    - cron: '0 9 * * 3'   # Every Wednesday at 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  gap-analysis:
+    name: AI Gap Analysis — New Skill and Prompt Suggestions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @google/generative-ai
+
+      - name: Run gap analysis with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # Build skill inventory
+          SKILLS=$(ls skills/)
+          PROMPTS=$(ls prompts/)
+
+          cat > gap-analysis.mjs << EOF
+          import { GoogleGenerativeAI } from "@google/generative-ai";
+          const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+          const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+          const existing_skills = \`${SKILLS}\`;
+          const existing_prompts = \`${PROMPTS}\`;
+
+          const philosophy = \`
+          Core philosophy encoded in this kit:
+          1. People · Process · Technology (PPT) evaluation framework
+          2. Pareto (80/20) — focus on highest value 20% of work
+          3. 30/60/90 mindset — horizon-based planning
+          4. First Principles — strip assumptions, rebuild from base elements
+          5. Bias Towards Action — anti-paralysis
+          6. Lead With Empathy — authentic caring leadership
+          7. Radical Candor — caring + direct feedback
+          8. Knowledge Sprints — athlete-style deep work
+          9. AI Use Case Scoring — 5-dimension weighted matrix
+          10. Business Data Analysis — raw data to opportunities
+          11. Outcome Probability — 4-factor Go/No-Go
+          12. Rate of Improvement — S-curve measurement
+          13. Governance Hierarchy — Obj→Strategy→Tactic→Action traceability
+          14. HITL and Guardrails — human oversight in autonomous systems
+          15. Autonomy Ladder — L0-L3 progressive autonomy
+          16. Tactic Design — action bundling patterns
+          17. Confidence and Experiment Design — calibrated scoring
+          \`;
+
+          const result = await model.generateContent(\`
+          You are a content strategist for an agent-kernel (reusable AI toolkit).
+
+          The kit encodes these design principles:
+          \${philosophy}
+
+          Existing skills: \${existing_skills}
+          Existing prompts: \${existing_prompts}
+
+          Identify:
+          1. Top 3 MISSING SKILLS — skills that would meaningfully extend the kit based on the philosophy
+          2. Top 2 MISSING PROMPTS — prompt templates that would complement existing skills
+          3. Top 1 CROSS-REFERENCE GAP — a skill and prompt that should reference each other but don't
+
+          Be very specific. For each suggestion, explain:
+          - Name (kebab-case)
+          - Which principle from the philosophy it encodes
+          - One sentence on why it's valuable
+
+          Format as a markdown list.
+          \`);
+
+          console.log(result.response.text());
+          EOF
+          node gap-analysis.mjs > gap_output.txt 2>&1
+          cat gap_output.txt
+
+      - name: Create GitHub issue with suggestions
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('gap_output.txt', 'utf8');
+            const today = new Date().toISOString().split('T')[0];
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Weekly Content Gap Analysis — ${today}`,
+              body: `## Automated Content Gap Analysis\n\nSuggested additions based on design philosophy coverage.\n\n${output}`,
+              labels: ['content-improvement', 'automated']
+            });

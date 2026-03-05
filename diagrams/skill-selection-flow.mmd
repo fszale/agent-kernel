@@ -1,0 +1,34 @@
+graph TB
+    START(["What do I need to do?"])
+
+    START --> Q1{"Evaluating or\ndeciding?"}
+    START --> Q2{"Planning or\norganizing?"}
+    START --> Q3{"Diagnosing a\nproblem?"}
+    START --> Q4{"Deploying AI\nor agents?"}
+    START --> Q5{"Leading or\ncoaching?"}
+
+    Q1 -->|"New idea/initiative"| S_IDE["💡 idea-evaluator\n+ prompts/idea-evaluator.md"]
+    Q1 -->|"Technology decision"| S_PPT["🔍 PPT Assessment\n+ prompts/ppt-assessment.md"]
+    Q1 -->|"Score AI use cases"| S_AI["📊 ai-use-case-scoring\n+ prompts/bottleneck-identification.md"]
+
+    Q2 -->|"New project/role"| S_90["📅 30-60-90-planning\n+ templates/30-60-90-plan-template.md"]
+    Q2 -->|"Strategic direction"| S_STR["📐 governance-hierarchy-design\n+ prompts/strategy-proposal.md"]
+    Q2 -->|"Architecture"| S_MSH["🌙 prompts/moonshot-architecture.md"]
+
+    Q3 -->|"Critical failure"| S_FF["🔥 firefighter"]
+    Q3 -->|"Stuck team"| S_SB["📦 shake-the-box"]
+    Q3 -->|"Root cause"| S_FP["🔬 first-principles"]
+    Q3 -->|"Process audit"| S_PA["⚙️ prompts/process-audit.md"]
+
+    Q4 -->|"Design agent"| S_DA["🤖 domain-agent-design\n+ templates/agent-spec-template.yaml"]
+    Q4 -->|"Multi-agent system"| S_FAC["🏭 agent-factory-design"]
+    Q4 -->|"Set autonomy"| S_AUT["🪜 autonomy-ladder"]
+    Q4 -->|"Measure impact"| S_ROI["📈 rate-of-improvement\n+ prompts/rate-of-improvement-analysis.md"]
+    Q4 -->|"Design guardrails"| S_HIT["🛡️ hitl-and-guardrails\n+ templates/agent-config-template.yaml"]
+
+    Q5 -->|"Give feedback"| S_RC["💬 radical-candor"]
+    Q5 -->|"Build trust"| S_EMP["❤️ lead-with-empathy"]
+    Q5 -->|"Boost productivity"| S_KS["⚡ knowledge-sprints"]
+    Q5 -->|"Overcome paralysis"| S_BTA["🎯 bias-towards-action"]
+
+    style START fill:#1a1a3a,color:#fff,stroke:#a78bfa

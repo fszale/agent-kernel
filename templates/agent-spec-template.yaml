@@ -1,0 +1,170 @@
+# Agent Specification Template
+
+# agent-spec.yaml
+# Purpose: Define a single agent's identity, capabilities, schedule, skills, prompts,
+#          actions, HITL rules, and cross-agent coordination.
+# One file per agent per project. All fields documented below.
+
+# ── Agent Identity ────────────────────────────────────────────────────────────
+agent:
+  id: "agent_name"                     # snake_case unique identifier
+  domain: "domain_name"               # The operational domain (e.g., "operations", "support")
+  description: "One-sentence description of what this agent does"
+  owner_role: "Role responsible for this agent's performance"
+  version: "1.0"
+  enabled: true
+
+# ── Discovery (Runtime Capability Metadata) ───────────────────────────────────
+# Used by an orchestrator to discover, route, and match work to agents.
+# This is the agent's "business card" — readable without domain expertise.
+discovery:
+  capabilities:                        # Semantic tags for capability matching
+    - "describe_what_agent_does_1"
+    - "describe_what_agent_does_2"
+  requirements:
+    data_sources:                      # Data the agent reads
+      - "data_source_name_1"
+    config:                            # Config sections required
+      - "guardrails"
+  provides:
+    analysis:                          # Read-only outputs
+      - "example_analysis_output"
+    recommendations:                   # Proposed actions requiring HITL
+      - "example_recommendation_output"
+    execution:                         # Actions the agent can execute
+      - "example_execution_output"
+
+# ── Schedule ─────────────────────────────────────────────────────────────────
+schedule:
+  cron: "0 9 * * *"                   # 9 AM UTC daily
+  cadence: "daily"                    # daily | weekly | monthly | realtime
+  depends_on_agents: []               # Agent IDs that must complete before this runs
+
+# ── Objectives ───────────────────────────────────────────────────────────────
+objectives:
+  primary_kpi: "primary_metric_name"
+  secondary_kpis:
+    - "secondary_metric_1"
+    - "secondary_metric_2"
+  weekly_improvement_target:
+    kpi: "primary_metric_name"
+    delta: 0.01                        # Improvement target per week (absolute or relative)
+
+# ── Inputs ───────────────────────────────────────────────────────────────────
+inputs:
+  data_sources:
+    - "data_source_1"
+    - "data_source_2"
+  config: "agent-config.yaml"
+
+# ── Skills ───────────────────────────────────────────────────────────────────
+# Markdown skill documents injected into this agent's system context.
+# Keep total skill tokens < 3K to stay within model context budget.
+skills:
+  - "shared/confidence-and-experiment"
+  - "shared/governance-hierarchy-design"
+  - "domain/relevant-domain-skill"
+
+# ── Prompts ──────────────────────────────────────────────────────────────────
+# Task-type → prompt template with version tracking and optional A/B test config.
+# version: semantic version of the prompt file
+# variant: "default" for standard prompt; named variants for A/B tests
+prompts:
+  primary_task:
+    template: "agent_name/primary_task"
+    version: "1.0"
+    variant: "default"
+    # Uncomment to activate A/B test:
+    # ab_test:
+    #   experiment_id: "prompt_exp_001"
+    #   control_version: "1.0"
+    #   split_pct: 0.50
+  secondary_task:
+    template: "agent_name/secondary_task"
+    version: "1.0"
+    variant: "default"
+
+# ── Model Routing ─────────────────────────────────────────────────────────────
+# Which LLM model to use per task type, with fallback chains.
+model_routing:
+  primary_task:
+    primary: "gemini-2.0-flash"
+    fallback:
+      - "gemini-2.0-flash-lite"
+    timeout_ms: 30000
+  secondary_task:
+    primary: "gemini-2.0-pro"
+    fallback:
+      - "gemini-2.0-flash"
+    timeout_ms: 60000
+
+# ── Rate Limits ───────────────────────────────────────────────────────────────
+rate_limits:
+  max_llm_calls_per_day: 50
+  max_cost_per_day_usd: 5.00
+  max_actions_per_day: 20
+
+# ── Decision Rationale ────────────────────────────────────────────────────────
+# Universal fields required on EVERY action output.
+# These ensure every output is auditable and explainable.
+decision_rationale:
+  universal_required_fields:
+    - "justification"                  # Why this action was chosen over alternatives
+    - "reasoning_summary"             # Step-by-step chain-of-thought summary
+  optional_fields:
+    - "alternatives_considered"       # What else was evaluated and why rejected
+    - "data_sources_used"            # Which inputs drove the decision
+    - "guardrail_evaluation"          # How guardrails were checked
+
+# ── Actions ──────────────────────────────────────────────────────────────────
+# What this agent is allowed to do.
+# risk_class: low | medium | high
+# autonomy_level: L0 | L1 | L2 | L3
+actions:
+  - id: "action_class_name"
+    description: "What this action does"
+    risk_class: "low"
+    autonomy_level: "L1"
+    guardrails:
+      max_change_pct: 0.10
+    required_fields:
+      - "expected_value"
+      - "confidence_score"
+      - "rollback_payload"
+
+# ── Cross-Agent Events ────────────────────────────────────────────────────────
+# Signals this agent emits or consumes via the event bus.
+cross_agent_events:
+  emits:
+    - "event_name_this_agent_produces"   # Consumed by which agent?
+  consumes:
+    - "event_name_this_agent_listens_to" # Produced by which agent?
+
+# ── HITL ─────────────────────────────────────────────────────────────────────
+hitl:
+  approvals:
+    medium_risk_required: true
+    high_risk_required: true
+  confidence_thresholds:
+    low_risk_auto_min: 0.60
+    medium_risk_execute_min: 0.70
+
+# ── Cost to Serve ─────────────────────────────────────────────────────────────
+cost_to_serve:
+  track:
+    - "llm_cost_usd"
+    - "human_review_minutes"
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  emit_fields:
+    - "agent_run_id"
+    - "action_id"
+    - "timestamp"
+    - "risk_class"
+    - "autonomy_level"
+    - "confidence_score"
+    - "expected_value"
+    - "status"
+    - "prompt_version"
+    - "justification"

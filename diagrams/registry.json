@@ -1,0 +1,87 @@
+{
+  "version": "1",
+  "diagrams": [
+    {
+      "id": "governance-hierarchy",
+      "file": "diagrams/governance-hierarchy.mmd",
+      "description": "Four-tier governance model: Objective → Strategy → Tactic → Action with reasoning fields and HITL gates",
+      "used_in": [
+        "PHILOSOPHY.md",
+        "skills/governance-hierarchy-design/SKILL.md",
+        "docs/design-principles.md"
+      ]
+    },
+    {
+      "id": "autonomy-ladder",
+      "file": "diagrams/autonomy-ladder.mmd",
+      "description": "L0 Observe → L1 Recommend → L2 Approve-to-Execute → L3 Guardrailed Auto with promotion and demotion paths",
+      "used_in": [
+        "PHILOSOPHY.md",
+        "skills/autonomy-ladder/SKILL.md",
+        "docs/design-principles.md"
+      ]
+    },
+    {
+      "id": "rate-of-improvement-curve",
+      "file": "diagrams/rate-of-improvement-curve.mmd",
+      "description": "S-curve: Rapid Acceleration → Tapering → Stabilization with curve shape classifications",
+      "used_in": [
+        "PHILOSOPHY.md",
+        "skills/rate-of-improvement/SKILL.md"
+      ]
+    },
+    {
+      "id": "ppt-value-streams",
+      "file": "diagrams/ppt-value-streams.mmd",
+      "description": "PPT × Revenue/Risk/Cost evaluation matrix showing how all three dimensions cross all three value streams",
+      "used_in": [
+        "PHILOSOPHY.md",
+        "skills/idea-evaluator/SKILL.md",
+        "docs/design-principles.md"
+      ]
+    },
+    {
+      "id": "skill-selection-flow",
+      "file": "diagrams/skill-selection-flow.mmd",
+      "description": "Decision tree for selecting the right skill based on task type",
+      "used_in": [
+        "AGENTS.md",
+        "CONTEXT.md"
+      ]
+    },
+    {
+      "id": "agent-architecture",
+      "file": "diagrams/agent-architecture.mmd",
+      "description": "Single agent architecture: inputs → skills + prompts → model routing → actions → HITL → cross-agent events",
+      "used_in": [
+        "skills/domain-agent-design/SKILL.md"
+      ]
+    },
+    {
+      "id": "agent-factory-evolution",
+      "file": "diagrams/agent-factory-evolution.mmd",
+      "description": "Evolution from single agent to factory of AI agents, AI+human factories, and factory-of-factories",
+      "used_in": [
+        "skills/agent-factory-design/SKILL.md",
+        "docs/design-principles.md"
+      ]
+    },
+    {
+      "id": "oi-operating-model",
+      "file": "diagrams/oi-operating-model.mmd",
+      "description": "Five-stage OI operating model: Process Map → Bottleneck ID → Automation Score → Deploy → Measure",
+      "used_in": [
+        "PHILOSOPHY.md",
+        "skills/ai-use-case-scoring/SKILL.md"
+      ]
+    },
+    {
+      "id": "antigravity-kit-architecture",
+      "file": "diagrams/antigravity-kit-architecture.mmd",
+      "description": "Five-layer Antigravity Kit architecture: Agent Context → Reusable Knowledge → Diagram System → Agent Procedures → Automated Quality",
+      "used_in": [
+        "docs/antigravity-kit-architecture.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+# agent-spec-domain-template.yaml
+#
+# Domain-Specific Agent Specification
+# Based on the accounting agent reference pattern from the agent-kernel.
+#
+# HOW TO USE:
+# 1. Replace all {{PLACEHOLDER}} values with your domain-specific content
+# 2. Review all commented-out sections and enable what applies to your domain
+# 3. Run validation: make consistency-check
+# 4. For financial, medical, legal, or safety domains: raise all confidence thresholds to 0.95+
+# 5. Keep enabled: false until Day 30 review passes (for elevated-risk domains)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Agent Identity ────────────────────────────────────────────────────────────
+agent:
+  id: {{agent_id}}                        # snake_case, e.g., "accounting", "inventory", "support"
+  domain: {{domain}}                      # e.g., finance, operations, sales, support, logistics
+  owner_role: "{{owner_role}}"            # e.g., "Finance Lead", "Operations Manager"
+  version: "1.0"
+  enabled: false                          # Set to true only after Day 30 review for elevated-risk domains
+
+# ── Discovery Layer ───────────────────────────────────────────────────────────
+# The orchestrator reads this block to route work without domain expertise.
+discovery:
+  description: >
+    {{2-3 sentence description readable by orchestrator without domain expertise.
+    State what the agent accelerates, what its key capabilities are, and any
+    important operating constraints like elevated confidence thresholds.}}
+
+  capabilities:
+    - "{{capability_1_snake_case}}"       # e.g., transaction_categorization
+    - "{{capability_2_snake_case}}"       # e.g., variance_detection
+    - "{{capability_3_snake_case}}"       # e.g., accrual_management
+
+  # Input channels this agent is relevant for (e.g., platform names, data flows)
+  channels: []
+
+  requirements:
+    data_sources:
+      - "{{data_source_1}}"              # e.g., transactions, orders, tickets
+      - "{{data_source_2}}"
+    integrations:
+      - "{{integration_system}}"         # e.g., accounting_system, crm, erp
+    config: []
+
+  provides:
+    analysis:                            # Read-only outputs (L0+ capability)
+      - "{{analysis_output_1}}"         # e.g., variance_report, fee_audit_report
+    recommendations:                     # Proposed actions requiring human decision (L1+)
+      - "{{recommendation_output_1}}"   # e.g., accrual_suggestions, reimbursement_claims
+    execution:                           # State-changing actions (L2+ with HITL)
+      - "{{execution_output_1}}"        # e.g., transaction_categorization, variance_alert
+
+# ── Schedule ─────────────────────────────────────────────────────────────────
+schedule:
+  cron: "0 8 * * *"                      # Daily 8 AM UTC — adjust to your timezone
+  cadence: "daily"                       # daily | weekly | realtime | event-driven
+  depends_on_agents: []                  # Agent IDs that must complete before this runs
+
+# ── Objectives ───────────────────────────────────────────────────────────────
+objectives:
+  primary_kpi: "{{primary_kpi}}"         # e.g., days_to_close, resolution_time, error_rate
+  secondary_kpis:
+    - "{{secondary_kpi_1}}"
+    - "{{secondary_kpi_2}}"
+
+# ── Inputs ───────────────────────────────────────────────────────────────────
+inputs:
+  data_sources:
+    - "{{data_source_1}}"
+    - "{{data_source_2}}"
+  config: "agent-config.yaml"
+
+# ── Skills ───────────────────────────────────────────────────────────────────
+# Select based on agent function:
+# - All agents: shared/guardrail_evaluation, shared/confidence-and-experiment
+# - Agents making recommendations: shared/governance-hierarchy-design
+# - Elevated-risk domains: shared/hitl-and-guardrails
+# - Agents measuring outcomes: shared/rate-of-improvement
+skills:
+  - "shared/guardrail_evaluation"
+  - "shared/confidence-and-experiment"
+  # - "shared/governance-hierarchy-design"
+  # - "shared/hitl-and-guardrails"
+  # - "shared/rate-of-improvement"
+
+# ── Prompts ──────────────────────────────────────────────────────────────────
+# One entry per distinct task type. Use domain-prefixed template paths.
+# prompts: One entry per distinct task type. Replace the key names (primary_task, secondary_task)
+# with your actual task names in snake_case. Examples: categorize, variance, accrual, triage, draft
+prompts:
+  primary_task:                          # Replace key with your task name, e.g., "categorize"
+    template: "AGENT_ID/primary_task"    # Replace AGENT_ID and task name
+    version: "1.0"
+    variant: "default"
+    # ab_test:                           # Uncomment to enable A/B testing
+    #   experiment_id: "exp_001"
+    #   control_version: "1.0"
+    #   test_version: "1.1"
+    #   split_pct: 0.20
+  secondary_task:                        # Replace key with your task name, e.g., "variance"
+    template: "AGENT_ID/secondary_task"  # Replace AGENT_ID and task name
+    version: "1.0"
+    variant: "default"
+
+# ── Model Routing ─────────────────────────────────────────────────────────────
+# Route by task complexity. Replace key names with your actual task names.
+# - Classification/extraction → mini/fast model
+# - Analysis/detection → mini/fast model
+# - Reasoning/generation/complex recommendations → full model
+model_routing:
+  primary_task: "mini"                   # Replace 'primary_task' with your task name
+  secondary_task: "full"                 # Replace 'secondary_task' with your task name
+
+# ── Decision Rationale (MANDATORY) ───────────────────────────────────────────
+# These fields are non-negotiable. Every action must include them.
+decision_rationale:
+  universal_required_fields:
+    - "justification"                    # Why this action was chosen over alternatives
+    - "reasoning_summary"               # Step-by-step chain of thought
+  optional_fields:
+    - "alternatives_considered"
+    - "data_sources_used"
+    - "guardrail_evaluation"
+
+# ── Actions ──────────────────────────────────────────────────────────────────
+# Pattern for elevated-risk domains (finance, medical, legal, safety):
+# - execution actions: min confidence 0.95
+# - recommendations: L1 only (never auto-execute)
+# - start ALL new agents at L1 or L0 — never L3
+
+actions:
+  - id: "{{execution_action_id}}"       # e.g., transaction_categorization
+    risk_class: "low"                   # low | medium | high
+    autonomy_level: "L2"               # L0 | L1 | L2 | L3 — start conservative
+    guardrails:
+      min_confidence_for_auto: 0.95    # Raise to 0.95 for elevated-risk domains
+    required_fields:
+      - "entity_id"                    # e.g., transaction_id
+      - "suggested_value"              # e.g., suggested_category
+      - "confidence_score"
+      - "supporting_evidence"          # e.g., similar_transactions
+      - "justification"                # MANDATORY
+      - "reasoning_summary"            # MANDATORY
+      - "rollback_payload"
+
+  - id: "{{alert_action_id}}"          # e.g., variance_alert
+    risk_class: "medium"
+    autonomy_level: "L3"               # Promote from L2 after proven track record
+    required_fields:
+      - "metric"
+      - "expected_value"
+      - "actual_value"
+      - "variance_pct"
+      - "possible_causes"
+      - "justification"
+      - "reasoning_summary"
+
+  - id: "{{recommendation_action_id}}" # e.g., accrual_suggestion (always L1 for financial)
+    risk_class: "high"
+    autonomy_level: "L1"               # Recommendations only — never auto-execute for high-risk
+    required_fields:
+      - "recommendation_type"
+      - "amount_or_impact"
+      - "period_or_scope"
+      - "justification"
+      - "reasoning_summary"
+      - "reversal_or_undo_steps"
+
+# ── Cross-Agent Events ────────────────────────────────────────────────────────
+# Naming: {domain}_{entity}_{verb} in snake_case past tense
+cross_agent_events:
+  emits:
+    - "{{domain}}_{{entity}}_detected"   # e.g., revenue_variance_detected
+    - "{{domain}}_anomaly_detected"
+  consumes:
+    - "{{other_domain}}_anomaly_detected" # e.g., ad_spend_anomaly
+
+# ── HITL ─────────────────────────────────────────────────────────────────────
+hitl:
+  approvals:
+    medium_risk_required: true
+    high_risk_required: true
+  confidence_thresholds:
+    low_risk_auto_min: 0.95            # 0.70 for standard domains; 0.95 for elevated-risk
+    medium_risk_execute_min: 0.95      # 0.75 for standard domains; 0.95 for elevated-risk
+    high_risk_execute_min: null        # null = never auto-execute (always HITL)
+
+# ── Cost Tracking ─────────────────────────────────────────────────────────────
+cost_to_serve:
+  track:
+    - "llm_cost_usd"
+    - "tooling_cost_usd"
+    - "human_review_minutes"
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+# All fields below are required in every event log entry for auditability.
+logging:
+  emit_fields:
+    - "agent_run_id"
+    - "action_id"
+    - "timestamp"
+    - "risk_class"
+    - "autonomy_level"
+    - "confidence_score"
+    - "expected_value"
+    - "status"
+    - "prompt_version"
+    - "justification"                  # Always — this is the audit trail

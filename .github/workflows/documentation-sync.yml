@@ -1,0 +1,72 @@
+name: Documentation Sync
+
+on:
+  push:
+    paths:
+      - 'skills/**'
+      - 'prompts/**'
+      - 'templates/**'
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'prompts/**'
+      - 'templates/**'
+
+jobs:
+  sync-check:
+    name: Verify README Index Completeness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check all skills are listed in AGENTS.md
+        run: |
+          FAILED=0
+          for skill_dir in skills/*/; do
+            skill_name=$(basename "$skill_dir")
+            if ! grep -q "$skill_name" AGENTS.md; then
+              echo "❌ Skill '$skill_name' is missing from AGENTS.md"
+              FAILED=1
+            fi
+          done
+          if [ $FAILED -eq 0 ]; then
+            echo "✅ All skills referenced in AGENTS.md"
+          fi
+          exit $FAILED
+
+      - name: Check all prompts are in .agents/skills/project-navigation.md
+        run: |
+          FAILED=0
+          for prompt_file in prompts/*.md; do
+            prompt_name=$(basename "$prompt_file")
+            if ! grep -q "$prompt_name" .agents/skills/project-navigation.md; then
+              echo "⚠️  Prompt '$prompt_name' not listed in project-navigation.md"
+              # Not a hard failure — warning only
+            fi
+          done
+          echo "✅ Prompt listing check complete"
+
+      - name: Check all templates are in .agents/skills/project-navigation.md
+        run: |
+          for template_file in templates/*; do
+            template_name=$(basename "$template_file")
+            if ! grep -q "$template_name" .agents/skills/project-navigation.md; then
+              echo "⚠️  Template '$template_name' not listed in project-navigation.md"
+            fi
+          done
+          echo "✅ Template listing check complete"
+
+      - name: Validate YAML files
+        run: |
+          npm install -g js-yaml
+          echo "Validating YAML files..."
+          FAILED=0
+          for yaml_file in templates/*.yaml .github/workflows/*.yml; do
+            if ! js-yaml "$yaml_file" > /dev/null 2>&1; then
+              echo "❌ Invalid YAML: $yaml_file"
+              FAILED=1
+            else
+              echo "✅ Valid: $yaml_file"
+            fi
+          done
+          exit $FAILED

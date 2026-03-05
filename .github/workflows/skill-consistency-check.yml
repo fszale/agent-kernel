@@ -1,0 +1,99 @@
+name: Skill Consistency Check
+
+on:
+  push:
+    paths:
+      - 'skills/**'
+      - 'prompts/**'
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'prompts/**'
+
+jobs:
+  check-skills:
+    name: Validate Skill Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check SKILL.md required frontmatter fields
+        run: |
+          echo "Checking SKILL.md files for required frontmatter..."
+          FAILED=0
+
+          for skill_file in skills/*/SKILL.md; do
+            echo "Checking: $skill_file"
+
+            # Check for 'name:' field
+            if ! grep -q "^name:" "$skill_file"; then
+              echo "❌ MISSING 'name:' in $skill_file"
+              FAILED=1
+            fi
+
+            # Check for 'description:' field
+            if ! grep -q "^description:" "$skill_file"; then
+              echo "❌ MISSING 'description:' in $skill_file"
+              FAILED=1
+            fi
+
+            # Check for 'when-to-use:' field
+            if ! grep -q "^when-to-use:" "$skill_file"; then
+              echo "❌ MISSING 'when-to-use:' in $skill_file"
+              FAILED=1
+            fi
+
+            # Check for 'principles:' field
+            if ! grep -q "^principles:" "$skill_file"; then
+              echo "❌ MISSING 'principles:' in $skill_file"
+              FAILED=1
+            fi
+
+            # Check for required body sections
+            if ! grep -q "^## Agent Instructions" "$skill_file"; then
+              echo "❌ MISSING '## Agent Instructions' section in $skill_file"
+              FAILED=1
+            fi
+
+            if ! grep -q "^## Output Format" "$skill_file"; then
+              echo "❌ MISSING '## Output Format' section in $skill_file"
+              FAILED=1
+            fi
+          done
+
+          if [ $FAILED -ne 0 ]; then
+            echo "❌ Skill consistency check FAILED"
+            exit 1
+          else
+            echo "✅ All SKILL.md files pass structure check"
+          fi
+
+  check-prompts:
+    name: Validate Prompt Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check prompt required sections
+        run: |
+          echo "Checking prompt files for required sections..."
+          FAILED=0
+
+          for prompt_file in prompts/*.md; do
+            echo "Checking: $prompt_file"
+
+            REQUIRED_SECTIONS=("## Purpose" "## When to Use" "## Variables" "## Expected Output")
+            for section in "${REQUIRED_SECTIONS[@]}"; do
+              if ! grep -q "$section" "$prompt_file"; then
+                echo "❌ MISSING '$section' in $prompt_file"
+                FAILED=1
+              fi
+            done
+          done
+
+          if [ $FAILED -ne 0 ]; then
+            echo "❌ Prompt consistency check FAILED"
+            exit 1
+          else
+            echo "✅ All prompt files pass structure check"
+          fi

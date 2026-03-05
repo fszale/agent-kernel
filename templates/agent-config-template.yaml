@@ -1,0 +1,136 @@
+# Agent Configuration Template
+
+# agent-config.yaml
+# Purpose: Define the safe operating envelope for any autonomous agent or automated workflow.
+# This configuration is the source of truth for guardrails, HITL rules, and autonomy levels.
+# All automated actions are validated against this config before execution.
+
+# ── Project Identity ───────────────────────────────────────────────────────────
+project:
+  name: "your-project-name"
+  owner: "team-or-operator-name"
+  channel: "primary-domain"             # e.g., "operations", "sales", "support"
+
+# ── Business Objectives ────────────────────────────────────────────────────────
+# Human-authored objectives that all strategies and actions must trace back to.
+# Each objective needs: title, rationale (WHY it matters), priority, and target KPIs.
+objectives:
+  - id: OBJ001
+    title: "Define your objective here"
+    rationale: "WHY this matters to the business right now"
+    priority: critical                    # critical | high | medium | low
+    target_kpis:
+      - metric: "metric_name"
+        target: "target_value"
+        timeframe: "90 days"
+
+# ── KPIs ──────────────────────────────────────────────────────────────────────
+kpis:
+  primary: "primary_metric_name"
+  secondary:
+    - "secondary_metric_1"
+    - "secondary_metric_2"
+  guardrail:                             # Metrics that trigger alerts if they deteriorate
+    - metric: "guardrail_metric_1"
+      alert_threshold: 0.05             # Alert if deteriorates by >5%
+
+# ── Guardrails ────────────────────────────────────────────────────────────────
+# Hard limits on automated actions. These are NOT soft guidelines — violations BLOCK actions.
+guardrails:
+  # Magnitude limits
+  max_change_pct_per_action: 0.20       # No single action may change a value by more than 20%
+  max_financial_impact_per_action: 500  # Max $500 committed per automated action
+
+  # Rate limits
+  max_actions_per_day: 50              # Daily cap across all action types
+  max_actions_per_hour: 10            # Hourly rate limit
+
+  # Quality gates
+  min_confidence_to_execute: 0.70     # Minimum confidence score required for any execution
+  max_data_staleness_hours: 48        # Block execution if data is older than 48 hours
+  min_data_quality_score: 0.75       # Block execution if data quality drops below threshold
+
+  # Domain-specific limits (add as needed)
+  # domain_specific:
+  #   budget:
+  #     max_daily_change_pct: 0.20
+  #   pricing:
+  #     min_price_floor: 0.00
+  #     max_price_ceiling: 9999.99
+
+# ── Autonomy Levels ────────────────────────────────────────────────────────────
+# Define the autonomy level for each action class.
+# L0: Observe only | L1: Recommend | L2: Approve-to-execute | L3: Guardrailed auto
+#
+# Promotion criteria (all must be true for 4+ weeks):
+#   - ROI > promotion_roi_threshold
+#   - error_rate < promotion_error_threshold
+#   - No incidents in period
+#
+# Demotion triggers (any one):
+#   - Severe anomaly | Incident | Manual kill switch | Sustained error rate > threshold
+autonomy:
+  default_level: L1                    # Starting level for any new action class
+  promotion_roi_threshold: 5.0         # 5x ROI required for promotion
+  promotion_error_threshold: 0.01      # <1% error rate required for promotion
+  promotion_observation_period_weeks: 4
+
+  action_classes:
+    - action_class: "example_action_class"
+      level: L1                        # Override default for specific action type
+      rationale: "Reason for this level"
+
+# ── HITL Rules ────────────────────────────────────────────────────────────────
+# Human-in-the-loop approval rules by risk class.
+hitl:
+  approvals:
+    low_risk:
+      auto_execute: true
+      min_confidence: 0.70
+    medium_risk:
+      auto_execute: false
+      approval_required: true
+      approval_sla_hours: 4            # Must be reviewed within 4 hours
+    high_risk:
+      auto_execute: false
+      approval_required: true
+      approval_sla_hours: 2
+
+  # Tactic approvals are always all-or-nothing
+  tactics:
+    approval_mode: all_or_nothing      # approve_all | reject_all (no cherry-picking)
+
+# ── Kill Switches ─────────────────────────────────────────────────────────────
+# Emergency halt configurations. Kill switches never auto-clear — humans must reactivate.
+kill_switches:
+  global:
+    enabled: false                     # Set to true to halt ALL execution immediately
+    reason: ""
+  per_domain:
+    enabled: false
+    domains: []                        # List domain names to halt
+
+  # Circuit breaker — auto-triggers kill switch on anomaly
+  circuit_breaker:
+    enabled: true
+    conditions:
+      - metric: "error_rate"
+        threshold: 0.10               # Auto-trigger if error rate exceeds 10%
+        window_minutes: 30
+      - metric: "anomaly_score"
+        threshold: 0.85
+        window_minutes: 15
+
+# ── Audit and Logging ─────────────────────────────────────────────────────────
+audit:
+  log_all_actions: true
+  log_all_guardrail_checks: true
+  log_all_hitl_decisions: true
+  log_kill_switch_events: true
+  retention_days: 365
+
+# ── Cost Tracking ─────────────────────────────────────────────────────────────
+cost_tracking:
+  enabled: true
+  max_cost_per_day_usd: 50.00
+  alert_at_pct: 0.80                  # Alert when 80% of daily budget is consumed
