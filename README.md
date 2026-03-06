@@ -29,7 +29,7 @@ This exists to help you build yours.
 
 If you’re building toward a future of multi-agent systems, digital twins, or AI-native companies, reach out. I’m looking to connect with people who see agentic factories not as a trend, but as a new industrial layer.
 
-All my contact can be found at https://github.com/fszale
+All my contact information can be found at https://github.com/fszale
 
 ---
 
