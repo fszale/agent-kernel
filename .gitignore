@@ -6,17 +6,26 @@ node_modules/
 Thumbs.db
 
 # Editor / IDE
+.idea/
+.vscode/
 *.swp
 *.swo
 *~
-.idea/
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .venv/
 venv/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
 
 # Mermaid CLI output (rendered SVGs are build artifacts)
 diagrams/*.svg
@@ -27,4 +36,6 @@ diagrams/*.png
 
 # Environment
 .env
-.env.local
+.env.*
+!.env.example
+!.env.sample
