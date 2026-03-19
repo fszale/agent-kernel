@@ -70,7 +70,7 @@ Copy (or link) the relevant `.agents/workflows/` files into your project to give
 To use the CI quality gates in your project:
 
 1. Copy `.github/workflows/` from the kernel
-2. Set `GEMINI_API_KEY` in your repository secrets if you choose to use the optional Gemini example workflows
+2. Set `LLM_API_KEY`, `LLM_API_ENDPOINT`, and `LLM_MODEL` in repository secrets if you choose to use the optional LLM-powered workflows
 3. Adjust workflow triggers and thresholds as needed
 
 ## After Injection: First Steps

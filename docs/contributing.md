@@ -54,14 +54,17 @@ Before submitting a PR:
 make all-checks
 ```
 
-## GitHub Actions (Optional Example Workflows)
+## GitHub Actions (Optional LLM-Powered Workflows)
 
-The following workflows require a `GEMINI_API_KEY` secret:
+The following workflows require LLM configuration secrets:
 - `prompt-quality-review.yml`
 - `content-improvement.yml`
 - `pr-agent-review.yml`
 
-Set this in: **Repository Settings → Secrets and Variables → Actions → New repository secret**
+Set these in: **Repository Settings → Secrets and Variables → Actions → New repository secret**
+- `LLM_API_KEY` (required)
+- `LLM_API_ENDPOINT` (required, OpenAI-compatible `/chat/completions` endpoint)
+- `LLM_MODEL` (required)
 
 ## Design Principles for Contributions
 

@@ -21,6 +21,7 @@ Before diagnosing, stop the bleeding:
 - What is the immediate impact on people, systems, or revenue?
 - What is the fastest action to limit further damage? (Not fix — contain)
 - Who needs to be notified immediately?
+- Who is incident commander and who is technical owner for this incident?
 
 Document: **Current state → Immediate action taken → Who is informed**
 
@@ -30,6 +31,8 @@ Identify every component that could be contributing:
 - What changed recently? (Deployments, config changes, data changes, external API changes)
 - What does the failure pattern look like? (Intermittent vs. constant, timing, scope)
 - What are the highest-probability failure points?
+- Which of these components has failed most often in prior incidents?
+- What "known exceptions" should be checked first based on runbook history?
 
 ### Step 3: Diagnose Root Cause
 
@@ -47,6 +50,7 @@ Design a fix that:
 - Includes a rollback plan if it fails
 - Has a test to confirm the fix works
 - Prevents the same failure from recurring
+- Has a single accountable owner and target date
 
 ### Step 5: PPT Impact Assessment
 
@@ -58,8 +62,9 @@ Before deploying the fix:
 ### Step 6: Document and Train
 
 - Write a post-mortem: timeline, root cause, fix, prevention
+- Capture **who / what / when / where / why** in the incident record
 - Share findings with the team
-- Update runbooks or documentation
+- Update runbooks, playbooks, and on-call checklists
 - Add monitoring if it doesn't exist
 
 ## Output Format

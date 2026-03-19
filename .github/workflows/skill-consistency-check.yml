@@ -7,8 +7,12 @@ on:
       - 'prompts/**'
       - 'templates/**'
       - 'docs/**'
+      - '.agents/**'
+      - '.github/workflows/**'
       - 'scripts/**'
       - 'AGENTS.md'
+      - 'CONTEXT.md'
+      - 'README.md'
       - 'PHILOSOPHY.md'
   pull_request:
     paths:
@@ -16,25 +20,17 @@ on:
       - 'prompts/**'
       - 'templates/**'
       - 'docs/**'
+      - '.agents/**'
+      - '.github/workflows/**'
       - 'scripts/**'
       - 'AGENTS.md'
+      - 'CONTEXT.md'
+      - 'README.md'
       - 'PHILOSOPHY.md'
 
 jobs:
-  check-skills:
-    name: Validate Skill Structure
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Run contract validator
-        run: python3 scripts/validate_contracts.py
-
-  check-prompts:
-    name: Validate Prompt Structure
+  contract-check:
+    name: Validate Repository Contracts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

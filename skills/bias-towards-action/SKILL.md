@@ -69,6 +69,11 @@ Over time:
 - Review the rate at which actions → insights → reduced risk
 - The system compounds: each action makes the next one easier
 
+If working with a team:
+- Define weekly must-do actions before the week starts
+- Hold a short end-of-week completion review
+- Group non-critical meetings into fixed windows so deep-work blocks survive
+
 ## Output Format
 
 Action plan:

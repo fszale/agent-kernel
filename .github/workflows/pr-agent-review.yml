@@ -18,9 +18,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install @google/generative-ai
-
       - name: Get diff of changed files
         run: |
           git diff origin/${{ github.base_ref }}...HEAD --name-only > changed-files.txt
@@ -28,57 +25,94 @@ jobs:
           echo "Changed files:"
           cat changed-files.txt
 
-      - name: Run AI review with Gemini
+      - name: Run AI review with configured LLM endpoint
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_API_ENDPOINT: ${{ secrets.LLM_API_ENDPOINT }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
         run: |
           cat > pr-review.mjs << 'EOF'
-          import { GoogleGenerativeAI } from "@google/generative-ai";
           import { readFileSync } from "fs";
 
-          const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-          const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+          const endpoint = process.env.LLM_API_ENDPOINT;
+          const apiKey = process.env.LLM_API_KEY;
+          const model = process.env.LLM_MODEL;
+          if (!endpoint || !apiKey || !model) {
+            throw new Error("Missing required secrets: LLM_API_KEY, LLM_API_ENDPOINT, LLM_MODEL");
+          }
+
+          async function askLLM(promptText) {
+            const response = await fetch(endpoint, {
+              method: "POST",
+              headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                model,
+                messages: [
+                  {
+                    role: "system",
+                    content: "You review pull requests for governance, traceability, and consistency issues."
+                  },
+                  { role: "user", content: promptText }
+                ],
+                temperature: 0.1
+              })
+            });
+
+            const body = await response.text();
+            if (!response.ok) {
+              throw new Error(`LLM request failed: ${response.status} ${body}`);
+            }
+            const parsed = JSON.parse(body);
+            const content = parsed?.choices?.[0]?.message?.content;
+            if (!content) {
+              throw new Error("LLM response missing choices[0].message.content");
+            }
+            return content;
+          }
 
           const diff = readFileSync("pr-diff.txt", "utf-8").substring(0, 8000);
           const changedFiles = readFileSync("changed-files.txt", "utf-8");
+          const promptText = [
+            "You are reviewing a pull request to the agent-kernel project.",
+            "This project encodes design principles about governance, traceability, and agent behavior.",
+            "",
+            "Review the following diff for these specific issues:",
+            "",
+            "1. GOVERNANCE HIERARCHY: If new skills or prompts introduce governance concepts,",
+            "   do they follow the Objective→Strategy→Tactic→Action chain?",
+            "",
+            "2. TRACEABILITY: Do any new agent-spec YAML files include the required fields:",
+            "   - decision_rationale.universal_required_fields: [justification, decision_summary, evidence]",
+            "   - tactic_alignment or strategy_alignment fields on actions?",
+            "",
+            "3. FRONTMATTER COMPLETENESS: Do any new SKILL.md files have all required frontmatter?",
+            "   Required: name, description, when-to-use, principles",
+            "",
+            "4. BANNED PATTERNS: Are there any brand-specific references that should not be in generic content?",
+            "",
+            "5. SCHEMA CONVENTIONS: Are naming conventions followed (kebab-case for files/directories)?",
+            "",
+            "Report findings in this format:",
+            "## ✅ Looks Good",
+            "[issues that are NOT present — be brief]",
+            "",
+            "## ⚠️ Suggestions",
+            "[non-blocking improvements with file and line reference]",
+            "",
+            "## ❌ Issues",
+            "[blocking issues that must be fixed]",
+            "",
+            `Changed files: ${changedFiles}`,
+            "",
+            "Diff:",
+            diff
+          ].join("\n");
 
-          const review = await model.generateContent(`
-            You are reviewing a pull request to the agent-kernel project.
-            This project encodes design principles about governance, traceability, and agent behavior.
-
-            Review the following diff for these specific issues:
-
-            1. GOVERNANCE HIERARCHY: If new skills or prompts introduce governance concepts,
-               do they follow the Objective→Strategy→Tactic→Action chain?
-
-            2. TRACEABILITY: Do any new agent-spec YAML files include the required fields:
-               - decision_rationale.universal_required_fields: [justification, decision_summary, evidence]
-               - tactic_alignment or strategy_alignment fields on actions?
-
-            3. FRONTMATTER COMPLETENESS: Do any new SKILL.md files have all required frontmatter?
-               Required: name, description, when-to-use, principles
-
-            4. BANNED PATTERNS: Are there any brand-specific references that shouldn't be in generic content?
-
-            5. SCHEMA CONVENTIONS: Are naming conventions followed (kebab-case for files/directories)?
-
-            Report findings in this format:
-            ## ✅ Looks Good
-            [issues that are NOT present — be brief]
-
-            ## ⚠️ Suggestions
-            [non-blocking improvements with file and line reference]
-
-            ## ❌ Issues
-            [blocking issues that must be fixed]
-
-            Changed files: ${changedFiles}
-
-            Diff:
-            ${diff}
-          `);
-
-          console.log(review.response.text());
+          const review = await askLLM(promptText);
+          console.log(review);
           EOF
           node pr-review.mjs > pr_review_output.txt 2>&1
           cat pr_review_output.txt
@@ -94,5 +128,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## 🤖 Agent Kernel — Automated PR Review\n\n${reviewOutput}\n\n---\n*Generated by Gemini AI. Requires \`GEMINI_API_KEY\` secret.*`
+              body: `## Agent Kernel — Automated PR Review\n\n${reviewOutput}\n\n---\n*Generated by the configured LLM endpoint. Requires \`LLM_API_KEY\`, \`LLM_API_ENDPOINT\`, and \`LLM_MODEL\` secrets.*`
             });

@@ -22,6 +22,8 @@ Collect or define:
 - **Objectives:** 3–5 measurable objectives (quantified, time-bound)
 - **Key Results:** 2–3 measurable outcomes per objective
 - **Stakeholders:** Who is affected? Who must be aligned? Who approves?
+- **Top Bottlenecks:** 3 execution constraints currently slowing progress
+- **Quick-Win Set:** 1 candidate each for Revenue / Risk / Cost deliverable in 10 business days or less
 
 ### Step 2: Build the Planning Matrix
 

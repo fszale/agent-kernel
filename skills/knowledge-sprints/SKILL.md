@@ -46,6 +46,7 @@ Dedicate entire days to single categories of work:
 - **Deep work days** (coding, writing, analysis): No meetings. Minimum 4 micro-sprints.
 - **Collaboration days** (meetings, reviews, planning): Group all calls here. Minimal creation work.
 - **Recovery/learning days** (reading, browsing, learning): No commitments. Refill the well.
+- **Meeting hygiene rule:** Front-load meetings into predictable windows so the rest of the week preserves long focus blocks.
 
 ### Step 4: Design the Week-Level Sprint
 
@@ -67,6 +68,11 @@ Weekly retrospective (15 minutes):
 - Which sprints produced the most valuable output?
 - Which activities were a distraction from sprinting?
 - What is the next week's top priority that deserves a dedicated day?
+- Did meeting consolidation reduce interruptions and overtime?
+
+Optional team experiment:
+- Run a 4-week trial with one meeting-light day per week.
+- Measure output, stress level, and cycle-time changes before deciding to keep it.
 
 ## Output Format
 

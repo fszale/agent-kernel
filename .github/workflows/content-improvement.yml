@@ -7,7 +7,7 @@ on:
 
 jobs:
   gap-analysis:
-    name: AI Gap Analysis — New Skill and Prompt Suggestions
+    name: LLM Gap Analysis — New Skill and Prompt Suggestions
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,69 +17,102 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install @google/generative-ai
-
-      - name: Run gap analysis with Gemini
+      - name: Run gap analysis with configured LLM endpoint
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_API_ENDPOINT: ${{ secrets.LLM_API_ENDPOINT }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
         run: |
-          # Build skill inventory
-          SKILLS=$(ls skills/)
-          PROMPTS=$(ls prompts/)
+          export EXISTING_SKILLS="$(ls skills/)"
+          export EXISTING_PROMPTS="$(ls prompts/)"
 
-          cat > gap-analysis.mjs << EOF
-          import { GoogleGenerativeAI } from "@google/generative-ai";
-          const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-          const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+          cat > gap-analysis.mjs << 'EOF'
+          const endpoint = process.env.LLM_API_ENDPOINT;
+          const apiKey = process.env.LLM_API_KEY;
+          const model = process.env.LLM_MODEL;
+          if (!endpoint || !apiKey || !model) {
+            throw new Error("Missing required secrets: LLM_API_KEY, LLM_API_ENDPOINT, LLM_MODEL");
+          }
 
-          const existing_skills = \`${SKILLS}\`;
-          const existing_prompts = \`${PROMPTS}\`;
+          async function askLLM(promptText) {
+            const response = await fetch(endpoint, {
+              method: "POST",
+              headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                model,
+                messages: [
+                  {
+                    role: "system",
+                    content: "You are a content strategist for reusable AI toolkits."
+                  },
+                  { role: "user", content: promptText }
+                ],
+                temperature: 0.2
+              })
+            });
 
-          const philosophy = \`
-          Core philosophy encoded in this kit:
-          1. People · Process · Technology (PPT) evaluation framework
-          2. Pareto (80/20) — focus on highest value 20% of work
-          3. 30/60/90 mindset — horizon-based planning
-          4. First Principles — strip assumptions, rebuild from base elements
-          5. Bias Towards Action — anti-paralysis
-          6. Lead With Empathy — authentic caring leadership
-          7. Radical Candor — caring + direct feedback
-          8. Knowledge Sprints — athlete-style deep work
-          9. AI Use Case Scoring — 5-dimension weighted matrix
-          10. Business Data Analysis — raw data to opportunities
-          11. Outcome Probability — 4-factor Go/No-Go
-          12. Rate of Improvement — S-curve measurement
-          13. Governance Hierarchy — Obj→Strategy→Tactic→Action traceability
-          14. HITL and Guardrails — human oversight in autonomous systems
-          15. Autonomy Ladder — L0-L3 progressive autonomy
-          16. Tactic Design — action bundling patterns
-          17. Confidence and Experiment Design — calibrated scoring
-          \`;
+            const body = await response.text();
+            if (!response.ok) {
+              throw new Error(`LLM request failed: ${response.status} ${body}`);
+            }
+            const parsed = JSON.parse(body);
+            const content = parsed?.choices?.[0]?.message?.content;
+            if (!content) {
+              throw new Error("LLM response missing choices[0].message.content");
+            }
+            return content;
+          }
 
-          const result = await model.generateContent(\`
-          You are a content strategist for an agent-kernel (reusable AI toolkit).
+          const existingSkills = process.env.EXISTING_SKILLS || "";
+          const existingPrompts = process.env.EXISTING_PROMPTS || "";
+          const philosophy = [
+            "Core philosophy encoded in this kit:",
+            "1. People · Process · Technology (PPT) evaluation framework",
+            "2. Pareto (80/20) — focus on highest value 20% of work",
+            "3. 30/60/90 mindset — horizon-based planning",
+            "4. First Principles — strip assumptions, rebuild from base elements",
+            "5. Bias Towards Action — anti-paralysis",
+            "6. Lead With Empathy — authentic caring leadership",
+            "7. Radical Candor — caring + direct feedback",
+            "8. Knowledge Sprints — athlete-style deep work",
+            "9. AI Use Case Scoring — 5-dimension weighted matrix",
+            "10. Business Data Analysis — raw data to opportunities",
+            "11. Outcome Probability — 4-factor Go/No-Go",
+            "12. Rate of Improvement — S-curve measurement",
+            "13. Governance Hierarchy — Obj→Strategy→Tactic→Action traceability",
+            "14. HITL and Guardrails — human oversight in autonomous systems",
+            "15. Autonomy Ladder — L0-L3 progressive autonomy",
+            "16. Tactic Design — action bundling patterns",
+            "17. Confidence and Experiment Design — calibrated scoring"
+          ].join("\n");
 
-          The kit encodes these design principles:
-          \${philosophy}
+          const promptText = [
+            "You are a content strategist for an agent-kernel (reusable AI toolkit).",
+            "",
+            "The kit encodes these design principles:",
+            philosophy,
+            "",
+            `Existing skills: ${existingSkills}`,
+            `Existing prompts: ${existingPrompts}`,
+            "",
+            "Identify:",
+            "1. Top 3 MISSING SKILLS — skills that would meaningfully extend the kit based on the philosophy",
+            "2. Top 2 MISSING PROMPTS — prompt templates that would complement existing skills",
+            "3. Top 1 CROSS-REFERENCE GAP — a skill and prompt that should reference each other but do not",
+            "",
+            "Be very specific. For each suggestion, explain:",
+            "- Name (kebab-case)",
+            "- Which principle from the philosophy it encodes",
+            "- One sentence on why it is valuable",
+            "",
+            "Format as a markdown list."
+          ].join("\n");
 
-          Existing skills: \${existing_skills}
-          Existing prompts: \${existing_prompts}
-
-          Identify:
-          1. Top 3 MISSING SKILLS — skills that would meaningfully extend the kit based on the philosophy
-          2. Top 2 MISSING PROMPTS — prompt templates that would complement existing skills
-          3. Top 1 CROSS-REFERENCE GAP — a skill and prompt that should reference each other but don't
-
-          Be very specific. For each suggestion, explain:
-          - Name (kebab-case)
-          - Which principle from the philosophy it encodes
-          - One sentence on why it's valuable
-
-          Format as a markdown list.
-          \`);
-
-          console.log(result.response.text());
+          const result = await askLLM(promptText);
+          console.log(result);
           EOF
           node gap-analysis.mjs > gap_output.txt 2>&1
           cat gap_output.txt
@@ -96,6 +129,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `Weekly Content Gap Analysis — ${today}`,
-              body: `## Automated Content Gap Analysis\n\nSuggested additions based on design philosophy coverage.\n\n${output}`,
+              body: `## Automated Content Gap Analysis\n\nSuggestions generated by the configured LLM endpoint.\n\n${output}`,
               labels: ['content-improvement', 'automated']
             });

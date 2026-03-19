@@ -24,7 +24,8 @@ Use kebab-case. Name should describe the output document, not the skill that use
 ## Step 3: Write the template content
 
 **For Markdown templates:**
-- Use `{{variable_name}}` placeholders for all fillable fields
+- Use `____________________` (25 underscores) for short fill-in fields
+- Use `> ___` blockquote format for long-form responses
 - Include section headers that match the expected output structure
 - Add brief inline instructions as HTML comments where helpful
 - Include a `## How to Use` section at the top

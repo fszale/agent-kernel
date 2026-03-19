@@ -8,9 +8,12 @@ on:
       - 'templates/**'
       - 'docs/**'
       - '.agents/**'
+      - '.github/workflows/**'
       - 'scripts/**'
       - 'README.md'
       - 'AGENTS.md'
+      - 'CONTEXT.md'
+      - 'PHILOSOPHY.md'
   pull_request:
     paths:
       - 'skills/**'
@@ -18,9 +21,12 @@ on:
       - 'templates/**'
       - 'docs/**'
       - '.agents/**'
+      - '.github/workflows/**'
       - 'scripts/**'
       - 'README.md'
       - 'AGENTS.md'
+      - 'CONTEXT.md'
+      - 'PHILOSOPHY.md'
 
 jobs:
   sync-check:

@@ -17,6 +17,7 @@ Design a complete AI workflow blueprint for a specific use case, including trigg
 | `{{current_tools}}` | Tools the business already uses | "Gmail, CRM, Spreadsheets" |
 | `{{data_sources}}` | Available data to feed the AI | "Historical email threads, contact records, FAQ document" |
 | `{{staff_roles}}` | Who interacts with this process | "Customer service rep (2 people), sales manager" |
+| `{{related_products}}` | Optional adjacent products/workstreams sharing capabilities | "Support portal, mobile app notifications, CRM assistant" |
 | `{{constraints}}` | Any limitations | "Must reply within 4 hours; legal disclaimers required on quotes" |
 
 ## Prompt
@@ -29,6 +30,7 @@ Target metric: {{target_metric}}
 Existing tools: {{current_tools}}
 Available data: {{data_sources}}
 Staff involved: {{staff_roles}}
+Related products/workstreams: {{related_products}}
 Constraints: {{constraints}}
 
 Design a complete AI workflow blueprint:
@@ -37,6 +39,13 @@ Design a complete AI workflow blueprint:
 - One-paragraph description of what the AI does
 - Trigger: What starts the workflow (event, schedule, manual, API call)
 - Output: What the workflow produces
+
+## 1A. Output-First Backward Design
+Design backwards from the end-user outcome before defining internals:
+- Which user role consumes the output?
+- What decision do they make from it?
+- What output artifact do they need (dashboard, report, API payload, alert)?
+- What drill-down detail is required when they ask "why?" or "what changed?"
 
 ## 2. Architecture
 Design the workflow as a clear step sequence:
@@ -48,6 +57,12 @@ Design the workflow as a clear step sequence:
 - Step 6: [Action / delivery] → Tool: [X] | Time: [Y]
 
 For each step: inputs, outputs, tools/systems, estimated processing time.
+
+If multiple products/workstreams are involved, add a **Shared Capability Matrix** and prioritize common components first:
+- Shared data assets
+- Shared APIs/services
+- Shared UI or interaction layers
+- Components that can be simulated/stubbed in v1 to accelerate end-to-end delivery
 
 ## 3. Integration Plan
 - How does this connect to existing tools?
@@ -81,6 +96,7 @@ Format the architecture section with a Mermaid sequence diagram if the flow has 
 
 ## Expected Output
 - Complete workflow blueprint with step-by-step architecture
+- Output-first design table (role → decision → artifact)
 - Integration specifications
 - Human review layer design
 - Error handling matrix

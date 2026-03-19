@@ -18,6 +18,7 @@ PROMPT_SECTIONS = ("## Purpose", "## When to Use", "## Variables", "## Prompt", 
 MARKDOWN_LINK_PATTERN = re.compile(r"\[[^\]]+\]\(([^)#]+\.md)\)")
 SKILL_ITEM_PATTERN = re.compile(r'^\s*-\s*"([^"]+)"')
 PROVIDER_MODEL_PATTERN = re.compile(r'"(gemini|gpt|claude|llama)[^"]*"', re.IGNORECASE)
+COUNT_CLAIM_PATTERN = re.compile(r"(\d+)\s+Mermaid\s+\.mmd")
 
 
 def repo_glob(*patterns: str) -> list[Path]:
@@ -111,7 +112,17 @@ def validate_skill_lists(issues: list[str]) -> None:
 
 
 def validate_rationale_contract(issues: list[str]) -> None:
-    files = repo_glob("README.md", "AGENTS.md", "PHILOSOPHY.md", "docs/**/*.md", "skills/**/*.md", "prompts/*.md", "templates/*", "diagrams/*.mmd")
+    files = repo_glob(
+        "README.md",
+        "AGENTS.md",
+        "PHILOSOPHY.md",
+        "docs/**/*.md",
+        ".agents/**/*.md",
+        "skills/**/*.md",
+        "prompts/*.md",
+        "templates/*",
+        "diagrams/*.mmd",
+    )
     banned_patterns = (
         r"\breasoning_summary\b",
         r"chain-of-thought",
@@ -137,6 +148,59 @@ def validate_rationale_contract(issues: list[str]) -> None:
                     add_issue(issues, path, f"deprecated contract pattern '{pattern}'", line_no)
 
 
+def validate_diagram_count_claims(issues: list[str]) -> None:
+    actual_count = len(repo_glob("diagrams/*.mmd"))
+    files_to_check = (
+        REPO_ROOT / "README.md",
+        REPO_ROOT / "CONTEXT.md",
+        REPO_ROOT / ".agents" / "skills" / "project-navigation.md",
+    )
+    for path in files_to_check:
+        for line_no, line in enumerate(path.read_text().splitlines(), start=1):
+            match = COUNT_CLAIM_PATTERN.search(line)
+            if not match:
+                continue
+            claimed_count = int(match.group(1))
+            if claimed_count != actual_count:
+                add_issue(
+                    issues,
+                    path,
+                    f"diagram count claim is {claimed_count}, actual is {actual_count}",
+                    line_no,
+                )
+
+
+def validate_template_authoring_policy(issues: list[str]) -> None:
+    add_template = REPO_ROOT / ".agents" / "workflows" / "add-template.md"
+    contributing = REPO_ROOT / "docs" / "contributing.md"
+    add_template_text = add_template.read_text()
+    contributing_text = contributing.read_text()
+
+    requires_placeholders = "{{variable_name}}" in add_template_text
+    requires_blanks = "____________________" in add_template_text
+    contributing_requires_blanks = "____________________" in contributing_text
+
+    # We standardize markdown templates on blank-fill sections.
+    if requires_placeholders:
+        add_issue(
+            issues,
+            add_template,
+            "markdown template policy should use blank-fill sections, not '{{variable_name}}' placeholders",
+        )
+    if not requires_blanks:
+        add_issue(
+            issues,
+            add_template,
+            "missing explicit blank-fill guidance for markdown templates",
+        )
+    if not contributing_requires_blanks:
+        add_issue(
+            issues,
+            contributing,
+            "missing blank-fill guidance for markdown templates",
+        )
+
+
 def validate_diagram_drift(issues: list[str]) -> None:
     result = subprocess.run(
         [sys.executable, str(REPO_ROOT / "scripts" / "embed_diagrams.py"), "--check"],
@@ -157,6 +221,8 @@ def main() -> int:
     validate_provider_neutral_template(issues)
     validate_skill_lists(issues)
     validate_rationale_contract(issues)
+    validate_diagram_count_claims(issues)
+    validate_template_authoring_policy(issues)
     validate_diagram_drift(issues)
 
     if issues:

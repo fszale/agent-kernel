@@ -3,11 +3,11 @@ name: Prompt Quality Review
 on:
   schedule:
     - cron: '0 9 * * 1'   # Every Monday at 9 AM UTC
-  workflow_dispatch:        # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   review-prompts:
-    name: AI-Powered Prompt Quality Review
+    name: LLM-Powered Prompt Quality Review
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,50 +17,90 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install @google/generative-ai
-
-      - name: Review prompts with Gemini
+      - name: Review prompts with configured LLM endpoint
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_API_ENDPOINT: ${{ secrets.LLM_API_ENDPOINT }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
         run: |
           cat > review-prompts.mjs << 'EOF'
-          import { GoogleGenerativeAI } from "@google/generative-ai";
           import { readFileSync, readdirSync } from "fs";
 
-          const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-          const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+          const endpoint = process.env.LLM_API_ENDPOINT;
+          const apiKey = process.env.LLM_API_KEY;
+          const model = process.env.LLM_MODEL;
+          if (!endpoint || !apiKey || !model) {
+            throw new Error("Missing required secrets: LLM_API_KEY, LLM_API_ENDPOINT, LLM_MODEL");
+          }
 
-          const promptFiles = readdirSync("prompts").filter(f => f.endsWith(".md"));
+          async function askLLM(promptText) {
+            const response = await fetch(endpoint, {
+              method: "POST",
+              headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                model,
+                messages: [
+                  {
+                    role: "system",
+                    content: "You review prompt templates for clarity, governance alignment, and output quality."
+                  },
+                  { role: "user", content: promptText }
+                ],
+                temperature: 0.2
+              })
+            });
+
+            const body = await response.text();
+            if (!response.ok) {
+              throw new Error(`LLM request failed: ${response.status} ${body}`);
+            }
+            const parsed = JSON.parse(body);
+            const content = parsed?.choices?.[0]?.message?.content;
+            if (!content) {
+              throw new Error("LLM response missing choices[0].message.content");
+            }
+            return content;
+          }
+
+          const promptFiles = readdirSync("prompts").filter((f) => f.endsWith(".md"));
           const findings = [];
 
           for (const file of promptFiles) {
             const content = readFileSync(`prompts/${file}`, "utf-8");
-            const review = await model.generateContent(`
-              You are reviewing a prompt template for an agent-kernel project.
-              The prompts should align with these principles:
-              - People · Process · Technology (PPT) framework
-              - Pareto (80/20) — focus on highest value
-              - 30/60/90 mindset — time horizons
-              - Bias towards action — outputs should be concrete and actionable
-              - Rate of Improvement — measurement focus
+            const promptText = [
+              "You are reviewing a prompt template for an agent-kernel project.",
+              "The prompts should align with these principles:",
+              "- People · Process · Technology (PPT) framework",
+              "- Pareto (80/20) — focus on highest value",
+              "- 30/60/90 mindset — time horizons",
+              "- Bias towards action — outputs should be concrete and actionable",
+              "- Rate of Improvement — measurement focus",
+              "",
+              "Review this prompt template and identify:",
+              "1. Clarity issues (ambiguous instructions or variables)",
+              "2. Principle alignment gaps (is it aligned with the design philosophy?)",
+              "3. Output quality (is the expected output concrete enough?)",
+              "4. One specific improvement suggestion",
+              "",
+              "Be concise. Maximum 4 bullet points total.",
+              "",
+              `Prompt file: ${file}`,
+              "",
+              "Content:",
+              content.substring(0, 3000)
+            ].join("\n");
 
-              Review this prompt template and identify:
-              1. Clarity issues (ambiguous instructions or variables)
-              2. Principle alignment gaps (is it aligned with the design philosophy?)
-              3. Output quality (is the expected output concrete enough?)
-              4. One specific improvement suggestion
-
-              Be concise. Maximum 4 bullet points total.
-
-              Prompt file: ${file}
-
-              Content:
-              ${content.substring(0, 3000)}
-            `);
-            const text = review.response.text();
-            if (text.toLowerCase().includes("issue") || text.toLowerCase().includes("improve") || text.toLowerCase().includes("unclear")) {
-              findings.push({ file, feedback: text });
+            const review = await askLLM(promptText);
+            const reviewLower = review.toLowerCase();
+            if (
+              reviewLower.includes("issue") ||
+              reviewLower.includes("improve") ||
+              reviewLower.includes("unclear")
+            ) {
+              findings.push({ file, feedback: review });
             }
           }
 
@@ -91,7 +131,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: `Weekly Prompt Quality Review — ${today}`,
-                body: `## Automated Prompt Quality Review\n\nGenerated by Gemini API.\n\n${output}`,
+                body: `## Automated Prompt Quality Review\n\nGenerated by the configured LLM endpoint.\n\n${output}`,
                 labels: ['prompt-quality', 'automated']
               });
             }

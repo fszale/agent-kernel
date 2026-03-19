@@ -1,6 +1,6 @@
 # Antigravity Kit — Architecture & Usage Guide
 
-> **What:** The Antigravity Kit is a meta-layer of project infrastructure that makes AI coding agents (like Antigravity, Gemini, Copilot) dramatically more effective when working on this repository. It encodes design philosophy, repeatable procedures, and automated quality gates — so every AI session starts with full project context instead of discovery from scratch.
+> **What:** The Antigravity Kit is a meta-layer of project infrastructure that makes AI coding agents dramatically more effective when working on this repository. It encodes design philosophy, repeatable procedures, and automated quality gates — so every AI session starts with full project context instead of discovery from scratch.
 
 ---
 
@@ -110,7 +110,7 @@ The kit is organized into five layers, each building on the one below:
 | **2. Reusable Knowledge** | Skills, prompts, and templates injected into work | ✅ Active |
 | **3. Diagram System** | Visual architecture, auto-embedded into docs | ✅ Active |
 | **4. Agent Procedures** | Step-by-step workflows triggered via slash commands | ✅ Active |
-| **5. Automated Quality** | GitHub Actions for validation and optional AI-driven improvement | ⚙️ Enable Gemini example workflows with `GEMINI_API_KEY` |
+| **5. Automated Quality** | GitHub Actions for validation and optional AI-driven improvement | ⚙️ Enable optional LLM workflows with `LLM_API_KEY`, `LLM_API_ENDPOINT`, and `LLM_MODEL` |
 
 ---
 
@@ -193,7 +193,7 @@ diagrams/*.mmd  →  registry.json  →  embed_diagrams.py  →  inline Mermaid 
 ```bash
 make embed-diagrams       # Populate all inline diagram markers
 make validate-mermaid     # Check syntax on all .mmd files
-make check-diagrams       # Dry-run embed (shows what would change)
+make check-diagrams       # Fail if diagram embeds are out of date
 ```
 
 See [docs/diagrams.md](diagrams.md) for the full diagram system reference.
@@ -235,11 +235,11 @@ GitHub Actions that validate the project on every push/PR and continuously impro
 
 | Workflow | Trigger | What It Catches |
 |---|---|---|
-| `skill-consistency-check.yml` | Push to `skills/` or `prompts/` | Missing SKILL.md frontmatter fields, missing prompt sections |
+| `skill-consistency-check.yml` | Push/PR on contract-relevant files | Full repository contract validation via `scripts/validate_contracts.py` |
 | `documentation-sync.yml` | Push to content dirs | Skills/prompts/templates not referenced in AGENTS.md or project-navigation.md |
 | `validate-mermaid.yml` | Push to `diagrams/` | Mermaid syntax errors, orphan .mmd files not in registry |
 
-### AI-Powered Workflows (optional Gemini example workflows)
+### AI-Powered Workflows (optional LLM-powered workflows)
 
 | Workflow | Trigger | What It Does |
 |---|---|---|
@@ -251,17 +251,19 @@ GitHub Actions that validate the project on every push/PR and continuously impro
 
 **Validation workflows** run automatically — no setup needed.
 
-**AI-powered workflows** require one secret:
+**AI-powered workflows** require three secrets:
 ```bash
 # Add to GitHub repo: Settings → Secrets and Variables → Actions
-GEMINI_API_KEY=your-gemini-api-key
+LLM_API_KEY=your-llm-api-key
+LLM_API_ENDPOINT=https://your-llm-endpoint.example/v1/chat/completions
+LLM_MODEL=your-model-name
 ```
 
 ### Local Validation
 
 ```bash
 make all-checks           # Run consistency + mermaid validation
-make consistency-check    # Validate SKILL.md frontmatter + prompt sections
+make consistency-check    # Run repository contract validator
 make validate-mermaid     # Validate .mmd diagram syntax
 make embed-diagrams       # Embed all diagrams into docs
 ```
@@ -329,7 +331,7 @@ prompts/                   # 16 prompt templates (structured AI workflows)
 templates/                 # 10 document/config templates (fillable output formats)
 
 diagrams/                  # 9 .mmd Mermaid sources + registry.json
-scripts/                   # embed_diagrams.py (auto-embed pipeline)
+scripts/                   # embed_diagrams.py + validate_contracts.py
 Makefile                   # validate-mermaid, embed-diagrams, consistency-check
 
 .agents/workflows/         # 7 step-by-step procedures (slash commands)

@@ -62,7 +62,7 @@ agent-kernel/
 │   ├── agent-config-template.yaml
 │   ├── agent-spec-template.yaml
 │   └── agent-spec-domain-template.yaml
-├── diagrams/                   ← 8 Mermaid .mmd diagram sources
+├── diagrams/                   ← 9 Mermaid .mmd diagram sources
 │   ├── registry.json
 │   ├── governance-hierarchy.mmd
 │   ├── autonomy-ladder.mmd
@@ -71,9 +71,11 @@ agent-kernel/
 │   ├── skill-selection-flow.mmd
 │   ├── agent-architecture.mmd
 │   ├── agent-factory-evolution.mmd
-│   └── oi-operating-model.mmd
+│   ├── oi-operating-model.mmd
+│   └── antigravity-kit-architecture.mmd
 ├── scripts/
-│   └── embed_diagrams.py
+│   ├── embed_diagrams.py
+│   └── validate_contracts.py
 ├── docs/                       ← Human-facing documentation
 │   ├── consistency-checks.md
 │   ├── contributing.md

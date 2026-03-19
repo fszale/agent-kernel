@@ -41,6 +41,7 @@ For each configuration domain:
 2. Document every field: what it controls, valid range, default value
 3. Add comments explaining business context
 4. Define which changes require system restart vs. hot-reload
+5. Start with the minimum viable schema and expand only when proven necessary
 
 Example structure:
 ```yaml
@@ -58,6 +59,8 @@ For complex conditional logic:
 - Rules defined in config/YAML → evaluated by a generic engine
 - Non-engineers can add/modify/remove rules without code changes
 - All rules are auditable and versioned in source control
+- Do not force highly complex policy logic into static config files; use a dedicated rule engine boundary
+- Log each decision with at least: `rule_id`, `input_fingerprint`, `decision`, `run_id`, `lineage_id`
 
 ### Step 4: CI/CD the Configuration
 
@@ -66,6 +69,7 @@ Treat configuration as a deployable artifact:
 2. Add schema validation to CI pipeline (fail fast on invalid config)
 3. Test configuration changes in staging before production
 4. Enable rollback of configuration independently of code
+5. Run tests on every config change, even "small" edits
 
 ### Step 5: Access Control and Audit
 

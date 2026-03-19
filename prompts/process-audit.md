@@ -17,6 +17,7 @@ Analyze a business process end-to-end to identify automation opportunities, inef
 | `{{process_description}}` | Brief description of what the process does | "Matching purchase orders to invoices and verifying amounts" |
 | `{{staff_involved}}` | Roles involved in this process | "AP clerk, department managers" |
 | `{{frequency}}` | How often this process runs | "200 invoices/week" |
+| `{{meeting_and_handoff_pattern}}` | Meeting load and handoff behavior affecting execution | "Daily standup + 3 ad-hoc syncs; 4 cross-team handoffs per request" |
 | `{{known_pain_points}}` | Issues already identified | "Takes 14 hours/week, frequent errors cause payment delays" |
 
 ## Prompt
@@ -29,6 +30,7 @@ Process: {{process_name}}
 Description: {{process_description}}
 Staff involved: {{staff_involved}}
 Frequency: {{frequency}}
+Meeting and handoff pattern: {{meeting_and_handoff_pattern}}
 Known pain points: {{known_pain_points}}
 
 ## 1. Process Map
@@ -46,6 +48,7 @@ Identify steps where:
 - Manual effort is highest relative to value
 - Handoffs between people/systems create delays
 - Work queues form
+- Meeting overhead or context switching reduces actual execution time
 
 ## 3. Automation Opportunity Assessment
 For each bottleneck:
@@ -68,6 +71,12 @@ Rank the top 3 automation opportunities by:
 - Speed to first value
 
 Format as: Priority 1 / Priority 2 / Priority 3 with rationale.
+
+## 6. Cadence Reset (if process is execution-starved)
+Propose a weekly operating cadence that protects execution time:
+- Which meetings should be consolidated or moved to fixed windows?
+- What weekly commitment/review ritual keeps work visible and moving?
+- Which metric confirms the cadence change worked?
 ```
 
 ## Expected Output
@@ -76,6 +85,7 @@ Format as: Priority 1 / Priority 2 / Priority 3 with rationale.
 - Ranked automation opportunities with feasibility scores
 - Risk register
 - Top 3 recommendations with rationale
+- Optional cadence-reset plan when execution time is the bottleneck
 
 ## Tips
 - Observe the process directly (Shadow Walk) before filling in the variables

@@ -88,8 +88,8 @@ agent-kernel/
 ├── skills/                     ← 22 reusable agent skills
 ├── prompts/                    ← 16 structured prompt templates
 ├── templates/                  ← 10 reusable document templates
-├── diagrams/                   ← 8 Mermaid .mmd sources + registry
-├── scripts/                    ← embed_diagrams.py automation
+├── diagrams/                   ← 9 Mermaid .mmd sources + registry
+├── scripts/                    ← embed_diagrams.py + validate_contracts.py automation
 ├── Makefile                    ← validate, embed, consistency targets
 ├── docs/                       ← Contributing, injection, diagrams guides
 └── .github/workflows/          ← 6 automated quality + improvement workflows

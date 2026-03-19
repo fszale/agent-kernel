@@ -7,6 +7,7 @@ Facilitate a collaborative system design session that starts with the ultimate v
 - At the start of any significant new system or product design
 - When an existing system needs a major rethinking
 - When you need full-team alignment on a long-term technical vision
+- When morale is low and the team needs a credible future state to rally around
 
 ## Variables
 
@@ -43,6 +44,7 @@ Draw a context-level diagram showing:
 - The central system (the "black box")
 - All external entities that interact with it (users, systems, data sources)
 - All data flows in and out
+- Inputs from engineering, product, operations, and support perspectives
 
 Format as a Mermaid diagram:
 ```mermaid

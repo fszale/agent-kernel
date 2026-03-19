@@ -28,8 +28,8 @@ agent-kernel/
 ├── skills/                     ← 22 injectable agent skills (SKILL.md per skill)
 ├── prompts/                    ← 16 structured prompt templates
 ├── templates/                  ← 10 reusable document templates
-├── diagrams/                   ← 8 Mermaid .mmd sources + registry.json
-├── scripts/                    ← embed_diagrams.py automation
+├── diagrams/                   ← 9 Mermaid .mmd sources + registry.json
+├── scripts/                    ← embed_diagrams.py + validate_contracts.py automation
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
 ├── docs/                       ← Contributing, injection, consistency, diagrams guides
 │   ├── consistency-checks.md

@@ -27,10 +27,15 @@ Identify what kind of stuck this is:
 ### Step 2: Find 3 Quick Wins
 
 Identify one quick win in each value stream. Quick win criteria:
-- Can be completed in 1–5 days
+- Can be completed in 1–10 business days (2 weeks max)
 - Visible and demonstrable to stakeholders
 - Requires no additional budget or headcount
 - Creates immediate, measurable improvement
+
+Quick win sources:
+- Team-reported bottlenecks and low-hanging fruit
+- Repeated customer complaints
+- Known process delays and handoff pain points
 
 | Value Stream | Quick Win Candidate | Time to Complete | Visibility |
 |---|---|---|---|
@@ -54,6 +59,10 @@ For each win:
 2. Execute with bias towards action
 3. Measure the outcome
 4. Communicate the result openly
+
+Cadence rule:
+- Commit weekly tasks at the start of each week
+- Run a visible end-of-week status review to keep momentum and trust
 
 ### Step 5: Introduce the Moonshot
 

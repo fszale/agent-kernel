@@ -63,10 +63,10 @@ schedule: {cron, cadence}
 objectives: {primary_kpi}
 skills: [list]
 prompts: {task_name: {template, version, variant}}
-decision_rationale: {universal_required_fields: [justification, reasoning_summary]}
+decision_rationale: {universal_required_fields: [justification, decision_summary, evidence]}
 actions: [{id, risk_class, autonomy_level, required_fields}]
 hitl: {approvals}
-logging: {emit_fields: [..., justification]}
+logging: {emit_fields: [..., justification, decision_summary, evidence]}
 ```
 
 ## Naming Conventions Summary

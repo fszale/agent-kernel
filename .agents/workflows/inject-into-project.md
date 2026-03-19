@@ -63,4 +63,8 @@ Test that an AI agent working on the downstream project can:
 
 ## Step 7: Enable GitHub Actions
 
-Enable the kernel's GitHub workflows in the downstream project by copying `.github/workflows/` and updating the `GEMINI_API_KEY` secret.
+Enable the kernel's GitHub workflows in the downstream project by copying `.github/workflows/`.
+For optional LLM-powered workflows, configure these secrets:
+- `LLM_API_KEY`
+- `LLM_API_ENDPOINT` (OpenAI-compatible `/chat/completions` endpoint)
+- `LLM_MODEL`
