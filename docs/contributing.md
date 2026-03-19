@@ -51,20 +51,10 @@ Create `templates/{purpose}.md` (or `.yaml` for config templates).
 Before submitting a PR:
 
 ```bash
-# YAML validation
-npx js-yaml templates/agent-config-template.yaml
-npx js-yaml templates/agent-spec-template.yaml
-npx js-yaml .github/workflows/*.yml
-
-# Find SKILL.md files missing required frontmatter
-find skills -name "SKILL.md" | xargs grep -L "^name:"
-
-# Find prompts missing required sections
-grep -rL "## Variables" prompts/
-grep -rL "## Expected Output" prompts/
+make all-checks
 ```
 
-## GitHub Actions (Secret Required)
+## GitHub Actions (Optional Example Workflows)
 
 The following workflows require a `GEMINI_API_KEY` secret:
 - `prompt-quality-review.yml`

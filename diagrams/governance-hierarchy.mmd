@@ -12,7 +12,7 @@ graph TB
     end
 
     subgraph AGENT_EXEC["Agent-Executed, Risk-Gated"]
-        ACT["Action\ntactic_alignment: role in bundle\nrisk_class: Low or Med or High\nconfidence_score: 0.0 to 1.0\nexpected_value: dollar or metric delta\njustification: REQUIRED\nreasoning_summary: REQUIRED\nrollback: how to undo"]
+        ACT["Action\ntactic_alignment: role in bundle\nrisk_class: Low or Med or High\nconfidence_score: 0.0 to 1.0\nexpected_value: dollar or metric delta\njustification: REQUIRED\ndecision_summary: REQUIRED\nevidence: REQUIRED\nrollback: how to undo"]
     end
 
     OBJ -->|"Quarterly HITL review"| STR

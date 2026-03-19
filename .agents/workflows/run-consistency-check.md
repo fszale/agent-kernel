@@ -6,7 +6,19 @@ description: how to run a consistency check on the agent-kernel repository
 
 Use this workflow to audit the repository for missing fields, broken cross-references, and structural violations.
 
-## Step 1: Verify all SKILL.md files have required frontmatter
+## Step 1: Run the automated contract validator
+
+```bash
+make all-checks
+```
+
+This runs:
+- structural checks for skills and prompts
+- internal markdown link validation
+- generic template contract checks
+- diagram drift detection
+
+## Step 2: Verify all SKILL.md files have required frontmatter
 
 Check every `skills/*/SKILL.md` for the required frontmatter fields:
 
@@ -24,7 +36,7 @@ find skills -name "SKILL.md" | xargs grep -L "^when-to-use:"
 # Should return empty
 ```
 
-## Step 2: Verify all prompts have required sections
+## Step 3: Verify all prompts have required sections
 
 Check every `prompts/*.md` for required sections:
 
@@ -38,7 +50,7 @@ grep -rL "## Expected Output" prompts/
 # Should return empty
 ```
 
-## Step 3: Check README index completeness
+## Step 4: Check README index completeness
 
 Verify every file in `skills/`, `prompts/`, and `templates/` is mentioned in `README.md`:
 
@@ -49,7 +61,7 @@ ls skills/
 grep -c "skill-name" README.md
 ```
 
-## Step 4: Check for broken cross-references
+## Step 5: Check for broken cross-references
 
 Scan for internal links that reference non-existent files:
 
@@ -60,7 +72,7 @@ grep -r "\[.*\](.*\.md)" . --include="*.md" | grep -v "^Binary"
 
 Manually verify each cross-reference link points to a file that exists.
 
-## Step 5: Validate YAML templates
+## Step 6: Validate YAML templates
 
 ```bash
 # Validate YAML syntax in templates
@@ -70,7 +82,7 @@ npx js-yaml .github/workflows/*.yml
 # All should return without errors
 ```
 
-## Step 6: Verify no brand-specific content
+## Step 7: Verify no brand-specific content
 
 ```bash
 # Check for any brand-specific references that shouldn't be here
@@ -78,7 +90,7 @@ grep -r "lillinello\|brand_name_placeholder" . --include="*.md" --include="*.yam
 # Should return empty
 ```
 
-## Step 7: Report findings
+## Step 8: Report findings
 
 List all issues found in each category with file names and line numbers. Priority:
 - 🔴 **Must Fix:** Missing required frontmatter, broken internal links, invalid YAML

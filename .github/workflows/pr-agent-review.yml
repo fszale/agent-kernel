@@ -52,7 +52,7 @@ jobs:
                do they follow the Objective→Strategy→Tactic→Action chain?
 
             2. TRACEABILITY: Do any new agent-spec YAML files include the required fields:
-               - decision_rationale.universal_required_fields: [justification, reasoning_summary]
+               - decision_rationale.universal_required_fields: [justification, decision_summary, evidence]
                - tactic_alignment or strategy_alignment fields on actions?
 
             3. FRONTMATTER COMPLETENESS: Do any new SKILL.md files have all required frontmatter?

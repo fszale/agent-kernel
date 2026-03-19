@@ -64,16 +64,15 @@ Plot each candidate on:
 graph LR
     subgraph STAGE1["Stage 1
 Process Mapping"]
-        S1["📋 Document
-current state
-Inputs → Outputs
+        S1["Document current state
+Inputs to Outputs
 Decision points
 Handoffs"]
     end
 
     subgraph STAGE2["Stage 2
 Bottleneck ID"]
-        S2["🔍 Score bottlenecks
+        S2["Score bottlenecks
 Time 30%
 Repeat 20%
 Errors 20%
@@ -83,8 +82,7 @@ Data 10%"]
 
     subgraph STAGE3["Stage 3
 Automation Scoring"]
-        S3["📊 AI Readiness
-Quadrant
+        S3["AI Readiness Quadrant
 Priority Targets
 Quick Wins
 Invest to Enable
@@ -93,16 +91,14 @@ Backlog"]
 
     subgraph STAGE4["Stage 4
 Deploy"]
-        S4["🚀 Minimal viable
-automation
+        S4["Minimal viable automation
 Human-in-loop v1
 Measure from Day 1"]
     end
 
     subgraph STAGE5["Stage 5
-Measure + Loop"]
-        S5["📈 Rate of
-Improvement
+Measure and Loop"]
+        S5["Rate of Improvement
 S-curve tracking
 Thesis validation
 Never stop"]
@@ -112,13 +108,12 @@ Never stop"]
     S2 -->|"top bottlenecks ranked"| S3
     S3 -->|"Priority Targets selected"| S4
     S4 -->|"deployed"| S5
-    S5 -->|"new bottlenecks
-emerge"| S2
+    S5 -->|"new bottlenecks emerge"| S2
 
-    METRIC["🎯 Always measure
+    METRIC["Always measure
 the metric the
 business cares about
-—not the AI metric"]
+not the AI metric"]
 
     S5 -.->|"guided by"| METRIC
 

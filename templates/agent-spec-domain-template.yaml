@@ -13,8 +13,8 @@
 
 # ── Agent Identity ────────────────────────────────────────────────────────────
 agent:
-  id: {{agent_id}}                        # snake_case, e.g., "accounting", "inventory", "support"
-  domain: {{domain}}                      # e.g., finance, operations, sales, support, logistics
+  id: "{{agent_id}}"                      # snake_case, e.g., "accounting", "inventory", "support"
+  domain: "{{domain}}"                    # e.g., finance, operations, sales, support, logistics
   owner_role: "{{owner_role}}"            # e.g., "Finance Lead", "Operations Manager"
   version: "1.0"
   enabled: false                          # Set to true only after Day 30 review for elevated-risk domains
@@ -73,16 +73,15 @@ inputs:
 
 # ── Skills ───────────────────────────────────────────────────────────────────
 # Select based on agent function:
-# - All agents: shared/guardrail_evaluation, shared/confidence-and-experiment
-# - Agents making recommendations: shared/governance-hierarchy-design
-# - Elevated-risk domains: shared/hitl-and-guardrails
-# - Agents measuring outcomes: shared/rate-of-improvement
+# - All agents: hitl-and-guardrails, confidence-and-experiment
+# - Agents making recommendations: governance-hierarchy-design
+# - Elevated-risk domains: hitl-and-guardrails
+# - Agents measuring outcomes: rate-of-improvement
 skills:
-  - "shared/guardrail_evaluation"
-  - "shared/confidence-and-experiment"
-  # - "shared/governance-hierarchy-design"
-  # - "shared/hitl-and-guardrails"
-  # - "shared/rate-of-improvement"
+  - "hitl-and-guardrails"
+  - "confidence-and-experiment"
+  # - "governance-hierarchy-design"
+  # - "rate-of-improvement"
 
 # ── Prompts ──────────────────────────────────────────────────────────────────
 # One entry per distinct task type. Use domain-prefixed template paths.
@@ -105,22 +104,33 @@ prompts:
 
 # ── Model Routing ─────────────────────────────────────────────────────────────
 # Route by task complexity. Replace key names with your actual task names.
-# - Classification/extraction → mini/fast model
-# - Analysis/detection → mini/fast model
-# - Reasoning/generation/complex recommendations → full model
+# Map these profiles to concrete vendor models in runtime configuration.
+# - Classification/extraction → fast
+# - Analysis/detection → balanced
+# - Reasoning/generation/complex recommendations → deep
 model_routing:
-  primary_task: "mini"                   # Replace 'primary_task' with your task name
-  secondary_task: "full"                 # Replace 'secondary_task' with your task name
+  primary_task:
+    profile: "fast"                      # Replace 'primary_task' with your task name
+    fallback_profiles:
+      - "balanced"
+    timeout_ms: 30000
+  secondary_task:
+    profile: "deep"                      # Replace 'secondary_task' with your task name
+    fallback_profiles:
+      - "balanced"
+    timeout_ms: 60000
 
 # ── Decision Rationale (MANDATORY) ───────────────────────────────────────────
 # These fields are non-negotiable. Every action must include them.
 decision_rationale:
   universal_required_fields:
     - "justification"                    # Why this action was chosen over alternatives
-    - "reasoning_summary"               # Step-by-step chain of thought
+    - "decision_summary"                # Concise explanation of the chosen action
+    - "evidence"                        # Facts, metrics, or observations supporting the decision
   optional_fields:
     - "alternatives_considered"
     - "data_sources_used"
+    - "assumptions"
     - "guardrail_evaluation"
 
 # ── Actions ──────────────────────────────────────────────────────────────────
@@ -141,7 +151,8 @@ actions:
       - "confidence_score"
       - "supporting_evidence"          # e.g., similar_transactions
       - "justification"                # MANDATORY
-      - "reasoning_summary"            # MANDATORY
+      - "decision_summary"             # MANDATORY
+      - "evidence"                     # MANDATORY
       - "rollback_payload"
 
   - id: "{{alert_action_id}}"          # e.g., variance_alert
@@ -154,7 +165,8 @@ actions:
       - "variance_pct"
       - "possible_causes"
       - "justification"
-      - "reasoning_summary"
+      - "decision_summary"
+      - "evidence"
 
   - id: "{{recommendation_action_id}}" # e.g., accrual_suggestion (always L1 for financial)
     risk_class: "high"
@@ -164,7 +176,8 @@ actions:
       - "amount_or_impact"
       - "period_or_scope"
       - "justification"
-      - "reasoning_summary"
+      - "decision_summary"
+      - "evidence"
       - "reversal_or_undo_steps"
 
 # ── Cross-Agent Events ────────────────────────────────────────────────────────
@@ -207,3 +220,5 @@ logging:
     - "status"
     - "prompt_version"
     - "justification"                  # Always — this is the audit trail
+    - "decision_summary"
+    - "evidence"

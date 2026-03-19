@@ -27,27 +27,23 @@ You are an agent autonomy manager and performance reviewer.
 <!-- DIAGRAM: autonomy-ladder START -->
 ```mermaid
 graph LR
-    L0["🔭 L0
+    L0["L0
 OBSERVE
-──────────
-Detects + reports
+Detects and reports
 No proposals
 No execution"]
-    L1["💡 L1
+    L1["L1
 RECOMMEND
-──────────
 Proposes actions
 Expected value
 Human decides"]
-    L2["✅ L2
+    L2["L2
 APPROVE-TO-EXEC
-──────────
 Full payload ready
 Human approves
 Then executes"]
-    L3["🚀 L3
+    L3["L3
 GUARDRAILED AUTO
-──────────
 Executes in envelope
 Alerts on anomaly
 Weekly audit"]
@@ -56,8 +52,8 @@ Weekly audit"]
 accurate detection
 no incidents"| L1
     L1 -->|"PROMOTE: 4+ weeks
-ROI > threshold
-errors < 1%"| L2
+ROI above threshold
+errors below 1%"| L2
     L2 -->|"PROMOTE: 4+ weeks
 provable value
 guardrail adherence"| L3
@@ -69,7 +65,7 @@ incident occurs"| L1
     L1 -->|"DEMOTE:
 kill switch"| L0
 
-    NEW["🆕 New agent
+    NEW["New agent
 or capability"] -->|"Always start here"| L0
 
     style L0 fill:#1a3a5c,color:#fff,stroke:#4a9ede

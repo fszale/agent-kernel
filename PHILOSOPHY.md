@@ -21,8 +21,8 @@ Every significant evaluation must address all three dimensions:
 <!-- DIAGRAM: ppt-value-streams START -->
 ```mermaid
 graph TB
-    subgraph PPT["People · Process · Technology Evaluation Matrix"]
-        subgraph P["👥 People"]
+    subgraph PPT["People, Process, Technology Evaluation Matrix"]
+        subgraph P["People"]
             P_REV["Revenue
 Who benefits?
 How much?"]
@@ -30,42 +30,32 @@ How much?"]
 Who is at risk?
 Downside?"]
             P_COST["Cost
-Training, change
-management"]
+Training, change management"]
         end
 
-        subgraph PR["⚙️ Process"]
+        subgraph PR["Process"]
             PR_REV["Revenue
-Revenue-process
-improvements?"]
+Revenue-process improvements?"]
             PR_RISK["Risk
-Operational risk
-reduction?"]
+Operational risk reduction?"]
             PR_COST["Cost
-Efficiency gains
-automation?"]
+Efficiency gains, automation?"]
         end
 
-        subgraph T["💻 Technology"]
+        subgraph T["Technology"]
             T_REV["Revenue
-Tech-enabled
-expansion?"]
+Tech-enabled expansion?"]
             T_RISK["Risk
-Security/reliability
-risks?"]
+Security and reliability risks?"]
             T_COST["Cost
-Build vs buy
-maintenance?"]
+Build vs buy, maintenance?"]
         end
     end
 
     subgraph VS["Value Stream Output"]
-        REV["💰 Revenue
-Generation"]
-        RISK["🛡️ Risk
-Mitigation"]
-        COST["💸 Cost
-Savings"]
+        REV["Revenue Generation"]
+        RISK["Risk Mitigation"]
+        COST["Cost Savings"]
     end
 
     P_REV --> REV
@@ -78,8 +68,8 @@ Savings"]
     PR_COST --> COST
     T_COST --> COST
 
-    SCORE["📊 Score 1-10 per cell
-= 9 scores total
+    SCORE["Score 1-10 per cell
+9 scores total
 Max = 90
 75+ Strong
 55-74 Promising
@@ -337,35 +327,34 @@ Start system design from the user output, then walk back to the data source.
 <!-- DIAGRAM: rate-of-improvement-curve START -->
 ```mermaid
 graph LR
-    W0["📍 Week 0
+    W0["Week 0
 Baseline
-I₀ = 0%"]
+I = 0%"]
     W1["Week 1-4
-🚀 Rapid
-Acceleration
+Rapid Acceleration
 RoI = HIGH"]
     W2["Week 5-10
-📈 Tapering
+Tapering
 RoI = DECLINING
-(normal)"]
+normal"]
     W3["Week 11+
-✅ Stabilization
-RoI ≈ 0
+Stabilization
+RoI near zero
 Value sustained"]
 
     W0 --> W1 --> W2 --> W3
 
     subgraph SHAPES["Curve Shape Diagnostics"]
-        S1["✅ S-Curve
-rise → taper → flat
+        S1["S-Curve
+rise to taper to flat
 SUCCESS"]
-        S2["⚠️ Rise-Decline
+        S2["Rise-Decline
 improvement then
-regression → WARN"]
-        S3["❌ Flat Line
+regression - WARN"]
+        S3["Flat Line
 no improvement
 FAILURE - redesign"]
-        S4["🔍 Unbounded
+        S4["Unbounded
 continuous rise
 INVESTIGATE"]
     end
@@ -375,11 +364,11 @@ INVESTIGATE"]
     W1 -.->|"if stuck"| S3
     W3 -.->|"if still rising"| S4
 
-    FORMULA["📐 RoI Formula
-RoI(t) = ΔI / Δt
+    FORMULA["RoI Formula
+RoI(t) = delta-I / delta-t
 where I = improvement %
 vs baseline
-Success: R² > 0.85
+Success: R-squared above 0.85
 on logistic fit"]
 
     style W0 fill:#2a2a2a,color:#fff,stroke:#6b7280
@@ -410,16 +399,15 @@ AI is not a tool — it is an **operational employee**: always on, always contri
 graph LR
     subgraph STAGE1["Stage 1
 Process Mapping"]
-        S1["📋 Document
-current state
-Inputs → Outputs
+        S1["Document current state
+Inputs to Outputs
 Decision points
 Handoffs"]
     end
 
     subgraph STAGE2["Stage 2
 Bottleneck ID"]
-        S2["🔍 Score bottlenecks
+        S2["Score bottlenecks
 Time 30%
 Repeat 20%
 Errors 20%
@@ -429,8 +417,7 @@ Data 10%"]
 
     subgraph STAGE3["Stage 3
 Automation Scoring"]
-        S3["📊 AI Readiness
-Quadrant
+        S3["AI Readiness Quadrant
 Priority Targets
 Quick Wins
 Invest to Enable
@@ -439,16 +426,14 @@ Backlog"]
 
     subgraph STAGE4["Stage 4
 Deploy"]
-        S4["🚀 Minimal viable
-automation
+        S4["Minimal viable automation
 Human-in-loop v1
 Measure from Day 1"]
     end
 
     subgraph STAGE5["Stage 5
-Measure + Loop"]
-        S5["📈 Rate of
-Improvement
+Measure and Loop"]
+        S5["Rate of Improvement
 S-curve tracking
 Thesis validation
 Never stop"]
@@ -458,13 +443,12 @@ Never stop"]
     S2 -->|"top bottlenecks ranked"| S3
     S3 -->|"Priority Targets selected"| S4
     S4 -->|"deployed"| S5
-    S5 -->|"new bottlenecks
-emerge"| S2
+    S5 -->|"new bottlenecks emerge"| S2
 
-    METRIC["🎯 Always measure
+    METRIC["Always measure
 the metric the
 business cares about
-—not the AI metric"]
+not the AI metric"]
 
     S5 -.->|"guided by"| METRIC
 
@@ -524,41 +508,38 @@ Action              →  tactic_alignment field    (What role does this action p
 <!-- DIAGRAM: governance-hierarchy START -->
 ```mermaid
 graph TB
-    subgraph HUMAN["👤 Human-Authored"]
-        OBJ["🎯 Business Objective
-─────────────────
+    subgraph HUMAN["Human-Authored"]
+        OBJ["Business Objective
 rationale: WHY this matters
-priority: Critical|High|Med|Low
+priority: Critical or High or Med or Low
 target_kpis: metric + timeframe"]
     end
 
-    subgraph AGENT_APPROVED["🤖 Agent-Proposed · Human-Approved"]
-        STR["📐 Strategy
-─────────────────
+    subgraph AGENT_APPROVED["Agent-Proposed, Human-Approved"]
+        STR["Strategy
 objective_alignment: HOW not WHICH
 thesis: falsifiable claim
 evidence: supporting data
 expected_outcomes: KPI + timeframe"]
     end
 
-    subgraph AGENT_BUNDLE["🔗 Agent-Bundled · All-or-Nothing Approval"]
-        TAC["📦 Tactic
-─────────────────
+    subgraph AGENT_BUNDLE["Agent-Bundled, All-or-Nothing Approval"]
+        TAC["Tactic
 strategy_alignment: HOW not WHICH
 intent: WHY actions must go together
-execution_mode: Sequential|Parallel|Phased
-risk_level: Low|Med|High"]
+execution_mode: Sequential or Parallel or Phased
+risk_level: Low or Med or High"]
     end
 
-    subgraph AGENT_EXEC["⚡ Agent-Executed · Risk-Gated"]
-        ACT["🔧 Action
-─────────────────
+    subgraph AGENT_EXEC["Agent-Executed, Risk-Gated"]
+        ACT["Action
 tactic_alignment: role in bundle
-risk_class: Low|Med|High
-confidence_score: 0.0-1.0
-expected_value: $ or metric delta
+risk_class: Low or Med or High
+confidence_score: 0.0 to 1.0
+expected_value: dollar or metric delta
 justification: REQUIRED
-reasoning_summary: REQUIRED
+decision_summary: REQUIRED
+evidence: REQUIRED
 rollback: how to undo"]
     end
 
@@ -566,18 +547,18 @@ rollback: how to undo"]
     STR -->|"Biweekly HITL review"| TAC
     TAC -->|"All-or-nothing HITL"| ACT
 
-    ACT -->|"✅ 30-sec traceability test"| OBJ
+    ACT -->|"30-sec traceability test"| OBJ
 
-    GUARD["🛡️ Guardrails
+    GUARD["Guardrails
 max_change_pct
 min_confidence
-max_actions/day
+max_actions_per_day
 financial_cap"] -.->|"blocks violations"| ACT
-    KILL["🔴 Kill Switches
-Global → Domain
-→ Agent Type
-→ Tactic
-→ Action Class"] -.->|"immediate halt"| ACT
+    KILL["Kill Switches
+Global to Domain
+to Agent Type
+to Tactic
+to Action Class"] -.->|"immediate halt"| ACT
 
     style HUMAN fill:#1a3a5c,color:#fff,stroke:#4a9ede
     style AGENT_APPROVED fill:#1a4a2e,color:#fff,stroke:#4ade80
@@ -631,27 +612,23 @@ Global → Domain
 <!-- DIAGRAM: autonomy-ladder START -->
 ```mermaid
 graph LR
-    L0["🔭 L0
+    L0["L0
 OBSERVE
-──────────
-Detects + reports
+Detects and reports
 No proposals
 No execution"]
-    L1["💡 L1
+    L1["L1
 RECOMMEND
-──────────
 Proposes actions
 Expected value
 Human decides"]
-    L2["✅ L2
+    L2["L2
 APPROVE-TO-EXEC
-──────────
 Full payload ready
 Human approves
 Then executes"]
-    L3["🚀 L3
+    L3["L3
 GUARDRAILED AUTO
-──────────
 Executes in envelope
 Alerts on anomaly
 Weekly audit"]
@@ -660,8 +637,8 @@ Weekly audit"]
 accurate detection
 no incidents"| L1
     L1 -->|"PROMOTE: 4+ weeks
-ROI > threshold
-errors < 1%"| L2
+ROI above threshold
+errors below 1%"| L2
     L2 -->|"PROMOTE: 4+ weeks
 provable value
 guardrail adherence"| L3
@@ -673,7 +650,7 @@ incident occurs"| L1
     L1 -->|"DEMOTE:
 kill switch"| L0
 
-    NEW["🆕 New agent
+    NEW["New agent
 or capability"] -->|"Always start here"| L0
 
     style L0 fill:#1a3a5c,color:#fff,stroke:#4a9ede
@@ -739,11 +716,13 @@ A tactic is a bundle of actions with a **shared logical dependency** — their c
 
 Every significant agent output must include:
 - `justification` — why this action was chosen over alternatives
-- `reasoning_summary` — step-by-step chain-of-thought
+- `decision_summary` — concise explanation of the selected action
+- `evidence` — the facts, metrics, or observations supporting the decision
 
 Optional but valuable:
 - `alternatives_considered` — what else was evaluated and why rejected
 - `data_sources_used` — which inputs drove the decision
+- `assumptions` — key assumptions or uncertainty that could change the decision
 - `guardrail_evaluation` — how limits were checked
 
 ---

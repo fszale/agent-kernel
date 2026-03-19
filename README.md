@@ -1,6 +1,6 @@
 # 🧠 Agent Kernel
 
-**A reusable Antigravity Kit — skills, prompts, templates, and automation injected into any project. This is my Digitial Twin working at one of my Agentic AI Factories.**
+**A reusable Antigravity Kit — skills, prompts, templates, and automation injected into any project. This is my Digital Twin working at one of my Agentic AI Factories.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -17,7 +17,7 @@ I built several incarnations of that idea over the years with mixed results. The
 That led me to build a series of AI employee factories: multi-agent environments where specialized agents collaborate, critique, research, recommend, schedule, summarize, and execute recurring workflows. The latest iteration includes a digital twin — an agentic version of me that captures my working style, decision patterns, frameworks, and operating assumptions.
 
 Agent Kernel is the reusable core of that system.
-It is the portable layer of skills, prompts, templates, context, and automation that lets a digital twin operate consistently across projects.
+It is the portable control plane of skills, prompts, templates, context, and automation that lets a digital twin operate consistently across projects.
 
 This project is based on a simple observation: AI systems are becoming increasingly agentic, and the artifacts they produce are becoming more machine-legible, structured, and reusable. Software documentation, plans, prompts, and workflows are no longer only for humans. They are becoming operating surfaces for agents.
 

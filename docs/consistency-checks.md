@@ -72,7 +72,7 @@ The following patterns are banned in any non-seed file:
 ## Agent Spec Required Fields
 
 Any `agent-spec-*.yaml` file must include:
-- `decision_rationale.universal_required_fields` containing `justification` and `reasoning_summary`
+- `decision_rationale.universal_required_fields` containing `justification`, `decision_summary`, and `evidence`
 - `discovery.capabilities` (at least one entry)
 - `actions` (at least one entry with `risk_class` and `autonomy_level`)
 - `hitl.approvals`

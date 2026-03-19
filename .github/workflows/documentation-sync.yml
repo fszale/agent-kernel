@@ -6,11 +6,21 @@ on:
       - 'skills/**'
       - 'prompts/**'
       - 'templates/**'
+      - 'docs/**'
+      - '.agents/**'
+      - 'scripts/**'
+      - 'README.md'
+      - 'AGENTS.md'
   pull_request:
     paths:
       - 'skills/**'
       - 'prompts/**'
       - 'templates/**'
+      - 'docs/**'
+      - '.agents/**'
+      - 'scripts/**'
+      - 'README.md'
+      - 'AGENTS.md'
 
 jobs:
   sync-check:
@@ -18,6 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: Check all skills are listed in AGENTS.md
         run: |
@@ -70,3 +83,6 @@ jobs:
             fi
           done
           exit $FAILED
+
+      - name: Run repository contract validator
+        run: python3 scripts/validate_contracts.py

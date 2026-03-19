@@ -76,3 +76,12 @@ Always produce:
 | Automating judgment-based complex decisions | 30–50% | AI may not match human judgment |
 | Deployment where staff are resistant | 40–60% | Organizational readiness is the bottleneck |
 | Novel use case with no precedent | 35–55% | Technical feasibility uncertain |
+
+## Output Format
+
+Structured probability assessment:
+1. Four-factor scorecard with rationale
+2. Overall probability of success and classification
+3. Top 3 risks with mitigations
+4. Go/No-Go recommendation
+5. Required changes for any factor below 50%

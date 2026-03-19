@@ -72,7 +72,9 @@ If any guardrail fails: **BLOCK THIS ACTION**. Provide alternative that passes.
 
 ### 7. Decision Rationale (REQUIRED FIELDS)
 - **justification**: Why was this action chosen over alternatives? What alternatives were considered and why were they ruled out?
-- **reasoning_summary**: Step-by-step summary of the chain of thought: [data observed] → [pattern identified] → [action derived] → [expected outcome]
+- **decision_summary**: Concise explanation of the selected action and intended outcome.
+- **evidence**: Facts, metrics, or observations that support the proposed action.
+- **assumptions**: Key assumptions or uncertainty that could change the recommendation.
 ```
 
 ## Expected Output
@@ -80,9 +82,9 @@ If any guardrail fails: **BLOCK THIS ACTION**. Provide alternative that passes.
 - Confidence score with reducers applied
 - Guardrail compliance table
 - Rollback plan
-- justification and reasoning_summary fields (non-negotiable)
+- justification, decision_summary, and evidence fields (non-negotiable)
 
 ## Tips
 - If any guardrail fails, do not propose the action — propose the alternative that passes instead
-- Always write justification and reasoning_summary even for "obvious" actions — these fields are for auditors, not the agent's benefit
+- Always write justification, decision_summary, and evidence even for "obvious" actions — these fields are for auditors, not the agent's benefit
 - If confidence falls below 0.5 after reducers, flag for human review regardless of risk class

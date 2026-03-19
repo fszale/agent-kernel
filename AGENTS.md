@@ -11,48 +11,43 @@ When injected into a project, this kernel gives you access to skills, prompts, a
 graph TB
     START(["What do I need to do?"])
 
-    START --> Q1{"Evaluating or
-deciding?"}
-    START --> Q2{"Planning or
-organizing?"}
-    START --> Q3{"Diagnosing a
-problem?"}
-    START --> Q4{"Deploying AI
-or agents?"}
-    START --> Q5{"Leading or
-coaching?"}
+    START --> Q1{"Evaluating or deciding?"}
+    START --> Q2{"Planning or organizing?"}
+    START --> Q3{"Diagnosing a problem?"}
+    START --> Q4{"Deploying AI or agents?"}
+    START --> Q5{"Leading or coaching?"}
 
-    Q1 -->|"New idea/initiative"| S_IDE["💡 idea-evaluator
+    Q1 -->|"New idea/initiative"| S_IDE["idea-evaluator
 + prompts/idea-evaluator.md"]
-    Q1 -->|"Technology decision"| S_PPT["🔍 PPT Assessment
+    Q1 -->|"Technology decision"| S_PPT["PPT Assessment
 + prompts/ppt-assessment.md"]
-    Q1 -->|"Score AI use cases"| S_AI["📊 ai-use-case-scoring
+    Q1 -->|"Score AI use cases"| S_AI["ai-use-case-scoring
 + prompts/bottleneck-identification.md"]
 
-    Q2 -->|"New project/role"| S_90["📅 30-60-90-planning
+    Q2 -->|"New project/role"| S_90["30-60-90-planning
 + templates/30-60-90-plan-template.md"]
-    Q2 -->|"Strategic direction"| S_STR["📐 governance-hierarchy-design
+    Q2 -->|"Strategic direction"| S_STR["governance-hierarchy-design
 + prompts/strategy-proposal.md"]
-    Q2 -->|"Architecture"| S_MSH["🌙 prompts/moonshot-architecture.md"]
+    Q2 -->|"Architecture"| S_MSH["prompts/moonshot-architecture.md"]
 
-    Q3 -->|"Critical failure"| S_FF["🔥 firefighter"]
-    Q3 -->|"Stuck team"| S_SB["📦 shake-the-box"]
-    Q3 -->|"Root cause"| S_FP["🔬 first-principles"]
-    Q3 -->|"Process audit"| S_PA["⚙️ prompts/process-audit.md"]
+    Q3 -->|"Critical failure"| S_FF["firefighter"]
+    Q3 -->|"Stuck team"| S_SB["shake-the-box"]
+    Q3 -->|"Root cause"| S_FP["first-principles"]
+    Q3 -->|"Process audit"| S_PA["prompts/process-audit.md"]
 
-    Q4 -->|"Design agent"| S_DA["🤖 domain-agent-design
+    Q4 -->|"Design agent"| S_DA["domain-agent-design
 + templates/agent-spec-template.yaml"]
-    Q4 -->|"Multi-agent system"| S_FAC["🏭 agent-factory-design"]
-    Q4 -->|"Set autonomy"| S_AUT["🪜 autonomy-ladder"]
-    Q4 -->|"Measure impact"| S_ROI["📈 rate-of-improvement
+    Q4 -->|"Multi-agent system"| S_FAC["agent-factory-design"]
+    Q4 -->|"Set autonomy"| S_AUT["autonomy-ladder"]
+    Q4 -->|"Measure impact"| S_ROI["rate-of-improvement
 + prompts/rate-of-improvement-analysis.md"]
-    Q4 -->|"Design guardrails"| S_HIT["🛡️ hitl-and-guardrails
+    Q4 -->|"Design guardrails"| S_HIT["hitl-and-guardrails
 + templates/agent-config-template.yaml"]
 
-    Q5 -->|"Give feedback"| S_RC["💬 radical-candor"]
-    Q5 -->|"Build trust"| S_EMP["❤️ lead-with-empathy"]
-    Q5 -->|"Boost productivity"| S_KS["⚡ knowledge-sprints"]
-    Q5 -->|"Overcome paralysis"| S_BTA["🎯 bias-towards-action"]
+    Q5 -->|"Give feedback"| S_RC["radical-candor"]
+    Q5 -->|"Build trust"| S_EMP["lead-with-empathy"]
+    Q5 -->|"Boost productivity"| S_KS["knowledge-sprints"]
+    Q5 -->|"Overcome paralysis"| S_BTA["bias-towards-action"]
 
     style START fill:#1a1a3a,color:#fff,stroke:#a78bfa
 ```
@@ -132,7 +127,7 @@ When generating new content in a project that uses this kernel:
 
 1. **Skill frontmatter is mandatory** — every `SKILL.md` must have `name`, `description`, `when-to-use`
 2. **Prompts must declare variables** — use `{{variable_name}}` format for all inputs
-3. **Actions must include reasoning** — `justification` and `reasoning_summary` are universal required outputs
+3. **Actions must include decision rationale** — `justification`, `decision_summary`, and `evidence` are universal required outputs
 4. **Traceability** — any proposed strategy or action must trace back to an objective via explicit alignment fields
 5. **Value stream tagging** — tag every output as Revenue / Risk / Cost or some combination
 6. **PPT lens** — explicitly address People, Process, and Technology impact for any significant recommendation

@@ -14,41 +14,42 @@ Design a production-ready domain agent from mandate to configuration. Produces a
 <!-- DIAGRAM: agent-architecture START -->
 ```mermaid
 graph TB
-    subgraph INPUTS["📥 Inputs"]
+    subgraph INPUTS["Inputs"]
         DS["Data Sources
-(transactions, logs
-KPIs, config)"]
+transactions, logs
+KPIs, config"]
         CFG["Agent Config
-(guardrails, HITL
-kill switches)"]
+guardrails, HITL
+kill switches"]
         EVT_IN["Cross-Agent Events
-(consumed from bus)"]
+consumed from bus"]
     end
 
-    subgraph AGENT["🤖 Agent Runtime"]
+    subgraph AGENT["Agent Runtime"]
         DISCO["Discovery Layer
 capabilities
 requirements
 provides"]
         SKILLS["Skills
-(injected context
-into system prompt)"]
+injected context
+into system prompt"]
         PROMPTS["Prompts
-(task templates
+task templates
 with versioning
-+ A/B support)"]
+and A/B support"]
         MODEL["Model Router
-primary → fallback
+primary to fallback
 timeout handling"]
         RATIONALE["Decision Rationale
 justification: REQUIRED
-reasoning_summary: REQUIRED"]
+decision_summary: REQUIRED
+evidence: REQUIRED"]
     end
 
-    subgraph SAFETY["🛡️ Safety Layer"]
+    subgraph SAFETY["Safety Layer"]
         CONF["Confidence
 Scoring
-0.0 - 1.0"]
+0.0 to 1.0"]
         GUARD["Guardrail
 Evaluation
 Hard limits"]
@@ -57,16 +58,16 @@ Low: auto
 Med/High: approval"]
     end
 
-    subgraph OUTPUTS["📤 Outputs"]
+    subgraph OUTPUTS["Outputs"]
         ANALYSIS["Analysis
-(read-only reports)"]
+read-only reports"]
         RECS["Recommendations
-(proposed actions)"]
+proposed actions"]
         EXEC["Execution
-(atomic actions
-+ rollback payload)"]
+atomic actions
+with rollback payload"]
         EVT_OUT["Cross-Agent Events
-(emitted to bus)"]
+emitted to bus"]
     end
 
     DS --> DISCO
@@ -131,11 +132,11 @@ Select which agent-kernel skills to inject into the agent's system context (keep
 
 | Situation | Recommended Skills |
 |---|---|
-| Agent handles financial data | `shared/guardrail_evaluation`, `shared/confidence-and-experiment` |
-| Agent makes recommendations | `shared/governance-hierarchy-design`, `shared/tactic-design` |
-| Agent interacts with humans | `shared/radical-candor`, `shared/lead-with-empathy` |
-| Agent measures outcomes | `shared/rate-of-improvement` |
-| Agent runs autonomously | `shared/hitl-and-guardrails`, `shared/autonomy-ladder` |
+| Agent handles financial data | `hitl-and-guardrails`, `confidence-and-experiment` |
+| Agent makes recommendations | `governance-hierarchy-design`, `tactic-design` |
+| Agent interacts with humans | `radical-candor`, `lead-with-empathy` |
+| Agent measures outcomes | `rate-of-improvement` |
+| Agent runs autonomously | `hitl-and-guardrails`, `autonomy-ladder` |
 
 For each task type, define a prompt template:
 ```yaml
@@ -150,16 +151,16 @@ prompts:
 
 ### Step 4: Configure Model Routing
 
-Route by task complexity:
+Route by task complexity using provider-neutral profiles:
 
-| Task Type | Recommended Model Tier | Notes |
+| Task Type | Recommended Model Profile | Notes |
 |---|---|---|
-| Classification, extraction | Fast/mini model | High volume, low cost |
-| Analysis, variance detection | Fast/mini model | Structured output |
-| Reasoning, recommendations | Full model | Complex judgment |
-| Code generation | Full model | Correctness matters |
+| Classification, extraction | `fast` | High volume, low cost |
+| Analysis, variance detection | `balanced` | Structured output |
+| Reasoning, recommendations | `deep` | Complex judgment |
+| Code generation | `deep` | Correctness matters |
 
-Always define a fallback model. Always set `timeout_ms`.
+Always define `fallback_profiles`. Always set `timeout_ms`. Map profiles to concrete vendor models in runtime configuration, not in this generic spec.
 
 ---
 

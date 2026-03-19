@@ -30,41 +30,38 @@ Action              ←  Atomic, guardrailed execution
 <!-- DIAGRAM: governance-hierarchy START -->
 ```mermaid
 graph TB
-    subgraph HUMAN["👤 Human-Authored"]
-        OBJ["🎯 Business Objective
-─────────────────
+    subgraph HUMAN["Human-Authored"]
+        OBJ["Business Objective
 rationale: WHY this matters
-priority: Critical|High|Med|Low
+priority: Critical or High or Med or Low
 target_kpis: metric + timeframe"]
     end
 
-    subgraph AGENT_APPROVED["🤖 Agent-Proposed · Human-Approved"]
-        STR["📐 Strategy
-─────────────────
+    subgraph AGENT_APPROVED["Agent-Proposed, Human-Approved"]
+        STR["Strategy
 objective_alignment: HOW not WHICH
 thesis: falsifiable claim
 evidence: supporting data
 expected_outcomes: KPI + timeframe"]
     end
 
-    subgraph AGENT_BUNDLE["🔗 Agent-Bundled · All-or-Nothing Approval"]
-        TAC["📦 Tactic
-─────────────────
+    subgraph AGENT_BUNDLE["Agent-Bundled, All-or-Nothing Approval"]
+        TAC["Tactic
 strategy_alignment: HOW not WHICH
 intent: WHY actions must go together
-execution_mode: Sequential|Parallel|Phased
-risk_level: Low|Med|High"]
+execution_mode: Sequential or Parallel or Phased
+risk_level: Low or Med or High"]
     end
 
-    subgraph AGENT_EXEC["⚡ Agent-Executed · Risk-Gated"]
-        ACT["🔧 Action
-─────────────────
+    subgraph AGENT_EXEC["Agent-Executed, Risk-Gated"]
+        ACT["Action
 tactic_alignment: role in bundle
-risk_class: Low|Med|High
-confidence_score: 0.0-1.0
-expected_value: $ or metric delta
+risk_class: Low or Med or High
+confidence_score: 0.0 to 1.0
+expected_value: dollar or metric delta
 justification: REQUIRED
-reasoning_summary: REQUIRED
+decision_summary: REQUIRED
+evidence: REQUIRED
 rollback: how to undo"]
     end
 
@@ -72,18 +69,18 @@ rollback: how to undo"]
     STR -->|"Biweekly HITL review"| TAC
     TAC -->|"All-or-nothing HITL"| ACT
 
-    ACT -->|"✅ 30-sec traceability test"| OBJ
+    ACT -->|"30-sec traceability test"| OBJ
 
-    GUARD["🛡️ Guardrails
+    GUARD["Guardrails
 max_change_pct
 min_confidence
-max_actions/day
+max_actions_per_day
 financial_cap"] -.->|"blocks violations"| ACT
-    KILL["🔴 Kill Switches
-Global → Domain
-→ Agent Type
-→ Tactic
-→ Action Class"] -.->|"immediate halt"| ACT
+    KILL["Kill Switches
+Global to Domain
+to Agent Type
+to Tactic
+to Action Class"] -.->|"immediate halt"| ACT
 
     style HUMAN fill:#1a3a5c,color:#fff,stroke:#4a9ede
     style AGENT_APPROVED fill:#1a4a2e,color:#fff,stroke:#4ade80
@@ -145,7 +142,8 @@ Each action must include:
 - `payload`: The actual execution payload
 - `rollback`: How to undo this action if needed
 - `justification`: Why this action over alternatives
-- `reasoning_summary`: Chain-of-thought summary for auditors
+- `decision_summary`: Concise explanation suitable for reviewers and auditors
+- `evidence`: Facts, metrics, or observations supporting the action
 
 ### The 30-Second Traceability Test
 

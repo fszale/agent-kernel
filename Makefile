@@ -3,8 +3,8 @@
 # Targets:
 #   make validate-mermaid      Validate all .mmd files for syntax errors
 #   make embed-diagrams        Embed .mmd content into Markdown files
-#   make check-diagrams        Dry-run diagram embed (shows what would change)
-#   make consistency-check     Validate SKILL.md frontmatter + prompt sections
+#   make check-diagrams        Fail if embedded diagrams are out of date
+#   make consistency-check     Run repository contract validation
 #   make all-checks            Run all validation targets
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -44,34 +44,16 @@ embed-diagrams:
 	@python3 scripts/embed_diagrams.py --verbose
 
 check-diagrams:
-	@echo "🔍 Checking diagrams (dry run)..."
-	@python3 scripts/embed_diagrams.py --dry-run --verbose
+	@echo "🔍 Checking diagram sync..."
+	@python3 scripts/embed_diagrams.py --check --verbose
 
 # ── Consistency Checks ────────────────────────────────────────────────────────
 
 consistency-check:
-	@echo "🔍 Running skill and prompt consistency checks..."
-	@FAILED=0; \
-	for f in skills/*/SKILL.md; do \
-		for field in "^name:" "^description:" "^when-to-use:" "^principles:"; do \
-			if ! grep -q "$$field" "$$f"; then \
-				echo "  ❌ MISSING '$$field' in $$f"; \
-				FAILED=1; \
-			fi; \
-		done; \
-	done; \
-	for f in prompts/*.md; do \
-		for section in "## Variables" "## Expected Output"; do \
-			if ! grep -q "$$section" "$$f"; then \
-				echo "  ❌ MISSING '$$section' in $$f"; \
-				FAILED=1; \
-			fi; \
-		done; \
-	done; \
-	if [ $$FAILED -ne 0 ]; then echo "❌ Consistency check FAILED"; exit 1; fi; \
-	echo "✅ All consistency checks passed."
+	@echo "🔍 Running repository contract checks..."
+	@python3 scripts/validate_contracts.py
 
 # ── Full Suite ────────────────────────────────────────────────────────────────
 
-all-checks: consistency-check validate-mermaid
+all-checks: consistency-check validate-mermaid check-diagrams
 	@echo "✅ All checks passed."

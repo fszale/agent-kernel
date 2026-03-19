@@ -61,9 +61,9 @@ inputs:
 # Markdown skill documents injected into this agent's system context.
 # Keep total skill tokens < 3K to stay within model context budget.
 skills:
-  - "shared/confidence-and-experiment"
-  - "shared/governance-hierarchy-design"
-  - "domain/relevant-domain-skill"
+  - "confidence-and-experiment"
+  - "governance-hierarchy-design"
+  - "relevant-domain-skill"
 
 # ── Prompts ──────────────────────────────────────────────────────────────────
 # Task-type → prompt template with version tracking and optional A/B test config.
@@ -85,17 +85,18 @@ prompts:
     variant: "default"
 
 # ── Model Routing ─────────────────────────────────────────────────────────────
-# Which LLM model to use per task type, with fallback chains.
+# Which model profile to use per task type. Map profiles to concrete vendor
+# models in runtime configuration so this template stays provider-neutral.
 model_routing:
   primary_task:
-    primary: "gemini-2.0-flash"
-    fallback:
-      - "gemini-2.0-flash-lite"
+    profile: "fast"
+    fallback_profiles:
+      - "balanced"
     timeout_ms: 30000
   secondary_task:
-    primary: "gemini-2.0-pro"
-    fallback:
-      - "gemini-2.0-flash"
+    profile: "deep"
+    fallback_profiles:
+      - "balanced"
     timeout_ms: 60000
 
 # ── Rate Limits ───────────────────────────────────────────────────────────────
@@ -110,10 +111,12 @@ rate_limits:
 decision_rationale:
   universal_required_fields:
     - "justification"                  # Why this action was chosen over alternatives
-    - "reasoning_summary"             # Step-by-step chain-of-thought summary
+    - "decision_summary"              # Concise explanation of the selected action
+    - "evidence"                      # Facts, metrics, or observations supporting the decision
   optional_fields:
     - "alternatives_considered"       # What else was evaluated and why rejected
     - "data_sources_used"            # Which inputs drove the decision
+    - "assumptions"                   # Key uncertainty that could change the decision
     - "guardrail_evaluation"          # How guardrails were checked
 
 # ── Actions ──────────────────────────────────────────────────────────────────
@@ -168,3 +171,5 @@ logging:
     - "status"
     - "prompt_version"
     - "justification"
+    - "decision_summary"
+    - "evidence"

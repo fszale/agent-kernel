@@ -23,7 +23,7 @@ The Antigravity Kit solves this by giving agents a **project map** (`CONTEXT.md`
 ```mermaid
 graph TB
     subgraph L1["Layer 1: Agent Context
-(read automatically)"]
+read automatically"]
         CTX["CONTEXT.md
 Project map, conventions
 naming rules"]
@@ -36,7 +36,7 @@ embedded diagrams"]
     end
 
     subgraph L2["Layer 2: Reusable Knowledge
-(skills + prompts + templates)"]
+skills + prompts + templates"]
         SK["skills/
 22 SKILL.md files
 Agent behaviors"]
@@ -49,9 +49,9 @@ Fillable output formats"]
     end
 
     subgraph L3["Layer 3: Diagram System
-(visual architecture)"]
+visual architecture"]
         MMD["diagrams/
-8 .mmd sources"]
+9 .mmd sources"]
         REG["registry.json
 Source of truth"]
         EMB["scripts/embed_diagrams.py
@@ -59,17 +59,15 @@ Auto-embed into docs"]
     end
 
     subgraph L4["Layer 4: Agent Procedures
-(repeatable workflows)"]
+repeatable workflows"]
         WF[".agents/workflows/
-7 step-by-step
-procedures"]
+7 step-by-step procedures"]
         ASK[".agents/skills/
-2 project knowledge
-docs"]
+2 project knowledge docs"]
     end
 
     subgraph L5["Layer 5: Automated Quality
-(GitHub Actions CI/CD)"]
+GitHub Actions CI/CD"]
         CI1["skill-consistency-check.yml
 Frontmatter + sections"]
         CI2["documentation-sync.yml
@@ -88,15 +86,11 @@ AI PR governance check"]
     L1 -->|"agents read context
 then select skills"| L2
     SK --> PR --> TM
-    L2 -->|"skills reference
-diagrams"| L3
+    L2 -->|"skills reference diagrams"| L3
     MMD --> REG --> EMB
-    L3 -->|"diagrams embedded
-into docs"| L1
-    L4 -->|"procedures use
-skills + prompts"| L2
-    L5 -->|"validates all
-layers"| L1
+    L3 -->|"diagrams embedded into docs"| L1
+    L4 -->|"procedures use skills + prompts"| L2
+    L5 -->|"validates all layers"| L1
     L5 -->|"validates"| L2
     L5 -->|"validates"| L3
 
@@ -116,7 +110,7 @@ The kit is organized into five layers, each building on the one below:
 | **2. Reusable Knowledge** | Skills, prompts, and templates injected into work | ✅ Active |
 | **3. Diagram System** | Visual architecture, auto-embedded into docs | ✅ Active |
 | **4. Agent Procedures** | Step-by-step workflows triggered via slash commands | ✅ Active |
-| **5. Automated Quality** | GitHub Actions for validation and AI-driven improvement | ⚙️ Enable with `GEMINI_API_KEY` |
+| **5. Automated Quality** | GitHub Actions for validation and optional AI-driven improvement | ⚙️ Enable Gemini example workflows with `GEMINI_API_KEY` |
 
 ---
 
@@ -245,7 +239,7 @@ GitHub Actions that validate the project on every push/PR and continuously impro
 | `documentation-sync.yml` | Push to content dirs | Skills/prompts/templates not referenced in AGENTS.md or project-navigation.md |
 | `validate-mermaid.yml` | Push to `diagrams/` | Mermaid syntax errors, orphan .mmd files not in registry |
 
-### AI-Powered Workflows (require `GEMINI_API_KEY` secret)
+### AI-Powered Workflows (optional Gemini example workflows)
 
 | Workflow | Trigger | What It Does |
 |---|---|---|

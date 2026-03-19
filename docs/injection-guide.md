@@ -55,7 +55,7 @@ Use `templates/agent-config-template.yaml` as your starting point. Configure:
 
 Use `templates/agent-spec-template.yaml` for each agent in your system. Pay attention to:
 - `discovery.capabilities` — this enables agent routing
-- `decision_rationale.universal_required_fields` — must include `justification` and `reasoning_summary`
+- `decision_rationale.universal_required_fields` — must include `justification`, `decision_summary`, and `evidence`
 - `actions` — start with L1 autonomy and promote from there
 
 ## Activation in `.agents/workflows/`
@@ -70,7 +70,7 @@ Copy (or link) the relevant `.agents/workflows/` files into your project to give
 To use the CI quality gates in your project:
 
 1. Copy `.github/workflows/` from the kernel
-2. Set `GEMINI_API_KEY` in your repository secrets
+2. Set `GEMINI_API_KEY` in your repository secrets if you choose to use the optional Gemini example workflows
 3. Adjust workflow triggers and thresholds as needed
 
 ## After Injection: First Steps

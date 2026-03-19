@@ -70,41 +70,38 @@ Action (atomic execution, risk-gated)
 <!-- DIAGRAM: governance-hierarchy START -->
 ```mermaid
 graph TB
-    subgraph HUMAN["👤 Human-Authored"]
-        OBJ["🎯 Business Objective
-─────────────────
+    subgraph HUMAN["Human-Authored"]
+        OBJ["Business Objective
 rationale: WHY this matters
-priority: Critical|High|Med|Low
+priority: Critical or High or Med or Low
 target_kpis: metric + timeframe"]
     end
 
-    subgraph AGENT_APPROVED["🤖 Agent-Proposed · Human-Approved"]
-        STR["📐 Strategy
-─────────────────
+    subgraph AGENT_APPROVED["Agent-Proposed, Human-Approved"]
+        STR["Strategy
 objective_alignment: HOW not WHICH
 thesis: falsifiable claim
 evidence: supporting data
 expected_outcomes: KPI + timeframe"]
     end
 
-    subgraph AGENT_BUNDLE["🔗 Agent-Bundled · All-or-Nothing Approval"]
-        TAC["📦 Tactic
-─────────────────
+    subgraph AGENT_BUNDLE["Agent-Bundled, All-or-Nothing Approval"]
+        TAC["Tactic
 strategy_alignment: HOW not WHICH
 intent: WHY actions must go together
-execution_mode: Sequential|Parallel|Phased
-risk_level: Low|Med|High"]
+execution_mode: Sequential or Parallel or Phased
+risk_level: Low or Med or High"]
     end
 
-    subgraph AGENT_EXEC["⚡ Agent-Executed · Risk-Gated"]
-        ACT["🔧 Action
-─────────────────
+    subgraph AGENT_EXEC["Agent-Executed, Risk-Gated"]
+        ACT["Action
 tactic_alignment: role in bundle
-risk_class: Low|Med|High
-confidence_score: 0.0-1.0
-expected_value: $ or metric delta
+risk_class: Low or Med or High
+confidence_score: 0.0 to 1.0
+expected_value: dollar or metric delta
 justification: REQUIRED
-reasoning_summary: REQUIRED
+decision_summary: REQUIRED
+evidence: REQUIRED
 rollback: how to undo"]
     end
 
@@ -112,18 +109,18 @@ rollback: how to undo"]
     STR -->|"Biweekly HITL review"| TAC
     TAC -->|"All-or-nothing HITL"| ACT
 
-    ACT -->|"✅ 30-sec traceability test"| OBJ
+    ACT -->|"30-sec traceability test"| OBJ
 
-    GUARD["🛡️ Guardrails
+    GUARD["Guardrails
 max_change_pct
 min_confidence
-max_actions/day
+max_actions_per_day
 financial_cap"] -.->|"blocks violations"| ACT
-    KILL["🔴 Kill Switches
-Global → Domain
-→ Agent Type
-→ Tactic
-→ Action Class"] -.->|"immediate halt"| ACT
+    KILL["Kill Switches
+Global to Domain
+to Agent Type
+to Tactic
+to Action Class"] -.->|"immediate halt"| ACT
 
     style HUMAN fill:#1a3a5c,color:#fff,stroke:#4a9ede
     style AGENT_APPROVED fill:#1a4a2e,color:#fff,stroke:#4ade80
@@ -146,27 +143,23 @@ Global → Domain
 <!-- DIAGRAM: autonomy-ladder START -->
 ```mermaid
 graph LR
-    L0["🔭 L0
+    L0["L0
 OBSERVE
-──────────
-Detects + reports
+Detects and reports
 No proposals
 No execution"]
-    L1["💡 L1
+    L1["L1
 RECOMMEND
-──────────
 Proposes actions
 Expected value
 Human decides"]
-    L2["✅ L2
+    L2["L2
 APPROVE-TO-EXEC
-──────────
 Full payload ready
 Human approves
 Then executes"]
-    L3["🚀 L3
+    L3["L3
 GUARDRAILED AUTO
-──────────
 Executes in envelope
 Alerts on anomaly
 Weekly audit"]
@@ -175,8 +168,8 @@ Weekly audit"]
 accurate detection
 no incidents"| L1
     L1 -->|"PROMOTE: 4+ weeks
-ROI > threshold
-errors < 1%"| L2
+ROI above threshold
+errors below 1%"| L2
     L2 -->|"PROMOTE: 4+ weeks
 provable value
 guardrail adherence"| L3
@@ -188,7 +181,7 @@ incident occurs"| L1
     L1 -->|"DEMOTE:
 kill switch"| L0
 
-    NEW["🆕 New agent
+    NEW["New agent
 or capability"] -->|"Always start here"| L0
 
     style L0 fill:#1a3a5c,color:#fff,stroke:#4a9ede
@@ -214,35 +207,34 @@ Formula: `RoI(t) = ΔI/Δt` — rate of improvement per time period.
 <!-- DIAGRAM: agent-factory-evolution START -->
 ```mermaid
 graph TB
-    subgraph ERA1["⚙️ Era 1 — Single Agent
+    subgraph ERA1["Era 1 - Single Agent
 Today: pilot deployments"]
-        A1["🤖 Domain Agent
-(e.g., Accounting Agent)
-L0→L3 autonomy
+        A1["Domain Agent
+e.g. Accounting Agent
+L0 to L3 autonomy
 HITL per action
 Guardrailed"]
-        H1["👤 Human
-operator + approver"]
+        H1["Human
+operator and approver"]
         A1 <-->|"approvals
 recommendations"| H1
     end
 
-    subgraph ERA2["🏭 Era 2 — Agent Factory
+    subgraph ERA2["Era 2 - Agent Factory
 Near future: coordinated fleets"]
-        ORCH["🧠 Orchestrator
-(event bus + scheduler
-+ routing)"]
-        A2a["🤖 Finance
-Agent"]
-        A2b["🤖 Operations
-Agent"]
-        A2c["🤖 Support
-Agent"]
-        A2d["🤖 Intelligence
-Agent"]
-        H2["👥 Human Team
-(HITL where needed)"]
-        ORCH --> A2a & A2b & A2c & A2d
+        ORCH["Orchestrator
+event bus + scheduler
+and routing"]
+        A2a["Finance Agent"]
+        A2b["Operations Agent"]
+        A2c["Support Agent"]
+        A2d["Intelligence Agent"]
+        H2["Human Team
+HITL where needed"]
+        ORCH --> A2a
+        ORCH --> A2b
+        ORCH --> A2c
+        ORCH --> A2d
         A2a <-->|"cross-agent events"| A2b
         A2b <-->|"cross-agent events"| A2c
         A2c <-->|"cross-agent events"| A2d
@@ -250,17 +242,16 @@ Agent"]
 strategic approvals"| H2
     end
 
-    subgraph ERA3["🏭+👤 Era 3 — Hybrid Factory
+    subgraph ERA3["Era 3 - Hybrid Factory
 Mid future: AI amplifies humans"]
-        HF1["👤 Human Expert
+        HF1["Human Expert
 with personal AI
 assistant factory"]
-        HF2["👤 Human Expert
+        HF2["Human Expert
 with personal AI
 assistant factory"]
-        SHARED["🤖 Shared Agent
-Factory
-(coordinated fleet)"]
+        SHARED["Shared Agent Factory
+coordinated fleet"]
         HF1 <-->|"instructions
 high-level goals"| SHARED
         HF2 <-->|"instructions
@@ -268,30 +259,27 @@ high-level goals"| SHARED
         HF1 <-->|"collaboration"| HF2
     end
 
-    subgraph ERA4["🌐 Era 4 — Factory of Factories
+    subgraph ERA4["Era 4 - Factory of Factories
 Far future: autonomous coordination"]
-        FAC_A["🏭 Factory A
-(Company / Domain A)
+        FAC_A["Factory A
+Company / Domain A
 AI fleet + humans"]
-        FAC_B["🏭 Factory B
-(Company / Domain B)
+        FAC_B["Factory B
+Company / Domain B
 AI fleet + humans"]
-        FAC_C["🏭 Factory C
-(Company / Domain C)
+        FAC_C["Factory C
+Company / Domain C
 AI fleet + humans"]
-        PROTO["📋 Standard Protocol
-(agent-to-agent API
+        PROTO["Standard Protocol
+agent-to-agent API
 trustability contracts
-verifiable rationale)"]
-        FAC_A <-->|"agent-to-agent
-calls"| PROTO
-        FAC_B <-->|"agent-to-agent
-calls"| PROTO
-        FAC_C <-->|"agent-to-agent
-calls"| PROTO
-        HITL_GOV["👤 HITL Governance
-(cross-factory standards
-audit + intervention)"]
+verifiable rationale"]
+        FAC_A <-->|"agent-to-agent calls"| PROTO
+        FAC_B <-->|"agent-to-agent calls"| PROTO
+        FAC_C <-->|"agent-to-agent calls"| PROTO
+        HITL_GOV["HITL Governance
+cross-factory standards
+audit and intervention"]
         PROTO <-->|"exceptions
 escalations"| HITL_GOV
     end

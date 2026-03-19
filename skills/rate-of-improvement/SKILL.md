@@ -53,35 +53,34 @@ After 4+ weeks of data, classify the deployment curve:
 <!-- DIAGRAM: rate-of-improvement-curve START -->
 ```mermaid
 graph LR
-    W0["📍 Week 0
+    W0["Week 0
 Baseline
-I₀ = 0%"]
+I = 0%"]
     W1["Week 1-4
-🚀 Rapid
-Acceleration
+Rapid Acceleration
 RoI = HIGH"]
     W2["Week 5-10
-📈 Tapering
+Tapering
 RoI = DECLINING
-(normal)"]
+normal"]
     W3["Week 11+
-✅ Stabilization
-RoI ≈ 0
+Stabilization
+RoI near zero
 Value sustained"]
 
     W0 --> W1 --> W2 --> W3
 
     subgraph SHAPES["Curve Shape Diagnostics"]
-        S1["✅ S-Curve
-rise → taper → flat
+        S1["S-Curve
+rise to taper to flat
 SUCCESS"]
-        S2["⚠️ Rise-Decline
+        S2["Rise-Decline
 improvement then
-regression → WARN"]
-        S3["❌ Flat Line
+regression - WARN"]
+        S3["Flat Line
 no improvement
 FAILURE - redesign"]
-        S4["🔍 Unbounded
+        S4["Unbounded
 continuous rise
 INVESTIGATE"]
     end
@@ -91,11 +90,11 @@ INVESTIGATE"]
     W1 -.->|"if stuck"| S3
     W3 -.->|"if still rising"| S4
 
-    FORMULA["📐 RoI Formula
-RoI(t) = ΔI / Δt
+    FORMULA["RoI Formula
+RoI(t) = delta-I / delta-t
 where I = improvement %
 vs baseline
-Success: R² > 0.85
+Success: R-squared above 0.85
 on logistic fit"]
 
     style W0 fill:#2a2a2a,color:#fff,stroke:#6b7280

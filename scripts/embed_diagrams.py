@@ -15,6 +15,7 @@ Usage:
 
 Options:
     --dry-run   Print diffs but do not write files
+    --check     Exit non-zero if any embed target is out of date
     --verbose   Show per-file progress
 
 Requirements: Python 3.8+, no external dependencies.
@@ -70,13 +71,17 @@ def embed_diagram_in_file(file_path, diagram_id, mmd_content, dry_run=False, ver
         rf"<!-- DIAGRAM: {re.escape(diagram_id)} START -->.*?<!-- DIAGRAM: {re.escape(diagram_id)} END -->",
         re.DOTALL,
     )
+    has_markers = pattern.search(original) is not None
 
     replacement = build_block(diagram_id, mmd_content)
     updated = pattern.sub(replacement, original)
 
     if updated == original:
         if verbose:
-            print(f"  ℹ  No markers found (skipping): {file_path}")
+            if has_markers:
+                print(f"  ✅ In sync: {file_path}")
+            else:
+                print(f"  ℹ  No markers found (skipping): {file_path}")
         return False
 
     if dry_run:
@@ -92,6 +97,7 @@ def embed_diagram_in_file(file_path, diagram_id, mmd_content, dry_run=False, ver
 def main():
     parser = argparse.ArgumentParser(description="Embed Mermaid diagrams into Markdown files.")
     parser.add_argument("--dry-run", action="store_true", help="Show what would change without writing")
+    parser.add_argument("--check", action="store_true", help="Exit non-zero if any file would change")
     parser.add_argument("--verbose", action="store_true", help="Print per-file progress")
     args = parser.parse_args()
 
@@ -111,13 +117,22 @@ def main():
 
         for target_file in used_in:
             updated = embed_diagram_in_file(
-                target_file, diagram_id, mmd_content, dry_run=args.dry_run, verbose=args.verbose
+                target_file,
+                diagram_id,
+                mmd_content,
+                dry_run=args.dry_run or args.check,
+                verbose=args.verbose,
             )
             if updated:
                 total_updates += 1
 
-    print(f"\n✅ Done — {total_updates} embed(s) {'would be ' if args.dry_run else ''}updated.")
+    if args.check and total_updates > 0:
+        print(f"\n❌ Diagram drift detected — {total_updates} embed(s) need updating.")
+        return 1
+
+    print(f"\n✅ Done — {total_updates} embed(s) {'would be ' if (args.dry_run or args.check) else ''}updated.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -30,8 +30,8 @@ Score each dimension 1–10 and provide written rationale.
 <!-- DIAGRAM: ppt-value-streams START -->
 ```mermaid
 graph TB
-    subgraph PPT["People · Process · Technology Evaluation Matrix"]
-        subgraph P["👥 People"]
+    subgraph PPT["People, Process, Technology Evaluation Matrix"]
+        subgraph P["People"]
             P_REV["Revenue
 Who benefits?
 How much?"]
@@ -39,42 +39,32 @@ How much?"]
 Who is at risk?
 Downside?"]
             P_COST["Cost
-Training, change
-management"]
+Training, change management"]
         end
 
-        subgraph PR["⚙️ Process"]
+        subgraph PR["Process"]
             PR_REV["Revenue
-Revenue-process
-improvements?"]
+Revenue-process improvements?"]
             PR_RISK["Risk
-Operational risk
-reduction?"]
+Operational risk reduction?"]
             PR_COST["Cost
-Efficiency gains
-automation?"]
+Efficiency gains, automation?"]
         end
 
-        subgraph T["💻 Technology"]
+        subgraph T["Technology"]
             T_REV["Revenue
-Tech-enabled
-expansion?"]
+Tech-enabled expansion?"]
             T_RISK["Risk
-Security/reliability
-risks?"]
+Security and reliability risks?"]
             T_COST["Cost
-Build vs buy
-maintenance?"]
+Build vs buy, maintenance?"]
         end
     end
 
     subgraph VS["Value Stream Output"]
-        REV["💰 Revenue
-Generation"]
-        RISK["🛡️ Risk
-Mitigation"]
-        COST["💸 Cost
-Savings"]
+        REV["Revenue Generation"]
+        RISK["Risk Mitigation"]
+        COST["Cost Savings"]
     end
 
     P_REV --> REV
@@ -87,8 +77,8 @@ Savings"]
     PR_COST --> COST
     T_COST --> COST
 
-    SCORE["📊 Score 1-10 per cell
-= 9 scores total
+    SCORE["Score 1-10 per cell
+9 scores total
 Max = 90
 75+ Strong
 55-74 Promising

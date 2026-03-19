@@ -54,7 +54,8 @@ Design all actions following these rules:
 
 For each action, required_fields MUST include:
   - justification (why this action was selected over alternatives)
-  - reasoning_summary (step-by-step chain of thought)
+  - decision_summary (concise explanation of the chosen action)
+  - evidence (facts, metrics, or observations that support the decision)
 
 ## 3. HITL Configuration
 Set confidence thresholds based on risk profile:
@@ -68,10 +69,11 @@ For each major task the agent performs, define a prompt entry:
   variant: "default"
 
 ## 5. Model Routing
-Assign model tiers:
-- Classification/extraction tasks → fast/mini model
-- Analysis/detection tasks → fast/mini model
-- Reasoning/recommendations/generation → full model
+Assign model profiles:
+- Classification/extraction tasks → fast profile
+- Analysis/detection tasks → fast or balanced profile
+- Reasoning/recommendations/generation → balanced or deep profile
+- Define fallback_profiles and timeout_ms for each task
 
 ## 6. Cross-Agent Events
 Define:
