@@ -9,6 +9,7 @@ agent-kernel/
 ├── README.md                   ← Start here (human overview)
 ├── CONTEXT.md                  ← AI agent project map
 ├── AGENTS.md                   ← Skill selection guide for agents
+├── CLAUDE.md                   ← Claude-oriented entry point
 ├── PHILOSOPHY.md               ← All design principles reference
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
 ├── skills/                     ← 22 agent skills
@@ -51,7 +52,9 @@ agent-kernel/
 │   ├── action-proposal.md
 │   ├── domain-agent-spec.md
 │   └── agent-factory-design.md
-├── templates/                  ← 10 document templates
+├── templates/                  ← 12 document templates
+│   ├── downstream-agents-template.md
+│   ├── downstream-claude-template.md
 │   ├── idea-evaluator-scorecard.md
 │   ├── 30-60-90-plan-template.md
 │   ├── ppt-impact-assessment.md
@@ -85,6 +88,7 @@ agent-kernel/
 │   └── antigravity-kit-architecture.md
 ├── .agents/
 │   ├── workflows/
+│   │   ├── review-project.md
 │   │   ├── add-skill.md
 │   │   ├── add-prompt.md
 │   │   ├── add-template.md
@@ -118,6 +122,7 @@ agent-kernel/
 | Design a multi-agent factory | `skills/agent-factory-design/` + `prompts/agent-factory-design.md` |
 | Design an agent system | `skills/governance-hierarchy-design/` + `templates/agent-spec-template.yaml` |
 | Create a Mermaid diagram | `skills/diagram-design/` + `.agents/workflows/add-diagram.md` |
+| Review another repo or artifact | `.agents/workflows/review-project.md` + `prompts/code-review.md` |
 | Add a new skill | `.agents/workflows/add-skill.md` |
 | Add a new prompt | `.agents/workflows/add-prompt.md` |
 | Add a new template | `.agents/workflows/add-template.md` |

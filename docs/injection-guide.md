@@ -18,6 +18,7 @@ git submodule update --init --recursive
 ```
 
 Reference skills and prompts from `.agent-kernel/skills/` and `.agent-kernel/prompts/` in your `CONTEXT.md` and `AGENTS.md`.
+If you use Claude, also reference `.agent-kernel/CLAUDE.md` from the downstream `CLAUDE.md`.
 
 ## Method 2: Direct Copy
 
@@ -44,6 +45,12 @@ Use the kernel's `CONTEXT.md` as a starting template, then customize for your pr
 
 Reference the kernel's `AGENTS.md` for the skill selection guide, then add project-specific agent activation rules.
 
+If the downstream project uses Claude, also create `CLAUDE.md` and mirror the same activation rules there.
+
+Starter templates:
+- `templates/downstream-agents-template.md`
+- `templates/downstream-claude-template.md`
+
 ### 3. Create `agent-config.yaml`
 
 Use `templates/agent-config-template.yaml` as your starting point. Configure:
@@ -64,6 +71,7 @@ Copy (or link) the relevant `.agents/workflows/` files into your project to give
 - `add-skill.md` — so agents can create new skills in your project
 - `run-consistency-check.md` — so agents can audit your project
 - `inject-into-project.md` — for projects that further inject the kernel
+- `review-project.md` — for structured code, design, or artifact review
 
 ## GitHub Actions Setup
 
@@ -79,6 +87,7 @@ To use the CI quality gates in your project:
 2. Set up your first agent spec using `agent-spec-template.yaml`
 3. Configure your first guardrails using `agent-config-template.yaml`
 4. Start all new agents at L0 (Observe) or L1 (Recommend) autonomy
+5. Test one review task using `/review-project` plus `prompts/code-review.md`
 
 ## Contact and Support
 

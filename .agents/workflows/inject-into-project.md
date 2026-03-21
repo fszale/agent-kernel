@@ -8,7 +8,7 @@ Follow these steps to inject the agent-kernel into a downstream project.
 
 ## Step 1: Add reference to the kernel
 
-In the downstream project's `CONTEXT.md` or `AGENTS.md`, add a reference:
+In the downstream project's `CONTEXT.md`, `AGENTS.md`, or `CLAUDE.md`, add a reference:
 
 ```markdown
 ## Agent Kernel
@@ -45,23 +45,33 @@ skills:
 Create project-specific workflows that extend the kernel's patterns:
 - Reference kernel workflows where they apply
 - Add project-specific procedures for recurring tasks
+- Include `review-project.md` if the downstream repo will use the kernel for code or artifact review
 
-## Step 5: Configure guardrails
+## Step 5: Create downstream agent instruction files
+
+Create the downstream instruction files from the kernel templates:
+- `templates/downstream-agents-template.md` for `AGENTS.md`-aware tools
+- `templates/downstream-claude-template.md` for Claude-style tools
+
+Update the copied file so it points at the kernel location used by the downstream project, typically `.agent-kernel/`.
+
+## Step 6: Configure guardrails
 
 Use `templates/agent-config-template.yaml` to create the project's guardrail configuration. Customize:
 - `max_change_pct_per_action` for your domain
 - `max_actions_per_day` for your operation scale
 - `min_confidence_to_execute` for your risk tolerance
 
-## Step 6: Verify activation
+## Step 7: Verify activation
 
 Test that an AI agent working on the downstream project can:
 1. Find and read CONTEXT.md in <30 seconds
 2. Navigate to a skill using the skill selection guide in AGENTS.md
 3. Execute a prompt using the correct variable format
 4. Apply the governance hierarchy when proposing actions
+5. Run a review flow using `review-project.md` and `prompts/code-review.md`
 
-## Step 7: Enable GitHub Actions
+## Step 8: Enable GitHub Actions
 
 Enable the kernel's GitHub workflows in the downstream project by copying `.github/workflows/`.
 For optional LLM-powered workflows, configure these secrets:

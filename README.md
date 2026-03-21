@@ -1,6 +1,6 @@
 # 🧠 Agent Kernel
 
-**A reusable Antigravity Kit — skills, prompts, templates, and automation injected into any project. This is my Digital Twin working at one of my Agentic AI Factories.**
+**A reusable Agentic Kit — skills, prompts, templates, and automation injected into any project. This is my Digital Twin working at one of my Agentic AI Factories as a Principal Operator.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -46,12 +46,12 @@ The Agent Kernel is a shared knowledge and tooling layer that encodes a proven d
 
 Every decision in this kit is evaluated through four lenses:
 
-| Lens | Question |
-|---|---|
-| **People · Process · Technology** | Who is affected? What process changes? What tech enables it? |
-| **Pareto (80/20)** | Which 20% of work delivers 80% of the value? |
-| **30/60/90 Mindset** | Immediate / Soon / Later — map all deliverables to time horizons |
-| **First Principles** | What are the base elements? Build from the ground up. |
+| Lens                                      | Question                                                          |
+| ----------------------------------------- | ----------------------------------------------------------------- |
+| **People · Process · Technology** | Who is affected? What process changes? What tech enables it?      |
+| **Pareto (80/20)**                  | Which 20% of work delivers 80% of the value?                      |
+| **30/60/90 Mindset**                | Immediate / Soon / Later — map all deliverables to time horizons |
+| **First Principles**                | What are the base elements? Build from the ground up.             |
 
 All work connects to at least one value stream: **Revenue Generation · Risk Mitigation · Cost Savings**
 
@@ -59,20 +59,22 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 
 ## Quick Start
 
-| You want to… | Start here |
-|---|---|
-| **Evaluate an idea** | `skills/idea-evaluator/SKILL.md` + `prompts/idea-evaluator.md` |
-| **Plan a project** | `skills/30-60-90-planning/SKILL.md` + `templates/30-60-90-plan-template.md` |
-| **Diagnose an issue** | `skills/firefighter/SKILL.md` |
-| **Score AI use cases** | `skills/ai-use-case-scoring/SKILL.md` + `prompts/bottleneck-identification.md` |
-| **Design an autonomous system** | `skills/governance-hierarchy-design/SKILL.md` + `templates/agent-spec-template.yaml` |
-| **Design a domain agent** | `skills/domain-agent-design/SKILL.md` + `templates/agent-spec-domain-template.yaml` |
-| **Design a multi-agent factory** | `skills/agent-factory-design/SKILL.md` + `prompts/agent-factory-design.md` |
-| **Measure AI impact** | `skills/rate-of-improvement/SKILL.md` + `prompts/rate-of-improvement-analysis.md` |
-| **Create a diagram** | `skills/diagram-design/SKILL.md` + `.agents/workflows/add-diagram.md` |
-| **Inject into a project** | [docs/injection-guide.md](docs/injection-guide.md) |
-| **Add a skill or prompt** | [docs/contributing.md](docs/contributing.md) |
-| **AI agent working here** | [AGENTS.md](AGENTS.md) and [CONTEXT.md](CONTEXT.md) |
+| You want to…                             | Start here                                                                               |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Evaluate an idea**                | `skills/idea-evaluator/SKILL.md` + `prompts/idea-evaluator.md`                       |
+| **Plan a project**                  | `skills/30-60-90-planning/SKILL.md` + `templates/30-60-90-plan-template.md`          |
+| **Diagnose an issue**               | `skills/firefighter/SKILL.md`                                                          |
+| **Score AI use cases**              | `skills/ai-use-case-scoring/SKILL.md` + `prompts/bottleneck-identification.md`       |
+| **Design an autonomous system**     | `skills/governance-hierarchy-design/SKILL.md` + `templates/agent-spec-template.yaml` |
+| **Design a domain agent**           | `skills/domain-agent-design/SKILL.md` + `templates/agent-spec-domain-template.yaml`  |
+| **Design a multi-agent factory**    | `skills/agent-factory-design/SKILL.md` + `prompts/agent-factory-design.md`           |
+| **Measure AI impact**               | `skills/rate-of-improvement/SKILL.md` + `prompts/rate-of-improvement-analysis.md`    |
+| **Create a diagram**                | `skills/diagram-design/SKILL.md` + `.agents/workflows/add-diagram.md`                |
+| **Inject into a project**           | [docs/injection-guide.md](docs/injection-guide.md)                                          |
+| **Review another repo or artifact** | `.agents/workflows/review-project.md` + `prompts/code-review.md`                     |
+| **Use this from Claude**            | [CLAUDE.md](CLAUDE.md)                                                                      |
+| **Add a skill or prompt**           | [docs/contributing.md](docs/contributing.md)                                                |
+| **AI agent working here**           | [AGENTS.md](AGENTS.md) and [CONTEXT.md](CONTEXT.md)                                            |
 
 ## Repository Structure
 
@@ -80,14 +82,18 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 agent-kernel/
 ├── README.md                   ← You are here
 ├── AGENTS.md                   ← Agent injection guide
+├── CLAUDE.md                   ← Claude-oriented entry point
 ├── CONTEXT.md                  ← AI-first project map
 ├── PHILOSOPHY.md               ← Full design principles reference
 ├── .agents/
 │   ├── workflows/              ← Step-by-step agent procedures
+│   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
 ├── skills/                     ← 22 reusable agent skills
 ├── prompts/                    ← 16 structured prompt templates
-├── templates/                  ← 10 reusable document templates
+├── templates/                  ← 12 reusable document templates
+│   ├── downstream-agents-template.md
+│   ├── downstream-claude-template.md
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry
 ├── scripts/                    ← embed_diagrams.py + validate_contracts.py automation
 ├── Makefile                    ← validate, embed, consistency targets
@@ -107,6 +113,7 @@ This kit synthesizes principles from four sources:
 ## Automated Improvement
 
 Six GitHub Actions continuously maintain and improve this kit:
+
 - **Skill consistency check** — validates structure on every push
 - **Prompt quality review** — weekly AI-driven review with suggestions
 - **Content improvement** — weekly gap analysis across all four philosophies

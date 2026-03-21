@@ -21,13 +21,14 @@ agent-kernel/
 ├── CONTEXT.md                  ← You are here (read first)
 ├── README.md                   ← Human-readable overview
 ├── AGENTS.md                   ← Agent activation and skill selection guide
+├── CLAUDE.md                   ← Claude-oriented activation entry point
 ├── PHILOSOPHY.md               ← Full design principles reference
 ├── .agents/
 │   ├── workflows/              ← Step-by-step agent procedures (slash commands)
 │   └── skills/                 ← Project-specific knowledge for agents
 ├── skills/                     ← 22 injectable agent skills (SKILL.md per skill)
 ├── prompts/                    ← 16 structured prompt templates
-├── templates/                  ← 10 reusable document templates
+├── templates/                  ← 12 reusable document templates
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry.json
 ├── scripts/                    ← embed_diagrams.py + validate_contracts.py automation
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
@@ -47,6 +48,7 @@ agent-kernel/
 |---|---|
 | `PHILOSOPHY.md` | All design principles from all four sources |
 | `AGENTS.md` | How agents select and activate skills |
+| `CLAUDE.md` | How Claude-style agents should activate and route into the kernel |
 | `skills/*/SKILL.md` | Per-skill instructions, when-to-use, agent instructions |
 | `prompts/*.md` | Structured prompt templates with variables |
 | `templates/*.md` / `*.yaml` | Reusable output document formats |
@@ -73,6 +75,7 @@ When working with an AI agent, use these to trigger workflow procedures:
 | `/add-prompt` | Creates a new prompt with variables and expected output |
 | `/add-template` | Creates a new document template |
 | `/add-diagram` | Creates a new Mermaid diagram with registry + embedding |
+| `/review-project` | Reviews a codebase or other artifact using the principal-operator lens |
 | `/run-consistency-check` | Audits all files for missing fields, broken cross-refs |
 | `/update-philosophy` | Extends PHILOSOPHY.md with a new principle |
 | `/inject-into-project` | Injects this kit into a downstream project |

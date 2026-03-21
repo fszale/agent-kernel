@@ -39,3 +39,5 @@ diagrams/*.png
 .env.*
 !.env.example
 !.env.sample
+
+*.code-workspace
