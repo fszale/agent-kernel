@@ -12,7 +12,7 @@ agent-kernel/
 ├── CLAUDE.md                   ← Claude-oriented entry point
 ├── PHILOSOPHY.md               ← All design principles reference
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
-├── skills/                     ← 22 agent skills
+├── skills/                     ← 24 agent skills
 │   ├── idea-evaluator/SKILL.md
 │   ├── 30-60-90-planning/SKILL.md
 │   ├── first-principles/SKILL.md
@@ -34,7 +34,9 @@ agent-kernel/
 │   ├── confidence-and-experiment/SKILL.md
 │   ├── diagram-design/SKILL.md
 │   ├── domain-agent-design/SKILL.md
-│   └── agent-factory-design/SKILL.md
+│   ├── agent-factory-design/SKILL.md
+│   ├── agentic-system-review/SKILL.md
+│   └── staged-validation/SKILL.md
 ├── prompts/                    ← 16 prompt templates
 │   ├── idea-evaluator.md
 │   ├── 30-60-90-plan.md
@@ -123,6 +125,8 @@ agent-kernel/
 | Design an agent system | `skills/governance-hierarchy-design/` + `templates/agent-spec-template.yaml` |
 | Create a Mermaid diagram | `skills/diagram-design/` + `.agents/workflows/add-diagram.md` |
 | Review another repo or artifact | `.agents/workflows/review-project.md` + `prompts/code-review.md` |
+| Review a multi-agent system | `skills/agentic-system-review/` + `.agents/workflows/review-project.md` |
+| Plan R\&D staged validation | `skills/staged-validation/` |
 | Add a new skill | `.agents/workflows/add-skill.md` |
 | Add a new prompt | `.agents/workflows/add-prompt.md` |
 | Add a new template | `.agents/workflows/add-template.md` |

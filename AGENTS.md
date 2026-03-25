@@ -38,6 +38,8 @@ graph TB
     Q4 -->|"Design agent"| S_DA["domain-agent-design
 + templates/agent-spec-template.yaml"]
     Q4 -->|"Multi-agent system"| S_FAC["agent-factory-design"]
+    Q4 -->|"Review agent system"| S_ASR["agentic-system-review"]
+    Q4 -->|"Stage R&D validation"| S_SV["staged-validation"]
     Q4 -->|"Set autonomy"| S_AUT["autonomy-ladder"]
     Q4 -->|"Measure impact"| S_ROI["rate-of-improvement
 + prompts/rate-of-improvement-analysis.md"]
@@ -101,6 +103,8 @@ When approaching any task, run through this decision chain in order:
 | Define guardrails + HITL | `hitl-and-guardrails` | — | `agent-config-template.yaml` |
 | Design a domain agent | `domain-agent-design` | `domain-agent-spec.md` | `agent-spec-domain-template.yaml` |
 | Design a multi-agent factory | `agent-factory-design` | `agent-factory-design.md` | — |
+| Review a multi-agent system | `agentic-system-review` | `code-review.md` | — |
+| Plan R&D staged validation | `staged-validation` | — | — |
 | Create a Mermaid diagram | `diagram-design` | — | — |
 
 ### Team & Leadership
