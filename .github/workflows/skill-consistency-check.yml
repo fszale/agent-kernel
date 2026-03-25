@@ -32,11 +32,23 @@ jobs:
   contract-check:
     name: Validate Repository Contracts
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Auto-heal diagram embeds
+        run: python3 scripts/embed_diagrams.py
+
+      - name: Commit auto-healed changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-heal diagram embeds [skip ci]"
+          file_pattern: 'AGENTS.md CONTEXT.md PHILOSOPHY.md README.md docs/*.md .agents/skills/*.md'
 
       - name: Run contract validator
         run: python3 scripts/validate_contracts.py
