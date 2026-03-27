@@ -48,10 +48,23 @@ Run a quick self-check:
 - [ ] `Agent Instructions` section provides step-by-step guidance
 - [ ] `Output Format` section describes what the skill produces
 
-## Step 4: Add to README.md
+## Step 4: Update Core Indexes
 
-Update the Skills section in `README.md` to include the new skill in the quick-start table. Run consistency check: `/run-consistency-check`.
+To ensure this new artifact is discoverable by other agents, you MUST update all of the following:
 
-## Step 5: Update .agents/skills/project-navigation.md
+- [ ] `README.md` (Update Quick Start table and the skill count in the directory tree if applicable)
+- [ ] `AGENTS.md` (Update the Skill Selection Guide table and Mermaid flow diagram)
+- [ ] `CLAUDE.md` (Update the Common Task Routing table)
+- [ ] `CONTEXT.md` (Update the total count of skills/prompts in the Directory Map)
+- [ ] `.agents/skills/project-navigation.md` (Update the directory map and finding-the-right-tool table)
+- [ ] `templates/downstream-*.md` (Update only if the addition creates a new fundamental review type or operational lens)
 
-Add the new skill to the skills inventory in `.agents/skills/project-navigation.md`.
+## Step 5: Run consistency check
+
+Run the repository validation script to ensure all cross-references and frontmatter contracts are correct:
+
+```bash
+make consistency-check
+# or
+python3 scripts/validate_contracts.py
+```

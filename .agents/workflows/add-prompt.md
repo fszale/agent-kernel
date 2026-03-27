@@ -49,10 +49,23 @@ Create `prompts/{purpose}.md` using kebab-case. The filename should describe the
 - [ ] Prompt body includes section headers (## 1. ## 2. etc.)
 - [ ] Cross-referenced to relevant skill if one exists
 
-## Step 4: Update README.md
+## Step 4: Update Core Indexes
 
-Add the new prompt to the relevant row in the Quick Start table.
+To ensure this new artifact is discoverable by other agents, you MUST update all of the following:
+
+- [ ] `README.md` (Update Quick Start table and the skill count in the directory tree if applicable)
+- [ ] `AGENTS.md` (Update the Skill Selection Guide table and Mermaid flow diagram)
+- [ ] `CLAUDE.md` (Update the Common Task Routing table)
+- [ ] `CONTEXT.md` (Update the total count of skills/prompts in the Directory Map)
+- [ ] `.agents/skills/project-navigation.md` (Update the directory map and finding-the-right-tool table)
+- [ ] `templates/downstream-*.md` (Update only if the addition creates a new fundamental review type or operational lens)
 
 ## Step 5: Run consistency check
 
-`/run-consistency-check`
+Run the repository validation script to ensure all cross-references and frontmatter contracts are correct:
+
+```bash
+make consistency-check
+# or
+python3 scripts/validate_contracts.py
+```

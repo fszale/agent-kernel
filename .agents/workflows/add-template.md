@@ -35,22 +35,25 @@ Use kebab-case. Name should describe the output document, not the skill that use
 - Use placeholder values that clearly show what to replace
 - Group fields logically with section comment banners
 
-## Step 4: Link from AGENTS.md
+## Step 4: Update Core Indexes
 
-Add a row to the appropriate Skill Selection Guide table in `AGENTS.md`:
+To ensure this new artifact is discoverable by other agents, you MUST update all of the following:
 
-```markdown
-| Your use case | relevant-skill | relevant-prompt.md | your-new-template.md |
-```
+- [ ] `README.md` (Update Quick Start table and the skill count in the directory tree if applicable)
+- [ ] `AGENTS.md` (Update the Skill Selection Guide table and Mermaid flow diagram)
+- [ ] `CLAUDE.md` (Update the Common Task Routing table)
+- [ ] `CONTEXT.md` (Update the total count of skills/prompts in the Directory Map)
+- [ ] `.agents/skills/project-navigation.md` (Update the directory map and finding-the-right-tool table)
+- [ ] `templates/downstream-*.md` (Update only if the addition creates a new fundamental review type or operational lens)
 
-## Step 5: Update project-navigation.md
+## Step 5: Run consistency check
 
-Add the template to the directory listing in `.agents/skills/project-navigation.md`.
-
-## Step 6: Run consistency check
+Run the repository validation script to ensure all cross-references and frontmatter contracts are correct:
 
 ```bash
 make consistency-check
+# or
+python3 scripts/validate_contracts.py
 ```
 
 For YAML templates, also validate:
