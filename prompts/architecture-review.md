@@ -1,10 +1,23 @@
-# Architecture & System Review
+# Prompt: Architecture & System Review
 
-**Purpose:** Evaluate an existing prototype, repository, or multi-agent system for architectural integrity, production readiness, and strategic staging. 
-**Output:** A structured gap analysis and a prioritized roadmap for adoption.
+## Purpose
+Evaluate an existing prototype, repository, or multi-agent system for architectural integrity, production readiness, and strategic staging. 
 
----
+## When to Use
+- When reviewing a multi-agent system or generic project architecture
+- Before moving a prototype into a production environment
+- When a team needs a prioritized roadmap for adoption
 
+## Variables
+
+| Variable | Description | Example |
+|---|---|---|
+| `{{project_description}}` | Brief description of the system | "ETL pipeline for scraping content using an agentic architecture" |
+| `{{team_charter}}` | Purpose or goal of the team | "an R&D group building a platform for downstream teams" |
+
+## Prompt
+
+```
 Please apply the contents of the agent-kernel to review the adjacent project in this workspace. 
 
 From what I understand, this project is a {{project_description}}. 
@@ -30,3 +43,9 @@ Based on the review above, assume the team is trying to focus on everything at o
 Use the `staged-validation` skill to advise this team on how to proceed. 
 
 Please provide a phased validation roadmap that applies the Pareto principle (80/20) and helps them prove out the most valuable, highest-risk components first (depth), rather than trying to build the whole system at once (breadth).
+```
+
+## Expected Output
+- A structured gap analysis covering the 4 dimensions (Self-Improvement, Memory, HITL, Simulation)
+- A prioritized list of findings
+- A phased validation roadmap focusing on depth before breadth
