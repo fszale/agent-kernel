@@ -26,7 +26,7 @@ agent-kernel/
 ├── .agents/
 │   ├── workflows/              ← Step-by-step agent procedures (slash commands)
 │   └── skills/                 ← Project-specific knowledge for agents
-├── skills/                     ← 22 injectable agent skills (SKILL.md per skill)
+├── skills/                     ← 24 injectable agent skills (SKILL.md per skill)
 ├── prompts/                    ← 16 structured prompt templates
 ├── templates/                  ← 12 reusable document templates
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry.json

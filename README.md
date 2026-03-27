@@ -71,7 +71,9 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | **Measure AI impact**               | `skills/rate-of-improvement/SKILL.md` + `prompts/rate-of-improvement-analysis.md`    |
 | **Create a diagram**                | `skills/diagram-design/SKILL.md` + `.agents/workflows/add-diagram.md`                |
 | **Inject into a project**           | [docs/injection-guide.md](docs/injection-guide.md)                                          |
-| **Review another repo or artifact** | `.agents/workflows/review-project.md` + `prompts/code-review.md`                     |
+| **Review another repo or artifact** | `.agents/workflows/review-project.md` + `prompts/architecture-review.md`                     |
+| **Review a multi-agent system**     | `skills/agentic-system-review/SKILL.md` + `prompts/architecture-review.md`           |
+| **Plan R&D staged validation**      | `skills/staged-validation/SKILL.md` + `prompts/architecture-review.md`                     |
 | **Use this from Claude**            | [CLAUDE.md](CLAUDE.md)                                                                      |
 | **Add a skill or prompt**           | [docs/contributing.md](docs/contributing.md)                                                |
 | **AI agent working here**           | [AGENTS.md](AGENTS.md) and [CONTEXT.md](CONTEXT.md)                                            |
@@ -89,7 +91,7 @@ agent-kernel/
 │   ├── workflows/              ← Step-by-step agent procedures
 │   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
-├── skills/                     ← 22 reusable agent skills
+├── skills/                     ← 24 reusable agent skills
 ├── prompts/                    ← 16 structured prompt templates
 ├── templates/                  ← 12 reusable document templates
 │   ├── downstream-agents-template.md

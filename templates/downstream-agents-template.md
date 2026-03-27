@@ -29,7 +29,8 @@ Before doing substantive work:
 When asked to review code, architecture, or other artifacts:
 
 - use `.agent-kernel/.agents/workflows/review-project.md`
-- use `.agent-kernel/prompts/code-review.md` for code and technical design review
+- use `.agent-kernel/prompts/code-review.md` for individual code files and snippets
+- use `.agent-kernel/prompts/architecture-review.md` for reviewing repositories, system architectures, and multi-agent pipelines
 - present findings first, ordered by severity
 - include file references and missing tests
 - apply First Principles and PPT before proposing refactors
