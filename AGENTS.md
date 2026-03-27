@@ -94,7 +94,7 @@ When approaching any task, run through this decision chain in order:
 | Task | Skill | Prompt | Template |
 |---|---|---|---|
 | Design a system architecture | — | `moonshot-architecture.md` | — |
-| Review code | — | `code-review.md` | — |
+| Review another repo or artifact | — | `architecture-review.md` | — |
 | Build config-driven system | `configuration-driven-design` | — | `agent-config-template.yaml` |
 | Define an agent spec | `governance-hierarchy-design` | — | `agent-spec-template.yaml` |
 | Design action bundles | `tactic-design` | `tactic-assembly.md` | — |
@@ -103,8 +103,8 @@ When approaching any task, run through this decision chain in order:
 | Define guardrails + HITL | `hitl-and-guardrails` | — | `agent-config-template.yaml` |
 | Design a domain agent | `domain-agent-design` | `domain-agent-spec.md` | `agent-spec-domain-template.yaml` |
 | Design a multi-agent factory | `agent-factory-design` | `agent-factory-design.md` | — |
-| Review a multi-agent system | `agentic-system-review` | `code-review.md` | — |
-| Plan R&D staged validation | `staged-validation` | — | — |
+| Review a multi-agent system | `agentic-system-review` | `architecture-review.md` | — |
+| Plan R&D staged validation | `staged-validation` | `architecture-review.md` | — |
 | Create a Mermaid diagram | `diagram-design` | — | — |
 
 ### Team & Leadership

@@ -4,9 +4,24 @@ description: how to inject the agent-kernel into a downstream project
 
 # Inject Into Project Workflow
 
-Follow these steps to inject the agent-kernel into a downstream project.
+## Method 1: Side-by-Side IDE Injection (For Reviews)
 
-## Step 1: Add reference to the kernel
+The fastest way to use the agent-kernel to review or advise on an existing project is to load it adjacent to your project in an IDE (like VS Code or Cursor).
+
+1. Clone `agent-kernel` to your machine.
+2. Open your IDE workspace and add **both** your project folder and the `agent-kernel` folder to the same window.
+3. Open a new AI chat or agent session.
+4. **Prompt the agent:** "Apply the contents of the `agent-kernel` to review the adjacent project in this workspace using `prompts/architecture-review.md`."
+
+This gives the agent immediate access to the kernel's skills without requiring you to copy files into your project repository.
+
+---
+
+## Method 2: Full Project Integration
+
+Follow these steps to permanently inject the agent-kernel directly into a downstream project's repository.
+
+### Step 1: Add reference to the kernel
 
 In the downstream project's `CONTEXT.md`, `AGENTS.md`, or `CLAUDE.md`, add a reference:
 
