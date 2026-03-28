@@ -23,8 +23,6 @@ graph TB
 + prompts/ppt-assessment.md"]
     Q1 -->|"Score AI use cases"| S_AI["ai-use-case-scoring
 + prompts/bottleneck-identification.md"]
-    Q1 -->|"Downstream consequences"| S_SOE["second-order-effects
-+ prompts/second-order-effects-analysis.md"]
 
     Q2 -->|"New project/role"| S_90["30-60-90-planning
 + templates/30-60-90-plan-template.md"]

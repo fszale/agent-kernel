@@ -38,13 +38,13 @@ embedded diagrams"]
     subgraph L2["Layer 2: Reusable Knowledge
 skills + prompts + templates"]
         SK["skills/
-25 SKILL.md files
+22 SKILL.md files
 Agent behaviors"]
         PR["prompts/
-18 prompt templates
+16 prompt templates
 Structured workflows"]
         TM["templates/
-13 document templates
+10 document templates
 Fillable output formats"]
     end
 
