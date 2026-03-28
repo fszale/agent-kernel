@@ -28,6 +28,10 @@ on:
       - 'README.md'
       - 'PHILOSOPHY.md'
 
+concurrency:
+  group: skill-consistency-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   contract-check:
     name: Validate Repository Contracts
@@ -45,10 +49,17 @@ jobs:
         run: python3 scripts/embed_diagrams.py
 
       - name: Commit auto-healed changes
+        id: auto_commit
         uses: stefanzweifel/git-auto-commit-action@v5
+        continue-on-error: true
         with:
           commit_message: "chore: auto-heal diagram embeds [skip ci]"
           file_pattern: 'AGENTS.md CONTEXT.md PHILOSOPHY.md README.md docs/*.md .agents/skills/*.md'
+
+      - name: Note auto-commit race conditions
+        if: steps.auto_commit.outcome != 'success'
+        run: |
+          echo "::warning::Auto-heal changes were created locally but could not be pushed cleanly. This usually means the branch moved while the workflow was running."
 
       - name: Run contract validator
         run: python3 scripts/validate_contracts.py
