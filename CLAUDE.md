@@ -36,6 +36,7 @@ Run through this chain in order before acting:
 | Review another repo or artifact | `.agents/workflows/review-project.md` + `prompts/architecture-review.md` |
 | Review a multi-agent system | `skills/agentic-system-review/SKILL.md` + `prompts/architecture-review.md` |
 | Plan R&D staged validation | `skills/staged-validation/SKILL.md` + `prompts/architecture-review.md` |
+| Assess downstream or systemic consequences | `skills/second-order-effects/SKILL.md` + `prompts/second-order-effects-analysis.md` |
 
 ## Review Mode
 

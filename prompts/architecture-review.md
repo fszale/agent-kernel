@@ -31,8 +31,15 @@ Use the `agentic-system-review` skill to audit this repository. Specifically, id
 
 1. **Self-Improvement:** How is it learning or improving over time? Are LLM decisions fed back into the system?
 2. **Memory & Context:** How is it managing state? Is there a shared context or just isolated memory?
-3. **Guardrails & HITL:** Where is the human-in-the-loop that can quickly pause, override, or provide feedback to operations? 
+3. **Guardrails & HITL:** Where is the human-in-the-loop that can quickly pause, override, or provide feedback to operations?
 4. **Simulation Boundaries:** Are there any mocked/simulated components masquerading as production readiness?
+5. **Second & Third Order Effects:** What downstream consequences does this system create once it is operating at scale? Consider:
+   - How do downstream teams or consumers change their behavior once they depend on this system?
+   - What adjacent systems or data pipelines does this system affect that are not in scope of its primary mandate?
+   - What perverse incentives does this system create — in its operators, consumers, or the processes it automates?
+   - What feedback loops does this system participate in — does it amplify or dampen the signals it acts on?
+
+For dimension 5, trace at least 3 second-order effects and flag any reinforcing feedback loops as Critical findings.
 
 Please provide a prioritized list of findings (Critical, High, Medium, Low).
 
@@ -46,6 +53,6 @@ Please provide a phased validation roadmap that applies the Pareto principle (80
 ```
 
 ## Expected Output
-- A structured gap analysis covering the 4 dimensions (Self-Improvement, Memory, HITL, Simulation)
-- A prioritized list of findings
+- A structured gap analysis covering 5 dimensions (Self-Improvement, Memory, HITL, Simulation, Second & Third Order Effects)
+- A prioritized list of findings with second-order effect chains flagged as Critical where applicable
 - A phased validation roadmap focusing on depth before breadth

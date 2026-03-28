@@ -69,6 +69,7 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | **Design a domain agent**           | `skills/domain-agent-design/SKILL.md` + `templates/agent-spec-domain-template.yaml`  |
 | **Design a multi-agent factory**    | `skills/agent-factory-design/SKILL.md` + `prompts/agent-factory-design.md`           |
 | **Measure AI impact**               | `skills/rate-of-improvement/SKILL.md` + `prompts/rate-of-improvement-analysis.md`    |
+| **Map downstream consequences**     | `skills/second-order-effects/SKILL.md` + `prompts/second-order-effects-analysis.md`  |
 | **Create a diagram**                | `skills/diagram-design/SKILL.md` + `.agents/workflows/add-diagram.md`                |
 | **Inject into a project**           | [docs/injection-guide.md](docs/injection-guide.md)                                          |
 | **Review another repo or artifact** | `.agents/workflows/review-project.md` + `prompts/architecture-review.md`                     |
@@ -91,9 +92,9 @@ agent-kernel/
 │   ├── workflows/              ← Step-by-step agent procedures
 │   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
-├── skills/                     ← 24 reusable agent skills
-├── prompts/                    ← 16 structured prompt templates
-├── templates/                  ← 12 reusable document templates
+├── skills/                     ← 25 reusable agent skills
+├── prompts/                    ← 18 structured prompt templates
+├── templates/                  ← 13 reusable document templates
 │   ├── downstream-agents-template.md
 │   ├── downstream-claude-template.md
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry

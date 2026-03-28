@@ -60,6 +60,20 @@ Check the reconstructed solution against:
 - What new risks does it introduce?
 - What's the 30-day test to validate feasibility?
 
+### Step 7: Map Second-Order Effects of the Recommended Solution
+
+Before finalizing, apply one layer of effects analysis to the recommended reconstruction:
+
+For each of the 4 axes — **Stakeholders, Adjacent Systems, Incentives & Behaviors, Feedback Loops** — ask what the reconstructed solution causes once it is operating as intended.
+
+Focus on:
+- Effects that the original problem framing would not have anticipated
+- Perverse incentives created by the new approach
+- Feedback loops that could amplify or reverse the intended improvement
+- Systems that now behave differently because the reconstruction removes a prior constraint they depended on
+
+Document 3–5 second-order effects and flag any that are severe enough to reconsider the recommended solution in favor of one of the alternatives.
+
 ## Output Format
 
 Structured report:
@@ -69,3 +83,4 @@ Structured report:
 4. Reconstructed solution options (2–3)
 5. Recommended solution with rationale
 6. 30-day validation plan
+7. Second-order effects of the recommended solution (top 3–5 with Likelihood, Magnitude, RRC tag)

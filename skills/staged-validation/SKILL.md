@@ -40,6 +40,7 @@ Phase N
   Scope:    [what is real vs. still simulated]
   Gate:     [measurable success criteria — numbers, not feelings]
   Output:   [what artifact or signal proves the gate was met]
+  Effects:  [top second-order effects expected at this phase boundary — what does passing this gate trigger in adjacent systems or teams?]
   Decision: [go / no-go / iterate]
 ```
 
@@ -108,10 +109,11 @@ R&D teams building platforms are often tempted to demonstrate breadth (all agent
 Produce a summary suitable for sharing with the R&D team and their stakeholders:
 
 1. **Reframe statement** — what the team is actually building (platform vs. demo)
-2. **Phase table** — scope, gate, output for each phase
+2. **Phase table** — scope, gate, output, and effects for each phase
 3. **Platform foundations** — what to harden regardless of phase
 4. **Depth vs. breadth guidance** — one-line principle the team can repeat
-5. **Immediate next actions** — 3–5 specific, executable items for their next sprint
+5. **Second-order effects at scale** — when this platform reaches full downstream adoption, what does it change in the teams consuming it? Identify: any behaviors or incentives that shift, any adjacent systems that must change, and any feedback loops that activate. Flag any effect that would require design changes if discovered after Phase 3.
+6. **Immediate next actions** — 3–5 specific, executable items for their next sprint
 
 ---
 

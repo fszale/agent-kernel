@@ -25,6 +25,14 @@ When reviewing code, designs, or operational artifacts:
 - order findings by severity
 - call out risky assumptions, missing tests, and missing guardrails
 
+## Decision Analysis Behavior
+
+When the task is to assess downstream consequences, systemic ripple effects, or perverse incentives:
+
+- use `.agent-kernel/skills/second-order-effects/SKILL.md`
+- use `.agent-kernel/prompts/second-order-effects-analysis.md`
+- surface high-severity chains, monitoring indicators, and mitigation thresholds
+
 ## Operating Lens
 
 Apply the kernel in this order:

@@ -12,7 +12,7 @@ agent-kernel/
 ├── CLAUDE.md                   ← Claude-oriented entry point
 ├── PHILOSOPHY.md               ← All design principles reference
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
-├── skills/                     ← 24 agent skills
+├── skills/                     ← 25 agent skills
 │   ├── idea-evaluator/SKILL.md
 │   ├── 30-60-90-planning/SKILL.md
 │   ├── first-principles/SKILL.md
@@ -32,18 +32,20 @@ agent-kernel/
 │   ├── autonomy-ladder/SKILL.md
 │   ├── tactic-design/SKILL.md
 │   ├── confidence-and-experiment/SKILL.md
+│   ├── second-order-effects/SKILL.md
 │   ├── diagram-design/SKILL.md
 │   ├── domain-agent-design/SKILL.md
 │   ├── agent-factory-design/SKILL.md
 │   ├── agentic-system-review/SKILL.md
 │   └── staged-validation/SKILL.md
-├── prompts/                    ← 16 prompt templates
+├── prompts/                    ← 18 prompt templates
 │   ├── idea-evaluator.md
 │   ├── 30-60-90-plan.md
 │   ├── ppt-assessment.md
 │   ├── code-review.md
 │   ├── moonshot-architecture.md
 │   ├── future-trends-analysis.md
+│   ├── second-order-effects-analysis.md
 │   ├── team-metrics-review.md
 │   ├── process-audit.md
 │   ├── bottleneck-identification.md
@@ -54,13 +56,14 @@ agent-kernel/
 │   ├── action-proposal.md
 │   ├── domain-agent-spec.md
 │   └── agent-factory-design.md
-├── templates/                  ← 12 document templates
+├── templates/                  ← 13 document templates
 │   ├── downstream-agents-template.md
 │   ├── downstream-claude-template.md
 │   ├── idea-evaluator-scorecard.md
 │   ├── 30-60-90-plan-template.md
 │   ├── ppt-impact-assessment.md
 │   ├── project-retrospective.md
+│   ├── second-order-effects-map.md
 │   ├── roi-report-template.md
 │   ├── weekly-progress-report.md
 │   ├── business-intake-questionnaire.md
@@ -120,6 +123,7 @@ agent-kernel/
 | Score AI opportunities | `skills/ai-use-case-scoring/` + `prompts/bottleneck-identification.md` |
 | Design an AI workflow | `prompts/workflow-design.md` |
 | Measure impact | `skills/rate-of-improvement/` + `prompts/rate-of-improvement-analysis.md` |
+| Map downstream consequences | `skills/second-order-effects/` + `prompts/second-order-effects-analysis.md` |
 | Design a domain agent | `skills/domain-agent-design/` + `templates/agent-spec-domain-template.yaml` |
 | Design a multi-agent factory | `skills/agent-factory-design/` + `prompts/agent-factory-design.md` |
 | Design an agent system | `skills/governance-hierarchy-design/` + `templates/agent-spec-template.yaml` |

@@ -65,8 +65,9 @@ Always produce:
 2. Overall P(Success) with classification
 3. Top 3 risk factors that could cause failure
 4. Specific mitigation strategy for each risk factor
-5. Go/No-Go recommendation with rationale
-6. "What would need to change" for any factor scoring below 50%
+5. **Second-order risk cascade** — for each of the top 3 risks, trace one layer further: if this risk materializes, what does it trigger next? Score each cascade effect by Likelihood × Magnitude and flag any that would lower P(Success) by more than 10 percentage points.
+6. Go/No-Go recommendation with rationale
+7. "What would need to change" for any factor scoring below 50%
 
 ## Reference Scenarios
 

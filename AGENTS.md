@@ -23,6 +23,8 @@ graph TB
 + prompts/ppt-assessment.md"]
     Q1 -->|"Score AI use cases"| S_AI["ai-use-case-scoring
 + prompts/bottleneck-identification.md"]
+    Q1 -->|"Downstream consequences"| S_SOE["second-order-effects
++ prompts/second-order-effects-analysis.md"]
 
     Q2 -->|"New project/role"| S_90["30-60-90-planning
 + templates/30-60-90-plan-template.md"]
@@ -124,6 +126,9 @@ When approaching any task, run through this decision chain in order:
 | Score confidence on a recommendation | `confidence-and-experiment` | — | — |
 | Design an experiment | `confidence-and-experiment` | — | — |
 | Analyze future trends | — | `future-trends-analysis.md` | — |
+| Map downstream consequences of a decision | `second-order-effects` | `second-order-effects-analysis.md` | `second-order-effects-map.md` |
+| Identify perverse incentives from a change | `second-order-effects` | `second-order-effects-analysis.md` | — |
+| Detect feedback loops in a system or strategy | `second-order-effects` | `second-order-effects-analysis.md` | `second-order-effects-map.md` |
 
 ## Consistency Rules for Agents
 

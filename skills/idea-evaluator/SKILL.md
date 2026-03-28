@@ -129,7 +129,24 @@ Produce a scorecard (1–10 per cell):
 | **Technology** | | | | |
 | **Total** | | | | |
 
-### Step 5: Output
+### Step 5: Second-Order Effects Check
+
+For the top-scoring option(s) with a Go or conditional-Go recommendation, apply the `second-order-effects` skill before finalizing the verdict.
+
+Ask:
+- What does this idea cause in **adjacent systems or processes** once it succeeds?
+- What **stakeholder behaviors or incentives** shift as a result?
+- Are there **feedback loops** — reinforcing (accelerates the effect) or balancing (dampens it) — that activate at scale?
+- What **third-order consequences** descend from the most material second-order effects?
+
+Document at minimum:
+- 3–5 second-order effects across the 4 axes (Stakeholders, Adjacent Systems, Incentives, Feedback Loops)
+- Any high-severity chains that would change the Go/No-Go verdict if they materialize
+- One monitoring indicator per high-severity chain
+
+If second-order effects materially change the risk picture, adjust the PPT scores before producing the final output.
+
+### Step 6: Output
 
 1. **Total score** (out of 90) and classification:
    - 75–90: 🟢 Strong — pursue immediately
@@ -140,7 +157,8 @@ Produce a scorecard (1–10 per cell):
 2. **30/60/90 next steps** — one action per time horizon
 3. **Pareto recommendation** — the single highest-impact action
 4. **PPT risks** — top risk in each dimension
-5. **Go/No-Go recommendation** with one-paragraph rationale
+5. **Second-order effects summary** — top 3 non-obvious downstream consequences and their monitoring indicators
+6. **Go/No-Go recommendation** with one-paragraph rationale
 
 ## Output Format
 

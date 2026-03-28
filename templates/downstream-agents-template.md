@@ -13,6 +13,7 @@ Use the kernel for:
 - strategic planning
 - system and agent design
 - code and artifact review
+- downstream consequence mapping for decisions and changes
 - governance, HITL, and autonomy decisions
 
 ## Required Startup
@@ -34,6 +35,15 @@ When asked to review code, architecture, or other artifacts:
 - present findings first, ordered by severity
 - include file references and missing tests
 - apply First Principles and PPT before proposing refactors
+
+## Decision Analysis Tasks
+
+When asked to assess downstream consequences, perverse incentives, or systemic ripple effects:
+
+- use `.agent-kernel/skills/second-order-effects/SKILL.md`
+- use `.agent-kernel/prompts/second-order-effects-analysis.md`
+- tag findings to Revenue, Risk, and/or Cost
+- call out monitoring indicators and guardrails for high-severity chains
 
 ## Consistency Rules
 

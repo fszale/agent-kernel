@@ -75,6 +75,18 @@ If any guardrail fails: **BLOCK THIS ACTION**. Provide alternative that passes.
 - **decision_summary**: Concise explanation of the selected action and intended outcome.
 - **evidence**: Facts, metrics, or observations that support the proposed action.
 - **assumptions**: Key assumptions or uncertainty that could change the recommendation.
+
+### 8. Second-Order Effects (REQUIRED FOR MEDIUM AND HIGH RISK ACTIONS)
+For any action with `risk_class` = Medium or High, trace the downstream effects of this action succeeding:
+
+| Axis | Effect | Likelihood (H/M/L) | Magnitude (H/M/L) | RRC |
+|---|---|---|---|---|
+| Stakeholders | [who changes behavior because this action succeeds?] | | | |
+| Adjacent Systems | [what other system now behaves differently?] | | | |
+| Incentives & Behaviors | [what new incentive does this create — positive or perverse?] | | | |
+| Feedback Loops | [does this trigger a reinforcing or balancing loop?] | | | |
+
+**second_order_effects_summary**: One sentence naming the highest-severity non-obvious consequence of this action and the recommended monitoring indicator.
 ```
 
 ## Expected Output
@@ -83,6 +95,7 @@ If any guardrail fails: **BLOCK THIS ACTION**. Provide alternative that passes.
 - Guardrail compliance table
 - Rollback plan
 - justification, decision_summary, and evidence fields (non-negotiable)
+- second_order_effects table and summary (required for Medium/High risk actions)
 
 ## Tips
 - If any guardrail fails, do not propose the action — propose the alternative that passes instead

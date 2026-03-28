@@ -127,8 +127,11 @@ Each tactic must include:
 - `execution_mode`: Sequential / Parallel / Phased
 - `risk_level`: Low / Medium / High
 - `actions`: List of constituent action IDs
+- `second_order_effects`: Top 2–3 downstream consequences this tactic is expected to trigger in adjacent objectives, systems, or stakeholder groups — and whether those effects are intended, acceptable, or require monitoring
 
 **All-or-nothing approval rule:** Tactics are approved as complete bundles. Approvers may not cherry-pick individual actions from a tactic.
+
+**Effects traceability rule:** If a tactic's `second_order_effects` touches an adjacent Objective in the hierarchy, that adjacency must be documented. Approvers must acknowledge the cross-objective impact before approving.
 
 ### Tier 4: Actions
 

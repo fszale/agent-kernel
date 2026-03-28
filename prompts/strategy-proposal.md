@@ -54,7 +54,15 @@ For each strategy you propose:
    - What would trigger a pivot or retirement of this strategy?
    - Conflict check: Does this conflict with any existing active strategies?
 
-8. **Strategy quality criteria** (self-verify before presenting):
+8. **Second-order effects of this strategy**:
+   For each strategy proposed, trace the downstream consequences of it succeeding across 3 axes:
+   - **Stakeholder shifts**: Who changes behavior, priorities, or expectations *because* this strategy works?
+   - **Adjacent objective impact**: Which other objectives in the governance hierarchy does this strategy affect — positively or negatively — once it is executing?
+   - **Perverse incentives**: What behavior does this strategy inadvertently reward or punish that was not intended?
+
+   Flag any second-order effect that: (a) conflicts with another active strategy, (b) creates an unmonitored dependency, or (c) would require re-prioritization of another objective if it materializes.
+
+9. **Strategy quality criteria** (self-verify before presenting):
    - [ ] Measurable: Has at least one quantifiable expected outcome with a timeframe
    - [ ] Bounded: Has a defined review window (default: 14 days)
    - [ ] Falsifiable: The thesis can be proved or disproved by measuring outcomes
@@ -68,4 +76,5 @@ If proposing a strategy update (conditions have changed), preserve the original 
 - 1–3 strategy proposals with all required fields
 - Self-verification checklist completed for each
 - Conflict check against existing strategies
+- Second-order effects documented for each strategy (stakeholder shifts, adjacent objective impact, perverse incentives)
 - Ranked recommendation (best strategy first, with rationale)

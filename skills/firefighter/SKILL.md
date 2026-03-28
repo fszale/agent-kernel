@@ -52,12 +52,20 @@ Design a fix that:
 - Prevents the same failure from recurring
 - Has a single accountable owner and target date
 
-### Step 5: PPT Impact Assessment
+### Step 5: PPT Impact Assessment + Second-Order Effects
 
 Before deploying the fix:
 - **People:** Who is affected by the fix? Any training needed?
 - **Process:** What workflow or process does this change?
 - **Technology:** What systems are modified? Risk of regression?
+
+Then apply one layer of second-order effects thinking to the fix itself — not the original incident:
+- **Stakeholders:** Does the fix change how any group behaves or what they expect? Could the fix create a new dependency or trust assumption?
+- **Adjacent Systems:** What systems does this fix touch that were not part of the original failure scope? Any integration points now behaving differently?
+- **Incentives:** Does the fix make the underlying failure mode less visible (masking vs. solving)? Does it reduce pressure to address a deeper systemic issue?
+- **Feedback Loops:** Does the fix introduce a temporary fix that relieves pressure but allows the root condition to persist and resurface?
+
+Flag any second-order effect of the fix that is higher severity than the original incident. If found, revisit Step 4 and redesign.
 
 ### Step 6: Document and Train
 
@@ -74,6 +82,6 @@ Firefighter report:
 2. Containment actions taken
 3. Root cause analysis (5 Whys chain)
 4. Permanent fix description + rollback plan
-5. PPT impact assessment
+5. PPT impact assessment + second-order effects of the fix
 6. Prevention measures added
 7. For next time: what monitoring or process would catch this earlier?

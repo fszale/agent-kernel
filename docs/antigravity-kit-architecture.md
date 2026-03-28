@@ -38,13 +38,13 @@ embedded diagrams"]
     subgraph L2["Layer 2: Reusable Knowledge
 skills + prompts + templates"]
         SK["skills/
-22 SKILL.md files
+25 SKILL.md files
 Agent behaviors"]
         PR["prompts/
-16 prompt templates
+18 prompt templates
 Structured workflows"]
         TM["templates/
-10 document templates
+13 document templates
 Fillable output formats"]
     end
 
@@ -326,9 +326,9 @@ CONTEXT.md                 # Root project map (agents read this first)
 AGENTS.md                  # Skill selection guide with decision tree
 PHILOSOPHY.md              # Full design principles (5 diagrams embedded)
 
-skills/                    # 22 SKILL.md files (reusable agent behaviors)
-prompts/                   # 16 prompt templates (structured AI workflows)
-templates/                 # 10 document/config templates (fillable output formats)
+skills/                    # 25 SKILL.md files (reusable agent behaviors)
+prompts/                   # 18 prompt templates (structured AI workflows)
+templates/                 # 13 document/config templates (fillable output formats)
 
 diagrams/                  # 9 .mmd Mermaid sources + registry.json
 scripts/                   # embed_diagrams.py + validate_contracts.py
