@@ -259,6 +259,8 @@ LLM_API_ENDPOINT=https://your-llm-endpoint.example/v1/chat/completions
 LLM_MODEL=your-model-name
 ```
 
+The workflow clients send a chat-style JSON payload and can read several common response formats, so the endpoint does not need to be limited to a single provider as long as it accepts `model` plus `messages`.
+
 ### Local Validation
 
 ```bash

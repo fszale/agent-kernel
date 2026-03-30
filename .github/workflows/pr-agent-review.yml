@@ -41,6 +41,53 @@ jobs:
             throw new Error("Missing required secrets: LLM_API_KEY, LLM_API_ENDPOINT, LLM_MODEL");
           }
 
+          function flattenText(value) {
+            if (typeof value === "string") {
+              return value.trim();
+            }
+            if (Array.isArray(value)) {
+              return value
+                .map((item) => {
+                  if (typeof item === "string") {
+                    return item;
+                  }
+                  if (typeof item?.text === "string") {
+                    return item.text;
+                  }
+                  if (typeof item?.content === "string") {
+                    return item.content;
+                  }
+                  return "";
+                })
+                .join("\n")
+                .trim();
+            }
+            return "";
+          }
+
+          function extractLLMText(parsed) {
+            const candidates = [
+              parsed?.choices?.[0]?.message?.content,
+              parsed?.choices?.[0]?.text,
+              parsed?.message?.content,
+              parsed?.output_text,
+              parsed?.content,
+              parsed?.candidates?.[0]?.content?.parts?.map((part) => part?.text ?? "").join("\n"),
+              parsed?.output
+                ?.flatMap((item) => item?.content ?? [])
+                ?.map((item) => item?.text ?? "")
+                ?.join("\n")
+            ];
+
+            for (const candidate of candidates) {
+              const text = flattenText(candidate);
+              if (text) {
+                return text;
+              }
+            }
+            return "";
+          }
+
           async function askLLM(promptText) {
             const response = await fetch(endpoint, {
               method: "POST",
@@ -65,10 +112,15 @@ jobs:
             if (!response.ok) {
               throw new Error(`LLM request failed: ${response.status} ${body}`);
             }
-            const parsed = JSON.parse(body);
-            const content = parsed?.choices?.[0]?.message?.content;
+            let parsed;
+            try {
+              parsed = JSON.parse(body);
+            } catch (error) {
+              throw new Error(`LLM response was not valid JSON: ${body.slice(0, 500)}`);
+            }
+            const content = extractLLMText(parsed);
             if (!content) {
-              throw new Error("LLM response missing choices[0].message.content");
+              throw new Error(`LLM response did not contain readable text. Body: ${body.slice(0, 1000)}`);
             }
             return content;
           }

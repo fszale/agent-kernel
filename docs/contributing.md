@@ -63,7 +63,7 @@ The following workflows require LLM configuration secrets:
 
 Set these in: **Repository Settings → Secrets and Variables → Actions → New repository secret**
 - `LLM_API_KEY` (required)
-- `LLM_API_ENDPOINT` (required, OpenAI-compatible `/chat/completions` endpoint)
+- `LLM_API_ENDPOINT` (required, an authenticated LLM HTTP endpoint that accepts chat-style `model` + `messages`; common response formats such as Chat Completions, Responses-style text output, Anthropic-style content blocks, and Gemini-style candidates are supported)
 - `LLM_MODEL` (required)
 
 ## Design Principles for Contributions
