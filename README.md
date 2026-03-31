@@ -62,6 +62,7 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | You want to…                             | Start here                                                                               |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------- |
 | **Evaluate an idea**                | `skills/idea-evaluator/SKILL.md` + `prompts/idea-evaluator.md`                       |
+| **Produce a review package**        | `skills/solution-review-package/SKILL.md` + `prompts/solution-review-package.md` + `templates/review-summary-template.md` |
 | **Plan a project**                  | `skills/30-60-90-planning/SKILL.md` + `templates/30-60-90-plan-template.md`          |
 | **Diagnose an issue**               | `skills/firefighter/SKILL.md`                                                          |
 | **Score AI use cases**              | `skills/ai-use-case-scoring/SKILL.md` + `prompts/bottleneck-identification.md`       |
@@ -73,6 +74,7 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | **Create a diagram**                | `skills/diagram-design/SKILL.md` + `.agents/workflows/add-diagram.md`                |
 | **Inject into a project**           | [docs/injection-guide.md](docs/injection-guide.md)                                          |
 | **Review another repo or artifact** | `.agents/workflows/review-project.md` + `prompts/architecture-review.md`                     |
+| **Review a proposed solution end-to-end** | `.agents/workflows/review-solution-package.md` + `prompts/solution-review-package.md` |
 | **Review a multi-agent system**     | `skills/agentic-system-review/SKILL.md` + `prompts/architecture-review.md`           |
 | **Plan R&D staged validation**      | `skills/staged-validation/SKILL.md` + `prompts/architecture-review.md`                     |
 | **Use this from Claude**            | [CLAUDE.md](CLAUDE.md)                                                                      |
@@ -92,9 +94,9 @@ agent-kernel/
 │   ├── workflows/              ← Step-by-step agent procedures
 │   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
-├── skills/                     ← 25 reusable agent skills
-├── prompts/                    ← 18 structured prompt templates
-├── templates/                  ← 13 reusable document templates
+├── skills/                     ← 26 reusable agent skills
+├── prompts/                    ← 19 structured prompt templates
+├── templates/                  ← 17 reusable document templates
 │   ├── downstream-agents-template.md
 │   ├── downstream-claude-template.md
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry
@@ -112,6 +114,17 @@ This kit synthesizes principles from four sources:
 - **[School of Titans](https://github.com/fszale/school-of-titans)** — First Principles, Systems over Goals, Lead with Empathy, Radical Candor, Knowledge Sprints
 - **[Operational Intelligence Lab](https://github.com/fszale/operational-intelligence-lab)** — Rate of Improvement, AI Employee Model, OI Operating Model, ROI Modeling
 - **Agentic OS** — Governance Hierarchy, HITL Design, Autonomy Ladder, Tactic Design, Experiment Design
+
+## Review Packages
+
+For advisory and project-review work, the kernel now supports a standard review package artifact set:
+
+- `review-summary.md`
+- `gap-analysis.md`
+- `implementation-plan.md`
+- `evaluation-plan.md`
+
+This is intended for product ideas, frameworks, and agentic implementations where teams need direct guidance and reusable artifacts rather than a one-off memo.
 
 ## Automated Improvement
 

@@ -26,9 +26,9 @@ agent-kernel/
 ├── .agents/
 │   ├── workflows/              ← Step-by-step agent procedures (slash commands)
 │   └── skills/                 ← Project-specific knowledge for agents
-├── skills/                     ← 25 injectable agent skills (SKILL.md per skill)
-├── prompts/                    ← 18 structured prompt templates
-├── templates/                  ← 13 reusable document templates
+├── skills/                     ← 26 injectable agent skills (SKILL.md per skill)
+├── prompts/                    ← 19 structured prompt templates
+├── templates/                  ← 17 reusable document templates
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry.json
 ├── scripts/                    ← embed_diagrams.py + validate_contracts.py automation
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
@@ -76,6 +76,7 @@ When working with an AI agent, use these to trigger workflow procedures:
 | `/add-template` | Creates a new document template |
 | `/add-diagram` | Creates a new Mermaid diagram with registry + embedding |
 | `/review-project` | Reviews a codebase or other artifact using the principal-operator lens |
+| `/review-solution-package` | Produces a reusable review package with summary, gap analysis, implementation plan, and evaluation plan |
 | `/run-consistency-check` | Audits all files for missing fields, broken cross-refs |
 | `/update-philosophy` | Extends PHILOSOPHY.md with a new principle |
 | `/inject-into-project` | Injects this kit into a downstream project |

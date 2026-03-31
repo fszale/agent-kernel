@@ -6,6 +6,8 @@ description: how to review a codebase or other project artifact using the agent-
 
 Use this workflow when reviewing a repository, pull request, design, process document, or other operational artifact.
 
+If the goal is to produce an outcome-driven package of reusable artifacts rather than a single review memo, use [`review-solution-package.md`](./review-solution-package.md).
+
 ## Step 1: Establish Context
 
 Define the review target:

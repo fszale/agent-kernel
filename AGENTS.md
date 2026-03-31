@@ -74,6 +74,7 @@ When approaching any task, run through this decision chain in order:
 | Task | Skill | Prompt | Template |
 |---|---|---|---|
 | Evaluate a new idea | `idea-evaluator` | `idea-evaluator.md` | `idea-evaluator-scorecard.md` |
+| Review a proposed solution or existing implementation | `solution-review-package` | `solution-review-package.md` | `review-summary-template.md`, `gap-analysis-template.md`, `implementation-plan-template.md`, `evaluation-plan-template.md` |
 | Plan a project or initiative | `30-60-90-planning` | `30-60-90-plan.md` | `30-60-90-plan-template.md` |
 | Assess a decision's impact | — | `ppt-assessment.md` | `ppt-impact-assessment.md` |
 | Run a retrospective | — | — | `project-retrospective.md` |
@@ -95,6 +96,7 @@ When approaching any task, run through this decision chain in order:
 |---|---|---|---|
 | Design a system architecture | — | `moonshot-architecture.md` | — |
 | Review another repo or artifact | — | `architecture-review.md` | — |
+| Produce an outcome-driven review package | `solution-review-package` | `solution-review-package.md` | `review-summary-template.md`, `gap-analysis-template.md`, `implementation-plan-template.md`, `evaluation-plan-template.md` |
 | Build config-driven system | `configuration-driven-design` | — | `agent-config-template.yaml` |
 | Define an agent spec | `governance-hierarchy-design` | — | `agent-spec-template.yaml` |
 | Design action bundles | `tactic-design` | `tactic-assembly.md` | — |
