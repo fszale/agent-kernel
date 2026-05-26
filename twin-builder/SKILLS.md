@@ -1,6 +1,6 @@
 # Agent Kernel Skill Catalog
 
-The 22 skills below are the canonical catalog the Twin Builder maps interview material against. Skills are intentionally broad — each one is a folder of patterns, prompts, and references that a deployed twin loads as it works.
+The 23 skills below are the canonical catalog the Twin Builder maps interview material against. Skills are intentionally broad — each one is a folder of patterns, prompts, and references that a deployed twin loads as it works.
 
 | Skill | Purpose |
 | --- | --- |
@@ -19,6 +19,7 @@ The 22 skills below are the canonical catalog the Twin Builder maps interview ma
 | `coaching-and-feedback` | 1:1s, growth conversations, performance feedback |
 | `writing-and-editing` | Drafting docs, memos, posts in the principal's voice |
 | `research-and-synthesis` | Pulling together findings, distilling into briefs |
+| `conative-operating-system` | Translating Kolbe-style action profiles into twin behavior, tools, guardrails, and evaluation tests |
 | `meeting-facilitation` | Designing and running productive meetings |
 | `data-interpretation` | Reading dashboards, asking the right second question |
 | `guardrails-and-ethics` | What never to do; what always to escalate |

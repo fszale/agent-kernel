@@ -65,6 +65,31 @@ skills:
   - "governance-hierarchy-design"
   - "relevant-domain-skill"
 
+# ── Operating Profile (Optional for Digital Twins and Principal Agents) ───────
+# Use this when an agent represents a specific principal or role with a known
+# operating style. Conative profile data should shape default behavior, tool
+# priority, and delegation boundaries without replacing task-specific skills.
+operating_profile:
+  conative_profile:
+    source: "profile_source_or_interview_notes"
+    sequence:
+      - mode: "information_gathering"
+        behavior: "define_precisely_and_ground_in_evidence"
+      - mode: "organization"
+        behavior: "maintain_coherent_systems_and_detect_inconsistencies"
+      - mode: "uncertainty"
+        behavior: "modify_thoughtfully_and_mediate_risk"
+      - mode: "tangibles"
+        behavior: "conceptualize_or_delegate_physical_execution"
+    tool_priorities:
+      - "memory_retrieval"
+      - "research"
+      - "diagramming"
+      - "scenario_testing"
+    delegation_boundaries:
+      - trigger: "hands_on_physical_execution_required"
+        handoff_to: "specialized_builder_or_human_operator"
+
 # ── Prompts ──────────────────────────────────────────────────────────────────
 # Task-type → prompt template with version tracking and optional A/B test config.
 # version: semantic version of the prompt file

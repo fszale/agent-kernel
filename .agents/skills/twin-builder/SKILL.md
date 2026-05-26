@@ -1,6 +1,6 @@
 ---
 name: twin-builder
-description: Run a structured five-stage interview with a principal and synthesise a four-file `agent-kernel` twin package (agent-spec.yaml, identity.md, guardrails.md, curated skills). Use when a new principal needs a twin from scratch, when an existing twin needs a re-interview to refresh identity or guardrails, or when a partner wants to demonstrate the kernel methodology end-to-end.
+description: Run a structured five-stage interview with a principal and synthesise a four-file `agent-kernel` twin package (agent-spec.yaml, identity.md, guardrails.md, curated skills, and optional conative profile). Use when a new principal needs a twin from scratch, when an existing twin needs a re-interview to refresh identity or guardrails, or when a partner wants to demonstrate the kernel methodology end-to-end.
 ---
 
 # twin-builder
@@ -28,6 +28,8 @@ The interviewer moves through these in order, but adaptively. Two-to-four high-s
 4. **Working style and communication preferences** — tone, brevity, formality, what they hate, what they love.
 5. **Guardrails and operating principles** — what their twin must never do without checking in, and what it should always escalate.
 
+If the principal provides a Kolbe-style or similar conative profile, use it as source evidence for stages 3-5. Extract the action sequence, tool implications, do / don't rules, delegation boundaries, and evaluation scenarios. Keep conation separate from personality, expertise, and values.
+
 The interviewer ends with `INTERVIEW_COMPLETE` on its own line when it has enough material across all five stages.
 
 ## Output contract
@@ -42,16 +44,17 @@ A successful run produces a strict-JSON envelope from the synthesis pass:
   "agentSpecYaml": "<full file contents>",
   "identityMd": "<full file contents>",
   "guardrailsMd": "<full file contents>",
+  "conativeProfile": "<optional structured summary or null>",
   "skills": [{ "name": "skill-name", "rationale": "one sentence" }]
 }
 ```
 
 Validation rules enforced before the package is offered for download:
 
-- `agentSpecYaml` must begin with `twin-id:` and contain `name:`, `owner:`, `description:`, `decision-style:`, `communication-style:`, `skills:`, `guardrails:`.
+- `agentSpecYaml` must begin with `twin-id:` and contain `name:`, `owner:`, `description:`, `decision-style:`, `communication-style:`, `skills:`, `guardrails:`. When conative evidence is provided, include `conative-profile:`.
 - `identityMd` must open with `# Identity`.
 - `guardrailsMd` must open with `# Guardrails`.
-- `skills` must contain 4 to 8 entries, all drawn from the canonical 22-skill catalog (see [`SKILLS.md`](../../twin-builder/SKILLS.md)).
+- `skills` must contain 4 to 8 entries, all drawn from the canonical 23-skill catalog (see [`SKILLS.md`](../../twin-builder/SKILLS.md)).
 
 ## Per-section regeneration
 
@@ -86,4 +89,5 @@ agent-factory serve your-twin-id
 - Live wizard: `<DEPLOY_URL>/twin-portal/twin-builder`
 - Source mirror: [`twin-builder/`](../../twin-builder)
 - Methodology notes: [`twin-builder/METHODOLOGY.md`](../../twin-builder/METHODOLOGY.md)
+- Filip conative reference: [`FILIP-KOLBE-CORE.md`](../../twin-builder/FILIP-KOLBE-CORE.md)
 - Reference twin: <https://github.com/fszale/digital-twin-filip>

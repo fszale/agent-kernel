@@ -68,6 +68,7 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | **Score AI use cases**              | `skills/ai-use-case-scoring/SKILL.md` + `prompts/bottleneck-identification.md`       |
 | **Design an autonomous system**     | `skills/governance-hierarchy-design/SKILL.md` + `templates/agent-spec-template.yaml` |
 | **Design a domain agent**           | `skills/domain-agent-design/SKILL.md` + `templates/agent-spec-domain-template.yaml`  |
+| **Tune a digital twin from a conative profile** | `skills/conative-profile-design/SKILL.md` + `prompts/conative-profile-design.md` + `templates/conative-operating-system-template.md` |
 | **Design a multi-agent factory**    | `skills/agent-factory-design/SKILL.md` + `prompts/agent-factory-design.md`           |
 | **Measure AI impact**               | `skills/rate-of-improvement/SKILL.md` + `prompts/rate-of-improvement-analysis.md`    |
 | **Map downstream consequences**     | `skills/second-order-effects/SKILL.md` + `prompts/second-order-effects-analysis.md`  |
@@ -94,9 +95,9 @@ agent-kernel/
 │   ├── workflows/              ← Step-by-step agent procedures
 │   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
-├── skills/                     ← 26 reusable agent skills
-├── prompts/                    ← 19 structured prompt templates
-├── templates/                  ← 17 reusable document templates
+├── skills/                     ← 27 reusable agent skills
+├── prompts/                    ← 20 structured prompt templates
+├── templates/                  ← 18 reusable document templates
 │   ├── downstream-agents-template.md
 │   ├── downstream-claude-template.md
 ├── diagrams/                   ← 9 Mermaid .mmd sources + registry

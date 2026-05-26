@@ -12,7 +12,7 @@ agent-kernel/
 ├── CLAUDE.md                   ← Claude-oriented entry point
 ├── PHILOSOPHY.md               ← All design principles reference
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
-├── skills/                     ← 25 agent skills
+├── skills/                     ← 27 agent skills
 │   ├── idea-evaluator/SKILL.md
 │   ├── 30-60-90-planning/SKILL.md
 │   ├── first-principles/SKILL.md
@@ -27,6 +27,8 @@ agent-kernel/
 │   ├── business-data-analysis/SKILL.md
 │   ├── outcome-probability/SKILL.md
 │   ├── rate-of-improvement/SKILL.md
+│   ├── solution-review-package/SKILL.md
+│   ├── conative-profile-design/SKILL.md
 │   ├── governance-hierarchy-design/SKILL.md
 │   ├── hitl-and-guardrails/SKILL.md
 │   ├── autonomy-ladder/SKILL.md
@@ -38,11 +40,12 @@ agent-kernel/
 │   ├── agent-factory-design/SKILL.md
 │   ├── agentic-system-review/SKILL.md
 │   └── staged-validation/SKILL.md
-├── prompts/                    ← 18 prompt templates
+├── prompts/                    ← 20 prompt templates
 │   ├── idea-evaluator.md
 │   ├── 30-60-90-plan.md
 │   ├── ppt-assessment.md
 │   ├── code-review.md
+│   ├── architecture-review.md
 │   ├── moonshot-architecture.md
 │   ├── future-trends-analysis.md
 │   ├── second-order-effects-analysis.md
@@ -51,12 +54,14 @@ agent-kernel/
 │   ├── bottleneck-identification.md
 │   ├── workflow-design.md
 │   ├── rate-of-improvement-analysis.md
+│   ├── solution-review-package.md
+│   ├── conative-profile-design.md
 │   ├── strategy-proposal.md
 │   ├── tactic-assembly.md
 │   ├── action-proposal.md
 │   ├── domain-agent-spec.md
 │   └── agent-factory-design.md
-├── templates/                  ← 13 document templates
+├── templates/                  ← 18 document templates
 │   ├── downstream-agents-template.md
 │   ├── downstream-claude-template.md
 │   ├── idea-evaluator-scorecard.md
@@ -66,6 +71,11 @@ agent-kernel/
 │   ├── second-order-effects-map.md
 │   ├── roi-report-template.md
 │   ├── weekly-progress-report.md
+│   ├── review-summary-template.md
+│   ├── gap-analysis-template.md
+│   ├── implementation-plan-template.md
+│   ├── evaluation-plan-template.md
+│   ├── conative-operating-system-template.md
 │   ├── business-intake-questionnaire.md
 │   ├── agent-config-template.yaml
 │   ├── agent-spec-template.yaml
@@ -98,12 +108,15 @@ agent-kernel/
 │   │   ├── add-prompt.md
 │   │   ├── add-template.md
 │   │   ├── add-diagram.md
+│   │   ├── cowork-task.md
+│   │   ├── review-solution-package.md
 │   │   ├── run-consistency-check.md
 │   │   ├── update-philosophy.md
 │   │   └── inject-into-project.md
 │   └── skills/
 │       ├── project-navigation.md    ← This file
-│       └── schema-conventions.md
+│       ├── schema-conventions.md
+│       └── twin-builder/SKILL.md
 └── .github/workflows/
     ├── skill-consistency-check.yml
     ├── prompt-quality-review.yml
@@ -126,6 +139,7 @@ agent-kernel/
 | Map downstream consequences | `skills/second-order-effects/` + `prompts/second-order-effects-analysis.md` |
 | Design a domain agent | `skills/domain-agent-design/` + `templates/agent-spec-domain-template.yaml` |
 | Design a multi-agent factory | `skills/agent-factory-design/` + `prompts/agent-factory-design.md` |
+| Tune a digital twin from a conative profile | `skills/conative-profile-design/` + `prompts/conative-profile-design.md` + `templates/conative-operating-system-template.md` |
 | Design an agent system | `skills/governance-hierarchy-design/` + `templates/agent-spec-template.yaml` |
 | Create a Mermaid diagram | `skills/diagram-design/` + `.agents/workflows/add-diagram.md` |
 | Review another repo or artifact | `.agents/workflows/review-project.md` + `prompts/code-review.md` |

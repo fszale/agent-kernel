@@ -33,6 +33,7 @@ Run through this chain in order before acting:
 | Plan a project or roadmap | `skills/30-60-90-planning/SKILL.md` + `templates/30-60-90-plan-template.md` |
 | Diagnose a failure or constraint | `skills/firefighter/SKILL.md` or `skills/first-principles/SKILL.md` |
 | Design an agent or multi-agent system | `skills/domain-agent-design/SKILL.md` or `skills/agent-factory-design/SKILL.md` |
+| Tune a digital twin from a conative profile | `skills/conative-profile-design/SKILL.md` + `prompts/conative-profile-design.md` |
 | Review another repo or artifact | `.agents/workflows/review-project.md` + `prompts/architecture-review.md` |
 | Review a multi-agent system | `skills/agentic-system-review/SKILL.md` + `prompts/architecture-review.md` |
 | Plan R&D staged validation | `skills/staged-validation/SKILL.md` + `prompts/architecture-review.md` |

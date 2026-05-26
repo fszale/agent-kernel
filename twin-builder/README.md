@@ -1,6 +1,6 @@
 # Twin Builder
 
-The Twin Builder is the SolidCage `agent-kernel` companion that turns a 10-minute conversation with a principal into a working twin package: an `agent-spec.yaml`, `identity.md`, `guardrails.md`, and a curated selection from the kernel skill catalog. The output is shaped for the [`agent-factory`](https://github.com/fszale/agent-factory) installer so that twins built here can be deployed without manual translation.
+The Twin Builder is the SolidCage `agent-kernel` companion that turns a 10-minute conversation with a principal into a working twin package: an `agent-spec.yaml`, `identity.md`, `guardrails.md`, and a curated selection from the kernel skill catalog. When a principal has a conative profile, the package also captures a conative operating system so the twin acts according to the principal's natural action sequence. The output is shaped for the [`agent-factory`](https://github.com/fszale/agent-factory) installer so that twins built here can be deployed without manual translation.
 
 The reference twin built around Filip Szalewicz (Head of Engineering, AI transformation) lives in [`digital-twin-filip`](https://github.com/fszale/digital-twin-filip). The Twin Builder uses that twin's structure as its target shape.
 
@@ -14,13 +14,15 @@ A live AI interviewer moves the principal through five topic areas, in order, bu
 4. **Working style and communication preferences** — tone, brevity, what they hate, what they love.
 5. **Guardrails and operating principles** — what the twin must never do without checking in, and what it should always escalate.
 
+If the principal provides a Kolbe-style result or similar conative profile, the interviewer treats it as a source artifact across stages 3-5: action sequence, tool preferences, delegation boundaries, and evaluation scenarios.
+
 The interviewer asks two-to-four high-signal questions per area, follows up only when a thin answer needs depth, and emits a sentinel marker (`INTERVIEW_COMPLETE`) when it has enough material across all five areas.
 
 ## What gets produced
 
 A synthesis pass converts the transcript into a strict-JSON envelope which the client renders as four downloadable files:
 
-- `agent-spec.yaml` — machine-readable twin definition (`twin-id`, `name`, `owner`, `description`, `decision-style`, `communication-style`, `skills`, `guardrails`)
+- `agent-spec.yaml` — machine-readable twin definition (`twin-id`, `name`, `owner`, `description`, `decision-style`, `communication-style`, `conative-profile`, `skills`, `guardrails`)
 - `identity.md` — 200-400 word first-person narrative
 - `guardrails.md` — 6-10 explicit rules
 - `README.md` — a short deploy guide that ships inside the ZIP
@@ -31,7 +33,7 @@ Each section is editable in the preview, and each section can be regenerated ind
 
 The twin builder maps interview material against the agent-kernel skill catalog. Skills selected by the synthesiser are recorded in `agent-spec.yaml` as a curated subset (typically 4-8 skills), each with a one-sentence rationale.
 
-See [`SKILLS.md`](./SKILLS.md) for the full 22-skill catalog.
+See [`SKILLS.md`](./SKILLS.md) for the full 23-skill catalog. For Filip's reference profile, see [`FILIP-KOLBE-CORE.md`](./FILIP-KOLBE-CORE.md).
 
 ## Deploying
 

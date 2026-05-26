@@ -6,7 +6,7 @@
 
 ## Why This Exists
 
-The agent-kernel contains 22 skills, 16 prompts, 10 templates, 9 diagrams, and 6 GitHub Actions workflows. Without a meta-layer, every time an AI agent starts a session it has to rediscover:
+The agent-kernel contains 27 skills, 20 prompts, 18 templates, 9 diagrams, and 6 GitHub Actions workflows. Without a meta-layer, every time an AI agent starts a session it has to rediscover:
 
 - Where things are and how they relate
 - What naming conventions to follow (kebab-case directories, snake_case YAML keys)
@@ -38,13 +38,13 @@ embedded diagrams"]
     subgraph L2["Layer 2: Reusable Knowledge
 skills + prompts + templates"]
         SK["skills/
-22 SKILL.md files
+27 SKILL.md files
 Agent behaviors"]
         PR["prompts/
-16 prompt templates
+20 prompt templates
 Structured workflows"]
         TM["templates/
-10 document templates
+18 document templates
 Fillable output formats"]
     end
 
@@ -61,9 +61,9 @@ Auto-embed into docs"]
     subgraph L4["Layer 4: Agent Procedures
 repeatable workflows"]
         WF[".agents/workflows/
-7 step-by-step procedures"]
+10 step-by-step procedures"]
         ASK[".agents/skills/
-2 project knowledge docs"]
+3 project knowledge docs"]
     end
 
     subgraph L5["Layer 5: Automated Quality
@@ -134,9 +134,9 @@ Session start → Read CONTEXT.md → Read AGENTS.md → Select skill → Read S
 
 ## Layer 2: Reusable Knowledge
 
-The core content library — 22 skills, 16 prompts, and 10 templates organized by domain.
+The core content library — 27 skills, 20 prompts, and 18 templates organized by domain.
 
-### Skills (22)
+### Skills (27)
 
 Each skill lives at `skills/{skill-name}/SKILL.md` with required frontmatter (`name`, `description`, `when-to-use`, `principles`) and `## Agent Instructions` + `## Output Format` sections.
 
@@ -146,13 +146,13 @@ Each skill lives at `skills/{skill-name}/SKILL.md` with required frontmatter (`n
 | School of Titans (3) | lead-with-empathy, radical-candor, knowledge-sprints |
 | OI Lab (4) | ai-use-case-scoring, business-data-analysis, outcome-probability, rate-of-improvement |
 | Agentic OS (5) | governance-hierarchy-design, hitl-and-guardrails, autonomy-ladder, tactic-design, confidence-and-experiment |
-| Kit Infrastructure (3) | diagram-design, domain-agent-design, agent-factory-design |
+| Kit Infrastructure (4) | diagram-design, domain-agent-design, agent-factory-design, conative-profile-design |
 
-### Prompts (16)
+### Prompts (20)
 
 Each prompt lives at `prompts/{purpose}.md` with required sections: `## Purpose`, `## When to Use`, `## Variables`, `## Prompt`, `## Expected Output`.
 
-### Templates (10)
+### Templates (18)
 
 Fillable document and configuration templates at `templates/{purpose}.md` or `templates/{purpose}.yaml`.
 
@@ -204,7 +204,7 @@ See [docs/diagrams.md](diagrams.md) for the full diagram system reference.
 
 Step-by-step workflows that agents follow when triggered via slash commands. These enforce consistent patterns for every common operation.
 
-### `.agents/workflows/` — 7 Procedures
+### `.agents/workflows/` — 10 Procedures
 
 | Slash Command | Workflow File | When to Use |
 |---|---|---|
@@ -212,18 +212,22 @@ Step-by-step workflows that agents follow when triggered via slash commands. The
 | `/add-prompt` | [add-prompt.md](../.agents/workflows/add-prompt.md) | Creating a new prompt with variables and expected output |
 | `/add-template` | [add-template.md](../.agents/workflows/add-template.md) | Creating a new document or YAML template |
 | `/add-diagram` | [add-diagram.md](../.agents/workflows/add-diagram.md) | Creating a Mermaid diagram, registering it, adding embed markers |
+| `/review-project` | [review-project.md](../.agents/workflows/review-project.md) | Reviewing a codebase, document, or system artifact |
+| `/review-solution-package` | [review-solution-package.md](../.agents/workflows/review-solution-package.md) | Producing a reusable review package with gap, implementation, and evaluation artifacts |
+| `/cowork-task` | [cowork-task.md](../.agents/workflows/cowork-task.md) | Coordinating task execution with a human collaborator |
 | `/update-philosophy` | [update-philosophy.md](../.agents/workflows/update-philosophy.md) | Adding or extending a design principle in PHILOSOPHY.md |
 | `/run-consistency-check` | [run-consistency-check.md](../.agents/workflows/run-consistency-check.md) | Full audit for stale refs, missing fields, broken cross-references |
 | `/inject-into-project` | [inject-into-project.md](../.agents/workflows/inject-into-project.md) | Injecting this kit into a downstream project |
 
 **How to use:** Tell your AI agent `/add-skill` or `/run-consistency-check`. The agent reads the workflow file and follows every step.
 
-### `.agents/skills/` — 2 Project Knowledge Docs
+### `.agents/skills/` — 3 Project Knowledge Docs
 
 | Skill | What It Teaches |
 |---|---|
 | [project-navigation.md](../.agents/skills/project-navigation.md) | Where to find skills, prompts, templates, diagrams, workflows, docs |
 | [schema-conventions.md](../.agents/skills/schema-conventions.md) | SKILL.md frontmatter rules, YAML schema conventions, governance fields |
+| [twin-builder/SKILL.md](../.agents/skills/twin-builder/SKILL.md) | Twin-builder methodology, output contract, and conative profile handling |
 
 ---
 
@@ -281,7 +285,7 @@ make embed-diagrams       # Embed all diagrams into docs
 | Agent spends 10+ min exploring the project each session | Agent reads `CONTEXT.md` in seconds, knows where everything is |
 | Agent doesn't know which skill applies to the task | `AGENTS.md` has a decision-tree diagram and lookup tables |
 | Agent invents its own naming conventions | `CONTEXT.md` enforces kebab-case, snake_case, and frontmatter rules |
-| No standard process for adding skills, prompts, diagrams | 7 slash-command workflows enforce consistent patterns every time |
+| No standard process for adding skills, prompts, diagrams | 10 slash-command workflows enforce consistent patterns every time |
 | Diagrams go stale as docs are updated | Embed system keeps diagram sources and inline copies in sync |
 
 ### For CI/CD
@@ -328,16 +332,16 @@ CONTEXT.md                 # Root project map (agents read this first)
 AGENTS.md                  # Skill selection guide with decision tree
 PHILOSOPHY.md              # Full design principles (5 diagrams embedded)
 
-skills/                    # 25 SKILL.md files (reusable agent behaviors)
-prompts/                   # 18 prompt templates (structured AI workflows)
-templates/                 # 13 document/config templates (fillable output formats)
+skills/                    # 27 SKILL.md files (reusable agent behaviors)
+prompts/                   # 20 prompt templates (structured AI workflows)
+templates/                 # 18 document/config templates (fillable output formats)
 
 diagrams/                  # 9 .mmd Mermaid sources + registry.json
 scripts/                   # embed_diagrams.py + validate_contracts.py
 Makefile                   # validate-mermaid, embed-diagrams, consistency-check
 
-.agents/workflows/         # 7 step-by-step procedures (slash commands)
-.agents/skills/            # 2 project knowledge documents
+.agents/workflows/         # 10 step-by-step procedures (slash commands)
+.agents/skills/            # 3 project knowledge documents
 
 .github/workflows/         # 6 GitHub Actions (3 validation + 3 AI-powered)
 

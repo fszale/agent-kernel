@@ -18,6 +18,19 @@ Stages are deliberately ordered to ride down a difficulty curve:
 
 Stage progression is approximated client-side from the count of user turns, used only for the progress bar — the model controls the actual pacing.
 
+## Conative profile input
+
+When a principal has a Kolbe-style conative profile, treat it as source evidence for how the twin should act by default. It should not replace the interview; it should sharpen stages 3-5 by making the principal's natural action sequence explicit.
+
+The synthesis pass should translate the profile into:
+
+- a compact `conative-profile` block in `agent-spec.yaml`
+- operating-sequence language for `identity.md`
+- do / don't rules and delegation triggers for `guardrails.md`
+- evaluation scenarios that catch inauthentic output under pressure
+
+Conative evidence should stay distinct from cognitive expertise and affective preference. The profile says how the principal naturally takes action, not what they know or what they emotionally prefer.
+
 ## Sentinel marker for completion
 
 The interviewer ends with `INTERVIEW_COMPLETE` on its own line when it has enough material. This gives the client a clean handoff signal without parsing model intent.
@@ -40,11 +53,13 @@ Each of the three text sections has its own regenerate endpoint. The regenerator
 
 The transcript and the synthesised package live in `localStorage` under namespaced keys. The chat endpoint and the synthesis endpoint both receive the transcript as the model context for each call, but the server is stateless: it does not persist the conversation, the conversation id, or any package material. No transcript content is logged.
 
-## Why these 22 skills
+## Why these 23 skills
 
 The catalog is intentionally biased toward technology-leadership twins — the audience SolidCage actually serves. It is broad enough to fit non-CTO principals (advisors, founders, operators) but narrow enough that the synthesiser can pick a coherent 4-8 skills without thrashing.
 
 The catalog is not the final word on a twin. After deployment, principals add bespoke skills and remove ones that don't earn their keep.
+
+The `conative-operating-system` catalog entry is selected when the principal provides Kolbe-style evidence or when the interview strongly surfaces a repeatable action pattern. It should produce prompt, tool, delegation, and evaluation changes, not just a personality summary.
 
 ## Output shape
 

@@ -37,6 +37,8 @@ graph TB
 
     Q4 -->|"Design agent"| S_DA["domain-agent-design
 + templates/agent-spec-template.yaml"]
+    Q4 -->|"Tune digital twin"| S_CON["conative-profile-design
++ prompts/conative-profile-design.md"]
     Q4 -->|"Multi-agent system"| S_FAC["agent-factory-design"]
     Q4 -->|"Review agent system"| S_ASR["agentic-system-review"]
     Q4 -->|"Stage R&D validation"| S_SV["staged-validation"]
@@ -97,6 +99,7 @@ When approaching any task, run through this decision chain in order:
 | Design a system architecture | — | `moonshot-architecture.md` | — |
 | Review another repo or artifact | — | `architecture-review.md` | — |
 | Produce an outcome-driven review package | `solution-review-package` | `solution-review-package.md` | `review-summary-template.md`, `gap-analysis-template.md`, `implementation-plan-template.md`, `evaluation-plan-template.md` |
+| Design or tune a digital twin from a conative profile | `conative-profile-design` | `conative-profile-design.md` | `conative-operating-system-template.md` |
 | Build config-driven system | `configuration-driven-design` | — | `agent-config-template.yaml` |
 | Define an agent spec | `governance-hierarchy-design` | — | `agent-spec-template.yaml` |
 | Design action bundles | `tactic-design` | `tactic-assembly.md` | — |

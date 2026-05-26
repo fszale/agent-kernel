@@ -18,21 +18,23 @@ validate-mermaid:
 	@echo "🔍 Validating Mermaid diagrams..."
 	@FAILED=0; \
 	for f in diagrams/*.mmd; do \
+		OUT="/tmp/agent-kernel-mermaid-$$(basename "$$f" .mmd).svg"; \
 		if command -v mmdc >/dev/null 2>&1; then \
-			if ! mmdc -i "$$f" -o /dev/null 2>/dev/null; then \
+			if ! mmdc -i "$$f" -o "$$OUT" 2>/dev/null; then \
 				echo "  ❌ Syntax error in: $$f"; \
 				FAILED=1; \
 			else \
 				echo "  ✅ Valid: $$f"; \
 			fi; \
 		else \
-			if ! npx --yes @mermaid-js/mermaid-cli mmdc -i "$$f" -o /dev/null 2>/dev/null; then \
+			if ! npx --yes @mermaid-js/mermaid-cli -i "$$f" -o "$$OUT" 2>/dev/null; then \
 				echo "  ❌ Syntax error in: $$f"; \
 				FAILED=1; \
 			else \
 				echo "  ✅ Valid: $$f"; \
 			fi; \
 		fi; \
+		rm -f "$$OUT"; \
 	done; \
 	if [ $$FAILED -ne 0 ]; then echo "❌ Mermaid validation FAILED"; exit 1; fi; \
 	echo "✅ All Mermaid diagrams valid."
