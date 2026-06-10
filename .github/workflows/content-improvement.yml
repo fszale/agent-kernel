@@ -168,8 +168,10 @@ jobs:
           const result = await askLLM(promptText);
           console.log(result);
           EOF
+          set +e
           node gap-analysis.mjs > gap_output.txt 2>&1
           NODE_EXIT=$?
+          set -e
           cat gap_output.txt
           exit $NODE_EXIT
 
