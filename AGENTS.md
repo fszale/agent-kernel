@@ -19,6 +19,8 @@ graph TB
 
     Q1 -->|"New idea/initiative"| S_IDE["idea-evaluator
 + prompts/idea-evaluator.md"]
+    Q1 -->|"Stress-test idea"| S_RED["red-team-idea-validation
++ prompts/red-team-idea-validation.md"]
     Q1 -->|"Technology decision"| S_PPT["PPT Assessment
 + prompts/ppt-assessment.md"]
     Q1 -->|"Score AI use cases"| S_AI["ai-use-case-scoring
@@ -76,6 +78,7 @@ When approaching any task, run through this decision chain in order:
 | Task | Skill | Prompt | Template |
 |---|---|---|---|
 | Evaluate a new idea | `idea-evaluator` | `idea-evaluator.md` | `idea-evaluator-scorecard.md` |
+| Stress-test an idea before commitment | `red-team-idea-validation` | `red-team-idea-validation.md` | — |
 | Review a proposed solution or existing implementation | `solution-review-package` | `solution-review-package.md` | `review-summary-template.md`, `gap-analysis-template.md`, `implementation-plan-template.md`, `evaluation-plan-template.md` |
 | Plan a project or initiative | `30-60-90-planning` | `30-60-90-plan.md` | `30-60-90-plan-template.md` |
 | Assess a decision's impact | — | `ppt-assessment.md` | `ppt-impact-assessment.md` |

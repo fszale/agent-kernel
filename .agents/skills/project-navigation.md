@@ -12,8 +12,9 @@ agent-kernel/
 ├── CLAUDE.md                   ← Claude-oriented entry point
 ├── PHILOSOPHY.md               ← All design principles reference
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
-├── skills/                     ← 27 agent skills
+├── skills/                     ← 28 agent skills
 │   ├── idea-evaluator/SKILL.md
+│   ├── red-team-idea-validation/SKILL.md
 │   ├── 30-60-90-planning/SKILL.md
 │   ├── first-principles/SKILL.md
 │   ├── firefighter/SKILL.md
@@ -40,8 +41,9 @@ agent-kernel/
 │   ├── agent-factory-design/SKILL.md
 │   ├── agentic-system-review/SKILL.md
 │   └── staged-validation/SKILL.md
-├── prompts/                    ← 20 prompt templates
+├── prompts/                    ← 21 prompt templates
 │   ├── idea-evaluator.md
+│   ├── red-team-idea-validation.md
 │   ├── 30-60-90-plan.md
 │   ├── ppt-assessment.md
 │   ├── code-review.md
@@ -131,6 +133,7 @@ agent-kernel/
 | I need to... | Go to... |
 |---|---|
 | Evaluate something | `skills/idea-evaluator/` + `prompts/idea-evaluator.md` |
+| Stress-test an idea before commitment | `skills/red-team-idea-validation/` + `prompts/red-team-idea-validation.md` |
 | Plan something | `skills/30-60-90-planning/` + `templates/30-60-90-plan-template.md` |
 | Diagnose a problem | `skills/firefighter/` or `skills/first-principles/` |
 | Score AI opportunities | `skills/ai-use-case-scoring/` + `prompts/bottleneck-identification.md` |

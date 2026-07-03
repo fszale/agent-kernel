@@ -8,6 +8,7 @@ graph TB
     START --> Q5{"Leading or coaching?"}
 
     Q1 -->|"New idea/initiative"| S_IDE["idea-evaluator\n+ prompts/idea-evaluator.md"]
+    Q1 -->|"Stress-test idea"| S_RED["red-team-idea-validation\n+ prompts/red-team-idea-validation.md"]
     Q1 -->|"Technology decision"| S_PPT["PPT Assessment\n+ prompts/ppt-assessment.md"]
     Q1 -->|"Score AI use cases"| S_AI["ai-use-case-scoring\n+ prompts/bottleneck-identification.md"]
 

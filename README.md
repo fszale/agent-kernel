@@ -62,6 +62,7 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | You want to…                             | Start here                                                                               |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------- |
 | **Evaluate an idea**                | `skills/idea-evaluator/SKILL.md` + `prompts/idea-evaluator.md`                       |
+| **Stress-test an idea before commitment** | `skills/red-team-idea-validation/SKILL.md` + `prompts/red-team-idea-validation.md` |
 | **Produce a review package**        | `skills/solution-review-package/SKILL.md` + `prompts/solution-review-package.md` + `templates/review-summary-template.md` |
 | **Plan a project**                  | `skills/30-60-90-planning/SKILL.md` + `templates/30-60-90-plan-template.md`          |
 | **Diagnose an issue**               | `skills/firefighter/SKILL.md`                                                          |
@@ -95,8 +96,8 @@ agent-kernel/
 │   ├── workflows/              ← Step-by-step agent procedures
 │   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
-├── skills/                     ← 27 reusable agent skills
-├── prompts/                    ← 20 structured prompt templates
+├── skills/                     ← 28 reusable agent skills
+├── prompts/                    ← 21 structured prompt templates
 ├── templates/                  ← 18 reusable document templates
 │   ├── downstream-agents-template.md
 │   ├── downstream-claude-template.md

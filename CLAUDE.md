@@ -30,6 +30,7 @@ Run through this chain in order before acting:
 | If you need to... | Use... |
 |---|---|
 | Evaluate an idea or initiative | `skills/idea-evaluator/SKILL.md` + `prompts/idea-evaluator.md` |
+| Adversarially stress-test an idea before commitment | `skills/red-team-idea-validation/SKILL.md` + `prompts/red-team-idea-validation.md` |
 | Plan a project or roadmap | `skills/30-60-90-planning/SKILL.md` + `templates/30-60-90-plan-template.md` |
 | Diagnose a failure or constraint | `skills/firefighter/SKILL.md` or `skills/first-principles/SKILL.md` |
 | Design an agent or multi-agent system | `skills/domain-agent-design/SKILL.md` or `skills/agent-factory-design/SKILL.md` |
