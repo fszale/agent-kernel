@@ -22,14 +22,9 @@ This is also the seam where the self-hosted question lives — see [`data-sovere
 
 ## Runtime interoperability via MCP
 
-The contract described above has to be enforced the same way regardless of which runtime is driving the reasoning loop — a custom-built factory, or a goal/loop pattern run through ChatGPT (formerly Codex, now merged into the unified ChatGPT app), Claude, Antigravity, Cursor, or others. **MCP (Model Context Protocol) is the layer that makes this practical**: each governed data source or tool — the ledger, the inventory system, the codebase — is exposed as one MCP server with its own input/access/output contract, built once, independent of any single vendor's native connector format.
+Roles aren't locked to one coding assistant or agent product. When a role needs an additional skill, tool, or action — a specific API call, a specific system integration — MCP (Model Context Protocol) is used where it fits, as the standard way to expose that capability. That's what lets the same tool be reused across ChatGPT (formerly Codex, now merged into the unified ChatGPT app), Claude, Antigravity, Cursor, or a custom goal/loop, instead of rebuilding a bespoke integration per runtime.
 
-This matters for two reasons:
-
-- **The contract is enforced at the MCP boundary, not per-runtime.** Whether a given task is being driven by ChatGPT, Claude, Antigravity, or Cursor, the same MCP server decides what that runtime is allowed to see and do. Swapping which model or IDE is doing the reasoning doesn't mean rebuilding governance — the enforcement point doesn't move.
-- **It's what makes the tiered/self-hosted pattern practical**, not just theoretical (see [`data-sovereignty-and-self-hosted-llms.md`](data-sovereignty-and-self-hosted-llms.md)). A custom-built factory can run its own MCP gateway in front of the proprietary context layer, and route different tasks to different reasoning substrates — frontier or self-hosted — through that same gateway, tier by tier, without the proprietary layer ever depending on which vendor's runtime happens to be attached that day.
-
-In practice this means the factory isn't locked into one coding assistant or agent product. The reasoning layer on top is replaceable; the governed MCP layer underneath is not.
+That's an interoperability convenience, not the security boundary. The guardrails, HITL gates, and input/access/output contracts described above are enforced by the kernel's own governance design — they don't depend on MCP, and they hold regardless of which protocol a given tool happens to use to connect. MCP just means the reasoning layer on top (which model or IDE is doing the work) is replaceable without rebuilding every tool integration underneath it.
 
 ## Token optimization
 

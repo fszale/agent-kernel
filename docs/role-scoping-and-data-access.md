@@ -46,6 +46,4 @@ In practice, a contract answers three questions per role, before the role is eve
 2. **Access** — what it's allowed to *do* with that data (read-only analysis vs. propose-only recommendation vs. execute-with-approval — see [`hitl-and-guardrails`](../skills/hitl-and-guardrails/SKILL.md) for the approval-gate mechanics).
 3. **Output** — what it's allowed to emit, and to whom (a report to a human, an event to another agent, a state-changing action).
 
-In a custom-built factory, each contract is implemented as an MCP (Model Context Protocol) server — one governed connector per data source or tool, rather than access logic re-implemented inside every agent. That's also what lets a role be driven by whichever runtime fits the task (ChatGPT, Claude, Antigravity, Cursor, or a custom goal/loop) without changing what that role is allowed to see or do — see [`architecture-security-and-guardrails.md`](architecture-security-and-guardrails.md) for the enforcement mechanics.
-
 The reason this matters more than the role list itself: the contract is what decides what actually crosses the wire to a model provider. That's the hinge point for the architecture and data-sovereignty questions — see [`architecture-security-and-guardrails.md`](architecture-security-and-guardrails.md) and [`data-sovereignty-and-self-hosted-llms.md`](data-sovereignty-and-self-hosted-llms.md).
