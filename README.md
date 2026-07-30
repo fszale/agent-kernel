@@ -79,6 +79,9 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | **Review a proposed solution end-to-end** | `.agents/workflows/review-solution-package.md` + `prompts/solution-review-package.md` |
 | **Review a multi-agent system**     | `skills/agentic-system-review/SKILL.md` + `prompts/architecture-review.md`           |
 | **Plan R&D staged validation**      | `skills/staged-validation/SKILL.md` + `prompts/architecture-review.md`                     |
+| **Understand role scoping & data access model** | [docs/role-scoping-and-data-access.md](docs/role-scoping-and-data-access.md) |
+| **Understand architecture, guardrails & token optimization** | [docs/architecture-security-and-guardrails.md](docs/architecture-security-and-guardrails.md) |
+| **Understand the data-sovereignty / self-hosted LLM approach** | [docs/data-sovereignty-and-self-hosted-llms.md](docs/data-sovereignty-and-self-hosted-llms.md) |
 | **Use this from Claude**            | [CLAUDE.md](CLAUDE.md)                                                                      |
 | **Add a skill or prompt**           | [docs/contributing.md](docs/contributing.md)                                                |
 | **AI agent working here**           | [AGENTS.md](AGENTS.md) and [CONTEXT.md](CONTEXT.md)                                            |

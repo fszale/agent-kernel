@@ -1,6 +1,6 @@
 # Downstream `AGENTS.md` Template
 
-> Use this in a downstream repository that injects `agent-kernel` for Codex or other `AGENTS.md`-aware agents.
+> Use this in a downstream repository that injects `agent-kernel` for ChatGPT (formerly Codex), Antigravity, Cursor, or other `AGENTS.md`-aware agents.
 
 Read `.agent-kernel/CONTEXT.md` first, then `.agent-kernel/AGENTS.md`.
 

@@ -102,7 +102,10 @@ agent-kernel/
 │   ├── injection-guide.md
 │   ├── design-principles.md
 │   ├── diagrams.md
-│   └── antigravity-kit-architecture.md
+│   ├── antigravity-kit-architecture.md
+│   ├── role-scoping-and-data-access.md
+│   ├── architecture-security-and-guardrails.md
+│   └── data-sovereignty-and-self-hosted-llms.md
 ├── .agents/
 │   ├── workflows/
 │   │   ├── review-project.md
@@ -148,6 +151,9 @@ agent-kernel/
 | Review another repo or artifact | `.agents/workflows/review-project.md` + `prompts/code-review.md` |
 | Review a multi-agent system | `skills/agentic-system-review/` + `.agents/workflows/review-project.md` |
 | Plan R\&D staged validation | `skills/staged-validation/` |
+| Answer questions on roles built + data access model | `docs/role-scoping-and-data-access.md` |
+| Answer questions on architecture, guardrails, or token optimization | `docs/architecture-security-and-guardrails.md` |
+| Explain the data-sovereignty / self-hosted LLM approach | `docs/data-sovereignty-and-self-hosted-llms.md` |
 | Add a new skill | `.agents/workflows/add-skill.md` |
 | Add a new prompt | `.agents/workflows/add-prompt.md` |
 | Add a new template | `.agents/workflows/add-template.md` |

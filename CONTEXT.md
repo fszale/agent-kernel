@@ -38,7 +38,10 @@ agent-kernel/
 │   ├── injection-guide.md
 │   ├── design-principles.md
 │   ├── diagrams.md
-│   └── antigravity-kit-architecture.md
+│   ├── antigravity-kit-architecture.md
+│   ├── role-scoping-and-data-access.md
+│   ├── architecture-security-and-guardrails.md
+│   └── data-sovereignty-and-self-hosted-llms.md
 └── .github/workflows/          ← 6 automated GitHub Actions
 ```
 
