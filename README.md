@@ -6,6 +6,22 @@
 
 ---
 
+## Use with Grok Build
+
+This repo is a Grok Build plugin. The existing `skills/` directory is the plugin. Nothing else to rewrite.
+
+Install from GitHub (after this lands on `main`):
+
+```bash
+grok plugin install fszale/agent-kernel --trust
+```
+
+Skills then show up as slash commands in Grok Build. Grok already reads `AGENTS.md` and `CLAUDE.md`.
+
+This is not listed on the official xAI marketplace yet. That step needs a pinned commit SHA after this is merged.
+
+---
+
 ## Why This Project Exists
 
 I have been building and observing software systems since the early home-computing era: Sinclair Spectrum, Atari, Commodore, and Amiga. Long before today’s AI wave, I was already fascinated by how machines evolve, how tools shape thinking, and how new computational layers eventually change what humans can do.
