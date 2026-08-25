@@ -1,0 +1,11 @@
+{
+  "name": "agent-kernel",
+  "version": "1.0.0",
+  "description": "Digital-twin control plane: reusable skills, prompts, and templates (first principles, Pareto, 30/60/90, HITL) for Grok Build.",
+  "author": {
+    "name": "Filip Szalewicz"
+  },
+  "repository": "https://github.com/fszale/agent-kernel",
+  "homepage": "https://github.com/fszale/agent-kernel",
+  "license": "MIT"
+}
