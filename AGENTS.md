@@ -163,6 +163,10 @@ Follow [.agents/workflows/add-skill.md](.agents/workflows/add-skill.md). These c
 - Update `CLAUDE.md` Common Task Routing. It is a separate index from the tables below.
 - Add a companion skill only when an existing category already has a home for it. `docs/antigravity-kit-architecture.md` states a stale skill count and an incomplete inventory. CI does not check it. Do not treat that page as the skill registry.
 
+## CI: AI review comments
+
+The job in `.github/workflows/pr-agent-review.yml` writes the LLM review, then posts it with `GITHUB_TOKEN`. That comment needs `issues: write` and `pull-requests: write` in the workflow `permissions` block. Without them, GitHub returns 403 `Resource not accessible by integration` on `POST /issues/{number}/comments` after the review text already exists. The response header `x-accepted-github-permissions` names those two scopes. A missing `LLM_API_KEY`, `LLM_API_ENDPOINT`, or `LLM_MODEL` fails earlier, in the review step, with `Missing required secrets`. Read the failed step before treating this check as a content problem. Runs 39665845805 (PR #2) and 39668153964 (PR #3) failed on the comment step, not on the review.
+
 ## Cross-Reference to Principles
 
 All skills and prompts in this kit are grounded in principles documented in [PHILOSOPHY.md](PHILOSOPHY.md). When in doubt, consult the relevant principle section before applying a skill.

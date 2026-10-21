@@ -68,6 +68,8 @@ Use `.agents/workflows/add-skill.md`. Also update `kernel.manifest.json`, the li
 
 Before opening a PR that changes `diagrams/`, run `make validate-mermaid` and confirm each file renders to a `.svg`. `embed_diagrams.py --check` does not compile Mermaid. `mmdc -o /dev/null` fails before parsing, because mermaid-cli requires an output path ending in `.md`, `.svg`, `.png`, or `.pdf`. Hiding stderr makes that failure look like a syntax error in every diagram.
 
+The AI review workflow posts its result as a PR comment. Declare `issues: write` and `pull-requests: write` on that job. A 403 `Resource not accessible by integration` means the token cannot comment. It does not mean the review found a governance problem. Missing `LLM_API_KEY`, `LLM_API_ENDPOINT`, or `LLM_MODEL` fails earlier with `Missing required secrets`.
+
 ## Cross-Reference
 
 Use [AGENTS.md](AGENTS.md) as the detailed operating guide and [PHILOSOPHY.md](PHILOSOPHY.md) when a decision requires principle-level grounding.
