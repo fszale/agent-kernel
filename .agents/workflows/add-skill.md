@@ -42,7 +42,7 @@ principles: [List, Of, Linked, Principles, From, PHILOSOPHY.md]
 
 Run a quick self-check:
 - [ ] `name` field matches directory name (kebab-case)
-- [ ] `description` is one sentence, under 150 characters
+- [ ] `description` is one sentence, under 150 characters, and ends with a period
 - [ ] `when-to-use` is specific (not "use when applicable")
 - [ ] `principles` references at least one principle from PHILOSOPHY.md
 - [ ] `Agent Instructions` section provides step-by-step guidance
@@ -53,10 +53,12 @@ Run a quick self-check:
 To ensure this new artifact is discoverable by other agents, you MUST update all of the following:
 
 - [ ] `README.md` (Update Quick Start table and the skill count in the directory tree if applicable)
-- [ ] `AGENTS.md` (Update the Skill Selection Guide table and Mermaid flow diagram)
+- [ ] `AGENTS.md` (Update the Skill Selection Guide table. The skill directory name must appear as a literal string. Documentation sync fails the PR otherwise.)
+- [ ] `diagrams/skill-selection-flow.mmd`, then `python3 scripts/embed_diagrams.py` (The Mermaid block in `AGENTS.md` is generated. Edit the source, not only the fence.)
 - [ ] `CLAUDE.md` (Update the Common Task Routing table)
 - [ ] `CONTEXT.md` (Update the total count of skills/prompts in the Directory Map)
-- [ ] `.agents/skills/project-navigation.md` (Update the directory map and finding-the-right-tool table)
+- [ ] `.agents/skills/project-navigation.md` (Update the directory map, the skill count, and the finding-the-right-tool table)
+- [ ] `kernel.manifest.json` (Add an id, version, path, description, and tags entry. CI does not check this file.)
 - [ ] `templates/downstream-*.md` (Update only if the addition creates a new fundamental review type or operational lens)
 
 ## Step 5: Run consistency check
@@ -68,3 +70,17 @@ make consistency-check
 # or
 python3 scripts/validate_contracts.py
 ```
+
+## Pitfalls learned while adding skills
+
+`scripts/validate_contracts.py` checks frontmatter keys, `## Agent Instructions`, `## Output Format`, markdown links, and diagram drift. It does not check every index. After the `candidate-evaluation-criteria` addition, keep these in the same change:
+
+1. **Literal id in `AGENTS.md`.** `.github/workflows/documentation-sync.yml` greps each `skills/*/` directory name. A prose description that omits the kebab-case id fails CI.
+2. **`kernel.manifest.json`.** This is the machine-readable skill registry. Nothing in CI compares it to `skills/`.
+3. **Diagram source.** `diagrams/skill-selection-flow.mmd` is embedded into `AGENTS.md`. Hand-editing the fence fails `make check-diagrams`. Labels in the `.mmd` use a backslash-n escape. `re.sub` in `scripts/embed_diagrams.py` turns that into a real line break, which is why the source and the fence look different and still count as in sync. Avoid extra backslashes in new labels.
+4. **Description length.** `docs/consistency-checks.md` requires one sentence, under 150 characters, ending with a period. The validator only checks that `description:` exists. Follow the documented rule.
+5. **Hand-written counts.** `README.md`, `CONTEXT.md`, and `.agents/skills/project-navigation.md` each say how many skills exist. Update all three, and add the directory to the navigation tree.
+6. **Separate routing file.** `CLAUDE.md` Common Task Routing is not generated from `AGENTS.md`.
+7. **Companion skills.** Add one only when an existing selection category already has a home for it. A hiring-loop skill was left out because this repo had no hiring-skill family. Index the new skill under the closest existing table instead.
+8. **Stale architecture inventory.** `docs/antigravity-kit-architecture.md` states an old skill count and does not list every skill. CI does not read it. Do not use that page as the registry, and do not bump its count unless you reconcile the full inventory.
+9. **Cross-links.** When a skill depends on another, add a relative markdown link both ways. The validator checks those links outside code fences.

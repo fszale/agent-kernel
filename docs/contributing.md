@@ -20,8 +20,11 @@ Follow the workflow at `.agents/workflows/add-skill.md`.
 - [ ] `SKILL.md` has all required frontmatter fields (`name`, `description`, `when-to-use`, `principles`)
 - [ ] `Agent Instructions` section is step-by-step and actionable
 - [ ] `Output Format` explicitly describes the output
-- [ ] Skill is cross-referenced in `README.md`
-- [ ] Skill is added to `.agents/skills/project-navigation.md`
+- [ ] Skill is cross-referenced in `README.md` and the skill count is updated
+- [ ] Skill directory name appears as a literal string in `AGENTS.md` (documentation sync fails otherwise)
+- [ ] Skill is added to `.agents/skills/project-navigation.md` (tree, count, and lookup table)
+- [ ] Skill is added to `CLAUDE.md` routing and `kernel.manifest.json`
+- [ ] If the selection diagram changes, `diagrams/skill-selection-flow.mmd` is updated and diagrams are re-embedded
 - [ ] `/run-consistency-check` passes
 
 ## How to Add a Prompt

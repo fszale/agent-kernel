@@ -9,11 +9,15 @@ Every `skills/*/SKILL.md` MUST begin with YAML frontmatter:
 ```yaml
 ---
 name: kebab-case-skill-name       # REQUIRED — must match directory name
-description: One sentence.        # REQUIRED — under 150 characters
+description: One sentence.        # REQUIRED: one sentence, under 150 characters, must end with a period
 when-to-use: Specific scenarios.  # REQUIRED — be specific, not generic
 principles: [Principle1, Principle2]  # REQUIRED — link to PHILOSOPHY.md
 ---
 ```
+
+The length and period rule is documented in `docs/consistency-checks.md`. `scripts/validate_contracts.py` only checks that the four keys exist, so a long description can pass CI and still break the contract.
+
+**Registry:** every new `skills/{name}/SKILL.md` also needs an entry in `kernel.manifest.json` (`id`, `version`, `path`, `description`, `tags`). CI does not compare that file to the skill directories. The skill id must also appear as a literal string in `AGENTS.md`, because documentation sync greps for it.
 
 **Required sections in the body:**
 - `## Purpose` — what this skill enables

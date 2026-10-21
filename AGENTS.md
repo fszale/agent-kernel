@@ -54,6 +54,7 @@ graph TB
     Q5 -->|"Build trust"| S_EMP["lead-with-empathy"]
     Q5 -->|"Boost productivity"| S_KS["knowledge-sprints"]
     Q5 -->|"Overcome paralysis"| S_BTA["bias-towards-action"]
+    Q5 -->|"Evaluate a candidate"| S_CAND["candidate-evaluation-criteria"]
 
     style START fill:#1a1a3a,color:#fff,stroke:#a78bfa
 ```
@@ -124,6 +125,7 @@ When approaching any task, run through this decision chain in order:
 | Lead with empathy | `lead-with-empathy` | — | — |
 | Optimize personal productivity | `knowledge-sprints` | — | — |
 | Bias towards executing | `bias-towards-action` | — | — |
+| Evaluate a candidate's improvement system | `candidate-evaluation-criteria` | — | — |
 | Review team metrics | — | `team-metrics-review.md` | — |
 
 ### Analysis & Measurement
@@ -131,6 +133,7 @@ When approaching any task, run through this decision chain in order:
 |---|---|---|---|
 | Score confidence on a recommendation | `confidence-and-experiment` | — | — |
 | Design an experiment | `confidence-and-experiment` | — | — |
+| Score a candidate's velocity and throughput curve | `candidate-evaluation-criteria` | — | — |
 | Analyze future trends | — | `future-trends-analysis.md` | — |
 | Map downstream consequences of a decision | `second-order-effects` | `second-order-effects-analysis.md` | `second-order-effects-map.md` |
 | Identify perverse incentives from a change | `second-order-effects` | `second-order-effects-analysis.md` | — |
@@ -146,6 +149,18 @@ When generating new content in a project that uses this kernel:
 4. **Traceability** — any proposed strategy or action must trace back to an objective via explicit alignment fields
 5. **Value stream tagging** — tag every output as Revenue / Risk / Cost or some combination
 6. **PPT lens** — explicitly address People, Process, and Technology impact for any significant recommendation
+
+## Adding a Skill
+
+Follow [.agents/workflows/add-skill.md](.agents/workflows/add-skill.md). These checks are easy to miss because `scripts/validate_contracts.py` does not cover all of them:
+
+- Put the kebab-case skill id in `AGENTS.md` as a literal string. `.github/workflows/documentation-sync.yml` fails the PR if any `skills/*/` directory name is absent.
+- Add the skill to `kernel.manifest.json`. That registry is not validated in CI.
+- If the task belongs on the selection diagram, edit `diagrams/skill-selection-flow.mmd`, then run `python3 scripts/embed_diagrams.py`. The fenced copy in this file is generated. Node labels in the `.mmd` use a backslash-n escape; `re.sub` turns that into a real line break on embed.
+- Keep `description` to one sentence under 150 characters, ending with a period. The documented contract in `docs/consistency-checks.md` is stricter than the validator, which only checks that the field exists.
+- Bump the hand-written skill counts in `README.md`, `CONTEXT.md`, and `.agents/skills/project-navigation.md`, and add the directory to that navigation tree.
+- Update `CLAUDE.md` Common Task Routing. It is a separate index from the tables below.
+- Add a companion skill only when an existing category already has a home for it. `docs/antigravity-kit-architecture.md` states a stale skill count and an incomplete inventory. CI does not check it. Do not treat that page as the skill registry.
 
 ## Cross-Reference to Principles
 
