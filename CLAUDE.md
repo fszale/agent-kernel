@@ -66,6 +66,10 @@ All generated content should preserve the kernel rules:
 
 Use `.agents/workflows/add-skill.md`. Also update `kernel.manifest.json`, the literal skill id in `AGENTS.md` (the documentation-sync workflow greps for it), `CLAUDE.md` routing, and the skill counts in `README.md`, `CONTEXT.md`, and `.agents/skills/project-navigation.md`. Selection-diagram changes start in `diagrams/skill-selection-flow.mmd` and are embedded; do not edit only the fenced copy. `description` is one sentence under 150 characters ending with a period, even though the contract validator only checks that the field exists. Do not add a companion skill unless an existing category already has a home for it.
 
+Before opening a PR that changes `diagrams/`, run `make validate-mermaid` and confirm each file renders to a `.svg`. `embed_diagrams.py --check` does not compile Mermaid. `mmdc -o /dev/null` fails before parsing, because mermaid-cli requires an output path ending in `.md`, `.svg`, `.png`, or `.pdf`. Hiding stderr makes that failure look like a syntax error in every diagram.
+
+The AI review workflow posts its result as a PR comment. Declare `issues: write` and `pull-requests: write` on that job. A 403 `Resource not accessible by integration` means the token cannot comment. It does not mean the review found a governance problem. Missing `LLM_API_KEY`, `LLM_API_ENDPOINT`, or `LLM_MODEL` fails earlier with `Missing required secrets`.
+
 ## Cross-Reference
 
 Use [AGENTS.md](AGENTS.md) as the detailed operating guide and [PHILOSOPHY.md](PHILOSOPHY.md) when a decision requires principle-level grounding.

@@ -157,10 +157,15 @@ Follow [.agents/workflows/add-skill.md](.agents/workflows/add-skill.md). These c
 - Put the kebab-case skill id in `AGENTS.md` as a literal string. `.github/workflows/documentation-sync.yml` fails the PR if any `skills/*/` directory name is absent.
 - Add the skill to `kernel.manifest.json`. That registry is not validated in CI.
 - If the task belongs on the selection diagram, edit `diagrams/skill-selection-flow.mmd`, then run `python3 scripts/embed_diagrams.py`. The fenced copy in this file is generated. Node labels in the `.mmd` use a backslash-n escape; `re.sub` turns that into a real line break on embed.
+- Before opening a PR that changes `diagrams/`, run `make validate-mermaid`. That renders each `.mmd` to a real `.svg`. `embed_diagrams.py --check` only compares the fence to the source. It does not compile Mermaid. `mmdc -o /dev/null` is invalid: mermaid-cli requires an output path ending in `.md`, `.svg`, `.png`, or `.pdf`, and it rejects `/dev/null` before parsing. The old workflow hid stderr, so that rejection looked like a syntax error in every diagram. Run 39666041941 on commit `d3769b1` failed that way. The diagrams themselves rendered.
 - Keep `description` to one sentence under 150 characters, ending with a period. The documented contract in `docs/consistency-checks.md` is stricter than the validator, which only checks that the field exists.
 - Bump the hand-written skill counts in `README.md`, `CONTEXT.md`, and `.agents/skills/project-navigation.md`, and add the directory to that navigation tree.
 - Update `CLAUDE.md` Common Task Routing. It is a separate index from the tables below.
 - Add a companion skill only when an existing category already has a home for it. `docs/antigravity-kit-architecture.md` states a stale skill count and an incomplete inventory. CI does not check it. Do not treat that page as the skill registry.
+
+## CI: AI review comments
+
+The job in `.github/workflows/pr-agent-review.yml` writes the LLM review, then posts it with `GITHUB_TOKEN`. That comment needs `issues: write` and `pull-requests: write` in the workflow `permissions` block. Without them, GitHub returns 403 `Resource not accessible by integration` on `POST /issues/{number}/comments` after the review text already exists. The response header `x-accepted-github-permissions` names those two scopes. A missing `LLM_API_KEY`, `LLM_API_ENDPOINT`, or `LLM_MODEL` fails earlier, in the review step, with `Missing required secrets`. Read the failed step before treating this check as a content problem. Runs 39665845805 (PR #2) and 39668153964 (PR #3) failed on the comment step, not on the review.
 
 ## Cross-Reference to Principles
 

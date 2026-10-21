@@ -4,9 +4,13 @@ on:
   push:
     paths:
       - 'diagrams/**'
+      - '.github/workflows/validate-mermaid.yml'
+      - 'scripts/mermaid-puppeteer.json'
   pull_request:
     paths:
       - 'diagrams/**'
+      - '.github/workflows/validate-mermaid.yml'
+      - 'scripts/mermaid-puppeteer.json'
 
 jobs:
   validate:
@@ -27,17 +31,22 @@ jobs:
         run: |
           echo "Validating Mermaid diagram syntax..."
           FAILED=0
+          mkdir -p /tmp/mermaid-out
           for f in diagrams/*.mmd; do
             echo "  Checking: $f"
-            if ! mmdc -i "$f" -o /dev/null 2>/dev/null; then
-              echo "  ❌ Syntax error in: $f"
+            # mermaid-cli picks the format from the output extension.
+            # /dev/null is rejected before the diagram is parsed, and hiding
+            # stderr makes that rejection look like a syntax error in every file.
+            out="/tmp/mermaid-out/$(basename "$f" .mmd).svg"
+            if ! mmdc -i "$f" -o "$out" -p scripts/mermaid-puppeteer.json; then
+              echo "  ❌ Render failed: $f"
               FAILED=1
             else
               echo "  ✅ Valid: $f"
             fi
           done
           if [ $FAILED -ne 0 ]; then
-            echo "❌ Mermaid validation FAILED — fix syntax errors before merging"
+            echo "❌ Mermaid validation FAILED. Fix the diagram syntax, then re-run."
             exit 1
           fi
           echo "✅ All Mermaid diagrams valid"
