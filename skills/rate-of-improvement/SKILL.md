@@ -146,3 +146,4 @@ S-curve success: RoI should be high early (weeks 1–4), declining (weeks 5–10
 
 Use the [weekly-progress-report.md](../../templates/weekly-progress-report.md) for tracking.
 Full analysis uses the [rate-of-improvement-analysis.md](../../prompts/rate-of-improvement-analysis.md) prompt.
+Candidate scoring that depends on this curve uses [candidate-evaluation-criteria](../candidate-evaluation-criteria/SKILL.md).

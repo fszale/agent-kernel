@@ -116,3 +116,5 @@ Experiment design document:
 5. Duration and sample size justification
 6. Confidence score with reducers applied
 7. Measurement plan (how data will be collected + who reviews at what cadence)
+
+Hiring interviews that need this calibration use [candidate-evaluation-criteria](../candidate-evaluation-criteria/SKILL.md).

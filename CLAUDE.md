@@ -39,6 +39,7 @@ Run through this chain in order before acting:
 | Review a multi-agent system | `skills/agentic-system-review/SKILL.md` + `prompts/architecture-review.md` |
 | Plan R&D staged validation | `skills/staged-validation/SKILL.md` + `prompts/architecture-review.md` |
 | Assess downstream or systemic consequences | `skills/second-order-effects/SKILL.md` + `prompts/second-order-effects-analysis.md` |
+| Evaluate an engineering or leadership candidate | `skills/candidate-evaluation-criteria/SKILL.md` with `skills/rate-of-improvement/SKILL.md` and `skills/confidence-and-experiment/SKILL.md` |
 | Explain roles built, data access model, architecture/guardrails, or the self-hosted/data-sovereignty approach | `docs/role-scoping-and-data-access.md`, `docs/architecture-security-and-guardrails.md`, `docs/data-sovereignty-and-self-hosted-llms.md` |
 
 ## Review Mode
@@ -60,6 +61,10 @@ All generated content should preserve the kernel rules:
 - significant recommendations should address People, Process, and Technology impact
 - prompts must use `{{variable_name}}` format
 - new skills must include required frontmatter
+
+## Adding a Skill
+
+Use `.agents/workflows/add-skill.md`. Also update `kernel.manifest.json`, the literal skill id in `AGENTS.md` (the documentation-sync workflow greps for it), `CLAUDE.md` routing, and the skill counts in `README.md`, `CONTEXT.md`, and `.agents/skills/project-navigation.md`. Selection-diagram changes start in `diagrams/skill-selection-flow.mmd` and are embedded; do not edit only the fenced copy. `description` is one sentence under 150 characters ending with a period, even though the contract validator only checks that the field exists. Do not add a companion skill unless an existing category already has a home for it.
 
 ## Cross-Reference
 

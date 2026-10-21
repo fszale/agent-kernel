@@ -88,6 +88,7 @@ All work connects to at least one value stream: **Revenue Generation · Risk Mit
 | **Tune a digital twin from a conative profile** | `skills/conative-profile-design/SKILL.md` + `prompts/conative-profile-design.md` + `templates/conative-operating-system-template.md` |
 | **Design a multi-agent factory**    | `skills/agent-factory-design/SKILL.md` + `prompts/agent-factory-design.md`           |
 | **Measure AI impact**               | `skills/rate-of-improvement/SKILL.md` + `prompts/rate-of-improvement-analysis.md`    |
+| **Evaluate a candidate**            | `skills/candidate-evaluation-criteria/SKILL.md` + `skills/rate-of-improvement/SKILL.md` + `skills/confidence-and-experiment/SKILL.md` |
 | **Map downstream consequences**     | `skills/second-order-effects/SKILL.md` + `prompts/second-order-effects-analysis.md`  |
 | **Create a diagram**                | `skills/diagram-design/SKILL.md` + `.agents/workflows/add-diagram.md`                |
 | **Inject into a project**           | [docs/injection-guide.md](docs/injection-guide.md)                                          |
@@ -115,7 +116,7 @@ agent-kernel/
 │   ├── workflows/              ← Step-by-step agent procedures
 │   │   ├── review-project.md
 │   └── skills/                 ← Project knowledge for agents
-├── skills/                     ← 28 reusable agent skills
+├── skills/                     ← 29 reusable agent skills
 ├── prompts/                    ← 21 structured prompt templates
 ├── templates/                  ← 18 reusable document templates
 │   ├── downstream-agents-template.md

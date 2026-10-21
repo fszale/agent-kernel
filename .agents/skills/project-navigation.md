@@ -12,7 +12,7 @@ agent-kernel/
 ├── CLAUDE.md                   ← Claude-oriented entry point
 ├── PHILOSOPHY.md               ← All design principles reference
 ├── Makefile                    ← validate-mermaid, embed-diagrams, consistency-check
-├── skills/                     ← 28 agent skills
+├── skills/                     ← 29 agent skills
 │   ├── idea-evaluator/SKILL.md
 │   ├── red-team-idea-validation/SKILL.md
 │   ├── 30-60-90-planning/SKILL.md
@@ -28,6 +28,7 @@ agent-kernel/
 │   ├── business-data-analysis/SKILL.md
 │   ├── outcome-probability/SKILL.md
 │   ├── rate-of-improvement/SKILL.md
+│   ├── candidate-evaluation-criteria/SKILL.md
 │   ├── solution-review-package/SKILL.md
 │   ├── conative-profile-design/SKILL.md
 │   ├── governance-hierarchy-design/SKILL.md
@@ -142,6 +143,7 @@ agent-kernel/
 | Score AI opportunities | `skills/ai-use-case-scoring/` + `prompts/bottleneck-identification.md` |
 | Design an AI workflow | `prompts/workflow-design.md` |
 | Measure impact | `skills/rate-of-improvement/` + `prompts/rate-of-improvement-analysis.md` |
+| Evaluate a candidate | `skills/candidate-evaluation-criteria/` with `skills/rate-of-improvement/` and `skills/confidence-and-experiment/` |
 | Map downstream consequences | `skills/second-order-effects/` + `prompts/second-order-effects-analysis.md` |
 | Design a domain agent | `skills/domain-agent-design/` + `templates/agent-spec-domain-template.yaml` |
 | Design a multi-agent factory | `skills/agent-factory-design/` + `prompts/agent-factory-design.md` |
