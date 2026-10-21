@@ -59,8 +59,10 @@ make validate-mermaid
 Or validate a single file:
 
 ```bash
-npx @mermaid-js/mermaid-cli mmdc -i diagrams/your-diagram-id.mmd -o /dev/null
+npx --yes @mermaid-js/mermaid-cli -i diagrams/your-diagram-id.mmd -o /tmp/your-diagram-id.svg -p scripts/mermaid-puppeteer.json
 ```
+
+Do not pass `-o /dev/null`. mermaid-cli rejects that path before it parses the diagram.
 
 Fix any syntax errors before committing.
 

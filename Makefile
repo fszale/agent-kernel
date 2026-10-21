@@ -12,7 +12,8 @@
 
 # ── Mermaid Validation ────────────────────────────────────────────────────────
 # Uses mmdc (mermaid-js/mermaid-cli) if installed globally, otherwise falls
-# back to npx. Compiles each .mmd file to /dev/null; fails on syntax errors.
+# back to npx. Renders each .mmd file to a real .svg. mermaid-cli rejects
+# /dev/null because the output path must end in .md, .svg, .png, or .pdf.
 
 validate-mermaid:
 	@echo "🔍 Validating Mermaid diagrams..."
@@ -20,15 +21,15 @@ validate-mermaid:
 	for f in diagrams/*.mmd; do \
 		OUT="/tmp/agent-kernel-mermaid-$$(basename "$$f" .mmd).svg"; \
 		if command -v mmdc >/dev/null 2>&1; then \
-			if ! mmdc -i "$$f" -o "$$OUT" 2>/dev/null; then \
-				echo "  ❌ Syntax error in: $$f"; \
+			if ! mmdc -i "$$f" -o "$$OUT" -p scripts/mermaid-puppeteer.json; then \
+				echo "  ❌ Render failed: $$f"; \
 				FAILED=1; \
 			else \
 				echo "  ✅ Valid: $$f"; \
 			fi; \
 		else \
-			if ! npx --yes @mermaid-js/mermaid-cli -i "$$f" -o "$$OUT" 2>/dev/null; then \
-				echo "  ❌ Syntax error in: $$f"; \
+			if ! npx --yes @mermaid-js/mermaid-cli -i "$$f" -o "$$OUT" -p scripts/mermaid-puppeteer.json; then \
+				echo "  ❌ Render failed: $$f"; \
 				FAILED=1; \
 			else \
 				echo "  ✅ Valid: $$f"; \

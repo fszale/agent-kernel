@@ -29,9 +29,11 @@ make embed-diagrams
 **Validate syntax:**
 ```bash
 make validate-mermaid
-# or
-npx @mermaid-js/mermaid-cli mmdc -i diagrams/your-diagram.mmd -o /dev/null
+# or render one diagram to a real .svg
+npx --yes @mermaid-js/mermaid-cli -i diagrams/your-diagram.mmd -o /tmp/your-diagram.svg -p scripts/mermaid-puppeteer.json
 ```
+
+`mmdc -o /dev/null` fails before the diagram is parsed. mermaid-cli requires the output path to end in `.md`, `.svg`, `.png`, or `.pdf`.
 
 **CI/CD:** `.github/workflows/validate-mermaid.yml` validates all `.mmd` files on every push/PR to `diagrams/`.
 
